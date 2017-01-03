@@ -22,6 +22,16 @@ module Repeek
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:               'smtp.gmail.com',
+      port:                   587,
+      domain:                'gmail.com',
+      user_name:             'repeek.website@gmail.com',
+      password:               ENV['REPEEK_MAILER_PASSWORD'],
+      authentication:        'plain'
+    }
+
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,
