@@ -1,6 +1,5 @@
 FactoryGirl.define do
-  factory :category do
+  factory :notebook do
     name "MyString"
-    description "MyText"
   end
 end
