@@ -2,7 +2,8 @@ user = User.where(email: 'vetalpaprotsky@gmail.com').first
 notebook = Notebook.where(name: 'Rails').first
 
 if user.nil? && notebook.nil?
-  user = User.create(email: 'vetalpaprotsky@gmail.com',
+  user = User.create(name: 'vetal paprotsky',
+                     email: 'vetalpaprotsky@gmail.com',
                      password: '12345678',
                      password_confirmation: '12345678')
 
