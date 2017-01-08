@@ -10,6 +10,7 @@ class User
 
   attr_accessor :password
 
+  before_save { email.downcase! }
   before_save :encrypt_password
 
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true, on: :create
@@ -17,7 +18,7 @@ class User
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
 
   def self.authenticate(email, password)
-    user = where(email: email).first
+    user = where(email: email.downcase).first
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
@@ -31,4 +32,6 @@ class User
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
+
+  # TODO: Add auth token. We should change that token each time user log in or log out. https://github.com/vetalpaprotsky/sample_app
 end
