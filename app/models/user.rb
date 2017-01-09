@@ -5,6 +5,7 @@ class User
   field :email, type: String
   field :password_hash, type: String
   field :password_salt, type: String
+  field :auth_token, type: String
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
@@ -12,6 +13,7 @@ class User
 
   before_save { email.downcase! }
   before_save :encrypt_password
+  before_create { generate_auth_token }
 
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true, on: :create
   validates :name, presence: true
@@ -26,12 +28,18 @@ class User
     end
   end
 
-  def encrypt_password
-    if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    end
+  def generate_auth_token
+    self.auth_token = Encryptor.encrypt(SecureRandom.uuid)
   end
 
-  # TODO: Add auth token. We should change that token each time user log in or log out. https://github.com/vetalpaprotsky/sample_app
+  private
+
+    def encrypt_password
+      if password.present?
+        self.password_salt = BCrypt::Engine.generate_salt
+        self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+      end
+    end
+
+    # TODO: Add auth token. We should change that token each time user log in or log out. https://github.com/vetalpaprotsky/sample_app
 end

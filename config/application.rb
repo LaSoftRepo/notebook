@@ -42,5 +42,7 @@ module Repeek
         request_specs: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
+
+    config.autoload_paths << File.join(Rails.root, 'lib')
   end
 end
