@@ -7,9 +7,10 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(users_params)
+    user.password_validation_is_required = true
     if user.save
       sign_in user
-      redirect_to root_url, notice: 'Signed up!'
+      redirect_to root_url, notice: 'Signed up'
     else
       render 'users/new', locals: { user: user }
     end

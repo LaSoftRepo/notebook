@@ -1,0 +1,7 @@
+<h1>Password Reset</h1>
+
+<%= simple_form_for user, url: password_reset_path(params[:id]) do |f| %>
+  <%= f.input :password, required: true %>
+  <%= f.input :password_confirmation, required: true %>
+  <%= f.button :submit, 'Reset password' %>
+<% end %>

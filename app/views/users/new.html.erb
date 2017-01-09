@@ -3,7 +3,7 @@
 <%= simple_form_for user do |f| %>
     <%= f.input :name %>
     <%= f.input :email %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
+    <%= f.input :password, required: true %>
+    <%= f.input :password_confirmation, required: true %>
     <%= f.button :submit, 'Sign up' %>
 <% end %>
