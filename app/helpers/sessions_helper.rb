@@ -19,9 +19,11 @@ module SessionsHelper
   end
 
   def current_user
+    return @current_user if @current_user
+
     if cookies[:auth_token]
       auth_token = Encryptor.encrypt(cookies[:auth_token])
-      @current_user ||= User.find_by(auth_token: auth_token)
+      @current_user = User.find_by(auth_token: auth_token)
     else
       nil
     end

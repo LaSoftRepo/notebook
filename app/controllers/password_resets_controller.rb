@@ -9,12 +9,12 @@ class PasswordResetsController < ApplicationController
 
   def create
     if params[:password_reset][:email].blank?
-      flash.now[:error] = 'Please, enter your email'
+      flash.now[:error] = 'Please, enter your email.'
       render 'password_resets/new'
     else
       user = User.find_by(email: params[:password_reset][:email])
       user.send_password_reset_instructions if user
-      redirect_to root_url, notice: 'Email was sent with password reset instructions'
+      redirect_to root_url, notice: 'Email was sent with password reset instructions.'
     end
   end
 
@@ -25,7 +25,7 @@ class PasswordResetsController < ApplicationController
   def update
     @user.password_validation_is_required = true
     if @user.update_attributes(user_params)
-      redirect_to root_url, notice: 'Password has been reset'
+      redirect_to root_url, notice: 'Password has been reset.'
     else
       render 'password_resets/edit', locals: { user: @user }
     end
@@ -39,7 +39,7 @@ class PasswordResetsController < ApplicationController
 
     def redirect_if_password_reset_has_expired
       if @user.password_reset_sent_at < 1.hour.ago
-        flash[:warning] = 'Password reset has expired'
+        flash[:warning] = 'Password reset has expired.'
         redirect_to new_password_reset_path
       end
     end
