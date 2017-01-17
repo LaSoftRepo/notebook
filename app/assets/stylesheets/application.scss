@@ -1,6 +1,18 @@
 @import "bootstrap";
+@import "bootstrap_overrides";
 @import "simple_form";
 
-div.container {
-  margin-top: 16px;
+body {
+  #page_title {
+    display: inline-block;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #d9d9d9;
+  }
+  #page {
+    padding: 1rem;
+  }
 }

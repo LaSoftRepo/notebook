@@ -1,5 +1,5 @@
 class PasswordResetsController < ApplicationController
-
+  before_action :redirect_signed_in_user
   before_action :find_user_by_token, only: [:edit, :update]
   before_action :redirect_if_password_reset_has_expired, only: [:edit, :update]
 
@@ -27,6 +27,7 @@ class PasswordResetsController < ApplicationController
     if @user.update_attributes(user_params)
       redirect_to root_url, notice: 'Password has been reset.'
     else
+      flash.now[:error] = 'The password reset failed. Please correct the fields.'
       render 'password_resets/edit', locals: { user: @user }
     end
   end

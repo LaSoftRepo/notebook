@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def bootstrap_class_for(flash_type)
+  def flash_class_for(flash_type)
     case flash_type
     when 'success'
       'alert-success'
@@ -13,5 +13,10 @@ module ApplicationHelper
     else
       flash_type
     end
+  end
+
+  def full_title(page_title)
+    base_title = 'Repeek'
+    page_title.blank? ? base_title : "#{base_title} | #{page_title}"
   end
 end

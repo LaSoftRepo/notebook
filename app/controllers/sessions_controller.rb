@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :redirect_signed_in_user, only: [:new, :create]
 
   def new
     render 'sessions/new'

@@ -1,4 +1,4 @@
-<h1>Password Reset</h1>
+<% provide :page_title, 'Password Reset' %>
 
 <%= simple_form_for user, url: password_reset_path(params[:id]) do |f| %>
   <%= f.input :password, required: true %>
