@@ -1,5 +1,5 @@
 class PasswordResetsController < ApplicationController
-  before_action :redirect_signed_in_user
+  before_action :redirect_authenticated_user
   before_action :find_user_by_token, only: [:edit, :update]
   before_action :redirect_if_password_reset_has_expired, only: [:edit, :update]
 
