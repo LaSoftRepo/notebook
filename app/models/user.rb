@@ -35,13 +35,6 @@ class User
     self.auth_token = Encryptor.encrypt(SecureRandom.uuid)
   end
 
-  def send_password_reset_instructions
-    self.password_reset_token = SecureRandom.uuid
-    self.password_reset_sent_at = Time.zone.now
-    save!
-    UserMailer.password_reset(self).deliver_now
-  end
-
   private
 
     def encrypt_password
