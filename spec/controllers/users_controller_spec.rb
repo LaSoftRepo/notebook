@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
   context 'LOG IN' do
     log_in
 
