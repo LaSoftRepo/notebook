@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  context 'LOG IN' do
+  context 'LOGGED IN' do
     log_in
 
     describe 'GET #new' do
@@ -22,24 +22,26 @@ RSpec.describe UsersController, type: :controller do
     end
 
     describe 'POST #create' do
+      let(:params) { { user: FactoryGirl.attributes_for(:user) } }
+
       it 'sets flash[:warning] message' do
-        post :create
+        post :create, params: params
         expect(flash[:warning]).to be_present
       end
 
       it "redirects to root path" do
-        post :create
+        post :create, params: params
         expect(response).to redirect_to root_path
       end
 
       it 'returns status 302' do
-        post :create
+        post :create, params: params
         expect(response.status).to eq 302
       end
     end
   end
 
-  context 'LOG OUT' do
+  context 'LOGGED OUT' do
     log_out
 
     describe 'GET #new' do
@@ -56,66 +58,67 @@ RSpec.describe UsersController, type: :controller do
 
     describe 'POST #create' do
       context 'WITH VALID PARAMS' do
-        let(:valid_params) { FactoryGirl.attributes_for(:user) }
+        let(:valid_params) { { user: FactoryGirl.attributes_for(:user) } }
 
         it 'creates new user' do
           expect do
-            post :create, params: { user: valid_params }
+            post :create, params: valid_params
           end.to change(User, :count).by(1)
         end
 
         it 'calls create method of UserRecorder' do
           expect_any_instance_of(UserRecorder).to receive(:create) { FactoryGirl.create :user }
-          post :create, params: { user: valid_params }
+          post :create, params: valid_params
         end
 
         it 'authenticates created user' do
-          post :create, params: { user: valid_params.merge(email: 'new@user.com') }
-          expect(controller.current_user.email).to eq 'new@user.com'
+          valid_params[:user][:email] = 'new@user.com'
+          post :create, params: valid_params
+          expect(controller.current_user.email).to eq valid_params[:user][:email]
         end
 
         it 'sets flash[:notice] message' do
-          post :create, params: { user: valid_params }
+          post :create, params: valid_params
           expect(flash[:notice]).to be_present
         end
 
         it 'redirects to root path' do
-          post :create, params: { user: valid_params }
+          post :create, params: valid_params
           expect(response).to redirect_to root_path
         end
 
         it 'returns status 302' do
-          post :create, params: { user: valid_params }
+          post :create, params: valid_params
           expect(response.status).to eq 302
         end
       end
 
       context 'WITH INVALID PARAMS' do
-        let(:invalid_params) { FactoryGirl.attributes_for(:invalid_user) }
+        let(:invalid_params) { { user: FactoryGirl.attributes_for(:invalid_user) } }
 
         it 'does not create new user' do
           expect do
-            post :create, params: { user: invalid_params }
+            post :create, params: invalid_params
           end.not_to change(User, :count)
         end
 
         it 'calls create method of UserRecorder' do
           expect_any_instance_of(UserRecorder).to receive(:create) { FactoryGirl.build :invalid_user }
-          post :create, params: { user: invalid_params }
+          post :create, params: invalid_params
         end
 
         it 'sets flash.now[:error] message' do
-          post :create, params: { user: invalid_params }
+          post :create, params: invalid_params
           expect(flash[:error]).to be_present
         end
 
         it "renders 'users/new' template" do
-          post :create, params: { user: invalid_params }
+          post :create, params: invalid_params
           expect(response).to render_template('users/new')
         end
 
         it 'returns status 400' do
-          post :create, params: { user: invalid_params }
+          post :create, params: invalid_params
           expect(response.status).to eq 400
         end
       end
