@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:log_in][:email], params[:log_in][:password])
     if user
-      sign_in(user, params[:log_in][:remember_me] == '1')
+      log_in(user, params[:log_in][:remember_me] == '1')
       redirect_to root_url, notice: 'Logged in!'
     else
       flash.now[:error] = 'Invalid email or password.'
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    sign_out
+    log_out
     redirect_to root_url, notice: 'Logged out!'
   end
 end

@@ -1,6 +1,6 @@
 module SessionsHelper
 
-  def sign_in(user, permanent = false)
+  def log_in(user, permanent = false)
     auth_token = SecureRandom.uuid
     if permanent
       cookies.permanent[:auth_token] = auth_token
@@ -11,7 +11,7 @@ module SessionsHelper
     @current_user = user
   end
 
-  def sign_out
+  def log_out
     current_user.generate_auth_token
     current_user.save
     cookies.delete(:auth_token)
