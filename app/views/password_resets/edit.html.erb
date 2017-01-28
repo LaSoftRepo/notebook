@@ -1,7 +1,8 @@
 <% provide :page_title, 'Password Reset' %>
-
-<%= simple_form_for user, url: password_reset_path(params[:id]) do |f| %>
-  <%= f.input :password, required: true %>
-  <%= f.input :password_confirmation, required: true %>
-  <%= f.button :submit, 'Reset password' %>
+<%= center_box do %>
+  <%= simple_form_for user, url: password_reset_path(params[:id]) do |f| %>
+    <%= f.input :password, required: true %>
+    <%= f.input :password_confirmation, required: true %>
+    <%= f.button :submit, 'Reset password' %>
+  <% end %>
 <% end %>

@@ -15,7 +15,9 @@
       <% end %>
       <div id="page">
         <%= render partial: 'shared/flash_messages', flash: flash %>
-        <%= yield %>
+        <div class="row">
+          <%= yield %>
+        </div>
       </div>
     </div>
   </body>
