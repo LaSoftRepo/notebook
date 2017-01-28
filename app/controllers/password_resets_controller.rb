@@ -7,7 +7,6 @@ class PasswordResetsController < ApplicationController
 
   def create
     email = params[:password_reset][:email]
-
     if PasswordResetService.new.send_instructions(email)
       redirect_to root_url, notice: 'Email was sent with password reset instructions.'
     else
@@ -21,10 +20,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    password = params[:user][:password]
-    password_confirmation = params[:user][:password_confirmation]
-
-    if PasswordResetService.new.update_password(user_by_token, password, password_confirmation)
+    if PasswordResetService.new.update_password(user_by_token, params[:user])
       redirect_to root_url, notice: 'Password has been reset.'
     else
       flash.now[:error] = 'The password reset failed. Please correct the fields.'
