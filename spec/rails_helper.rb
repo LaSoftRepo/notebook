@@ -46,6 +46,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
   config.extend ControllerMacros, type: :controller
 
   config.use_transactional_fixtures = false

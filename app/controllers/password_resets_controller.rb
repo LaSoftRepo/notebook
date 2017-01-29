@@ -6,12 +6,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    email = params[:password_reset][:email]
-    if PasswordResetService.new.send_instructions(email)
-      redirect_to root_url, notice: 'Email was sent with password reset instructions.'
+    if PasswordResetService.new.send_instructions(params[:password_reset][:email])
+      redirect_to root_path, notice: 'Email was sent with password reset instructions.'
     else
       flash.now[:error] = 'Email format is invalid. Please, enter valid email.'
-      render 'password_resets/new'
+      render 'password_resets/new', status: 400
     end
   end
 
@@ -21,10 +20,10 @@ class PasswordResetsController < ApplicationController
 
   def update
     if PasswordResetService.new.update_password(user_by_token, params[:user])
-      redirect_to root_url, notice: 'Password has been reset.'
+      redirect_to root_path, notice: 'Password has been reset.'
     else
       flash.now[:error] = 'The password reset failed. Please correct the fields.'
-      render 'password_resets/edit', locals: { user: user_by_token }
+      render 'password_resets/edit', locals: { user: user_by_token }, status: 400
     end
   rescue PasswordResetService::PasswordResetExpired
     flash[:warning] = 'Password reset has expired.'
