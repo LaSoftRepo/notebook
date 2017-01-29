@@ -22,11 +22,6 @@ RSpec.describe PasswordResetsController, type: :controller do
         get :new
         expect(response).to redirect_to root_path
       end
-
-      it 'returns status 302' do
-        get :new
-        expect(response.status).to eq 302
-      end
     end
 
     describe 'POST #create' do
@@ -42,11 +37,6 @@ RSpec.describe PasswordResetsController, type: :controller do
         post :create, params: params
         expect(response).to redirect_to root_path
       end
-
-      it 'returns status 302' do
-        post :create, params: params
-        expect(response.status).to eq 302
-      end
     end
 
     describe 'GET #edit' do
@@ -61,11 +51,6 @@ RSpec.describe PasswordResetsController, type: :controller do
       it 'redirects to root path' do
         get :edit, params: params
         expect(response).to redirect_to root_path
-      end
-
-      it 'returns status 302' do
-        get :edit, params: params
-        expect(response.status).to eq 302
       end
     end
 
@@ -86,11 +71,6 @@ RSpec.describe PasswordResetsController, type: :controller do
       it 'redirects to root path' do
         patch :update, params: params
         expect(response).to redirect_to root_path
-      end
-
-      it 'returns status 302' do
-        patch :update, params: params
-        expect(response.status).to eq 302
       end
     end
   end
@@ -130,11 +110,6 @@ RSpec.describe PasswordResetsController, type: :controller do
         it 'redirects to root path' do
           post :create, params: valid_params
           expect(response).to redirect_to root_path
-        end
-
-        it 'returns status 302' do
-          post :create, params: valid_params
-          expect(response.status).to eq 302
         end
       end
 
@@ -238,11 +213,6 @@ RSpec.describe PasswordResetsController, type: :controller do
             patch :update, params: valid_params
             expect(response).to redirect_to root_path
           end
-
-          it 'returns status 302' do
-            patch :update, params: valid_params
-            expect(response.status).to eq 302
-          end
         end
 
         context 'WITH INVALID PARAMS' do
@@ -302,11 +272,6 @@ RSpec.describe PasswordResetsController, type: :controller do
           it 'redirects to new password reset path' do
             patch :update, params: params
             expect(response).to redirect_to new_password_reset_path
-          end
-
-          it 'returns status 302' do
-            patch :update, params: params
-            expect(response.status).to eq 302
           end
         end
       end

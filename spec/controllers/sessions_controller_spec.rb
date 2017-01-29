@@ -14,11 +14,6 @@ RSpec.describe SessionsController, type: :controller do
         get :new
         expect(response).to redirect_to root_path
       end
-
-      it 'returns status 302' do
-        get :new
-        expect(response.status).to eq 302
-      end
     end
 
     describe 'POST #create' do
@@ -36,11 +31,6 @@ RSpec.describe SessionsController, type: :controller do
         post :create, params: params
         expect(response).to redirect_to root_path
       end
-
-      it 'returns status 302' do
-        post :create, params: params
-        expect(response.status).to eq 302
-      end
     end
 
     describe 'DELETE #destroy' do
@@ -57,11 +47,6 @@ RSpec.describe SessionsController, type: :controller do
       it 'redirects to root path' do
         delete :destroy
         expect(response).to redirect_to root_path
-      end
-
-      it 'returns status 302' do
-        delete :destroy
-        expect(response.status).to eq 302
       end
     end
   end
@@ -109,11 +94,6 @@ RSpec.describe SessionsController, type: :controller do
         it 'redirects to root path' do
           post :create, params: valid_params
           expect(response).to redirect_to root_path
-        end
-
-        it 'returns status 302' do
-          post :create, params: valid_params
-          expect(response.status).to eq 302
         end
       end
 
