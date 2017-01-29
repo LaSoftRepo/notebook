@@ -99,7 +99,7 @@ RSpec.describe PasswordResetsController, type: :controller do
     log_out
 
     describe 'GET #new' do
-      it 'renders password_reset/new template' do
+      it "renders 'password_reset/new' template" do
         get :new
         expect(response).to render_template('password_resets/new')
       end
@@ -151,7 +151,7 @@ RSpec.describe PasswordResetsController, type: :controller do
           expect(flash.now[:error]).to be_present
         end
 
-        it 'renders password_resets/new template' do
+        it "renders 'password_resets/new' template" do
           post :create, params: invalid_params
           expect(response).to render_template('password_resets/new')
         end
@@ -178,7 +178,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         let(:params) { { id: token } }
         before { set_password_reset_token(FactoryGirl.create(:user), params[:id]) }
 
-        it 'renders password_resets/edit template' do
+        it "renders 'password_resets/edit' template" do
           get :edit, params: params
           expect(response).to render_template('password_resets/edit')
         end
@@ -266,7 +266,7 @@ RSpec.describe PasswordResetsController, type: :controller do
             expect(flash.now[:error]).to be_present
           end
 
-          it 'renders password_resets/edit template' do
+          it "renders 'password_resets/edit' template" do
             patch :update, params: invalid_params
             expect(response).to render_template 'password_resets/edit'
           end

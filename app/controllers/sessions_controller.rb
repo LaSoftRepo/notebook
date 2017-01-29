@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :authenticate_user, only: :destroy
   before_action :redirect_authenticated_user, only: [:new, :create]
 
   def new
@@ -12,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to root_url, notice: 'Logged in!'
     else
       flash.now[:error] = 'Invalid email or password.'
-      render 'sessions/new'
+      render 'sessions/new', status: 400
     end
   end
 

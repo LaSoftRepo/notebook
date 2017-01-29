@@ -12,10 +12,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # def authenticate_user
-    #   unless current_user
-    #     flash[:warning] = 'You are not logged in. Please log in.'
-    #     redirect_to log_in_path
-    #   end
-    # end
+    def authenticate_user
+      unless current_user
+        flash[:warning] = 'You are not logged in. Please log in.'
+        redirect_to log_in_path
+      end
+    end
 end
