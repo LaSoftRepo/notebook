@@ -1,6 +1,5 @@
 require 'rails_helper'
-# TODO: Add tests for render like in notebooks_controller_spec file.
-# They should also check locals which are passed to template.
+
 RSpec.describe StaticsController, type: :controller do
   shared_examples 'statics_controller' do
     describe 'GET #home' do

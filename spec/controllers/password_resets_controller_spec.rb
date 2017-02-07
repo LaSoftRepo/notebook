@@ -143,7 +143,7 @@ RSpec.describe PasswordResetsController, type: :controller do
       context 'TOKEN DOES NOT EXIST' do
         let(:params) { { id: 'not_existing_token' } }
 
-        it 'raise an errors' do
+        it 'raises an error' do
           expect do
             get :edit, params: params
           end.to raise_error Mongoid::Errors::DocumentNotFound
@@ -152,11 +152,17 @@ RSpec.describe PasswordResetsController, type: :controller do
 
       context 'TOKEN EXISTS' do
         let(:params) { { id: token } }
-        before { set_password_reset_token(FactoryGirl.create(:user), params[:id]) }
+        let(:user) { FactoryGirl.create(:user) }
+        before { set_password_reset_token(user, params[:id]) }
 
-        it "renders 'password_resets/edit' template" do
+        it "renders 'password_resets/edit' template with user that was found by token" do
+          allow(controller).to receive(:render).with no_args
+          expect(controller).to(
+            receive(:render).with(
+              'password_resets/edit', locals: { user: user }
+            )
+          )
           get :edit, params: params
-          expect(response).to render_template('password_resets/edit')
         end
 
         it 'returns status 200' do
@@ -237,9 +243,14 @@ RSpec.describe PasswordResetsController, type: :controller do
             expect(flash.now[:error]).to be_present
           end
 
-          it "renders 'password_resets/edit' template" do
+          it "renders 'password_resets/edit' template with user that was found by token" do
+            allow(controller).to receive(:render).with no_args
+            expect(controller).to(
+              receive(:render).with(
+                'password_resets/edit', locals: { user: user }, status: 400
+              )
+            )
             patch :update, params: invalid_params
-            expect(response).to render_template 'password_resets/edit'
           end
 
           it 'returns status 400' do
