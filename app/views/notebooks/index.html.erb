@@ -1,6 +1,6 @@
 <% provide :page_title, 'Notebooks' %>
-<ul>
+<div class="list-group">
   <% notebooks.each do |notebook| %>
-    <li><%= link_to notebook.name, notebook_path(notebook) %></li>
+    <%= link_to notebook.name, notebook_path(notebook), class: 'list-group-item list-group-item-action' %>
   <% end %>
-</ul>
+</div>
