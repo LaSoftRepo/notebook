@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: 'statics#home'
 
   resources :users
+  resources :notebooks
   resources :sessions
   resources :password_resets
 end

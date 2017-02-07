@@ -9,6 +9,8 @@ class User
   field :password_reset_token, type: String
   field :password_reset_sent_at, type: DateTime
 
+  has_many :notebooks
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
   attr_accessor :password, :password_validation_is_required
