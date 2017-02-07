@@ -58,6 +58,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mongoid'
 
 # Other
+gem 'appsignal'
 gem 'factory_girl_rails'
 gem 'faker'
 gem 'simple_form'
