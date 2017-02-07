@@ -1,6 +1,6 @@
-<% provide page_title: 'Notebooks' %>
+<% provide :page_title, 'Notebooks' %>
 <ul>
   <% notebooks.each do |notebook| %>
-    <li><%= notebook.name %></li>
+    <li><%= link_to notebook.name, notebook_path(notebook) %></li>
   <% end %>
 </ul>

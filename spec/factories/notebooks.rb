@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :notebook do
-    name "MyString"
+    name { Faker::Lorem.word }
+    association :user, factory: :user
   end
 end

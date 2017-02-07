@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:log_in][:email], params[:log_in][:password])
     if user
       log_in(user, params[:log_in][:remember_me] == '1')
-      redirect_to root_url, notice: 'Logged in!'
+      redirect_to notebooks_path, notice: 'Logged in!'
     else
       flash.now[:error] = 'Invalid email or password.'
       render 'sessions/new', status: 400

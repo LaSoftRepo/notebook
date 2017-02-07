@@ -1,0 +1,8 @@
+<ul class="section-list">
+  <% sections.each do |section| %>
+    <li><%= link_to section.name, '#' %></li>
+    <% if section.sub_sections.any? %>
+      <%= render partial: 'sections', locals: { sections: section.sub_sections } %>
+    <% end %>
+  <% end %>
+</ul>

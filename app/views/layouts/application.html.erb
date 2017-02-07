@@ -10,11 +10,11 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container">
+      <%= render partial: 'shared/flash_messages', flash: flash %>
       <% if content_for?(:page_title) %>
-        <h1 id="page_title"><%= yield(:page_title) %></h1>
+        <div id="page_title"><%= yield(:page_title) %></div>
       <% end %>
       <div id="page">
-        <%= render partial: 'shared/flash_messages', flash: flash %>
         <div class="row">
           <%= yield %>
         </div>
