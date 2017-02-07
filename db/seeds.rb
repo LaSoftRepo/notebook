@@ -27,4 +27,7 @@ if user.nil? && notebook.nil?
 
   notebook.sections.push(models, views, controllers)
   notebook.upsert
+
+  notebook2 = Notebook.create(name: 'JavaScript', user_id: user.id)
+  notebook2.upsert
 end
