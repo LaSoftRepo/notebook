@@ -1,5 +1,6 @@
 require 'rails_helper'
-
+# TODO: Add tests for render like in notebooks_controller_spec file.
+# They should also check locals which are passed to template.
 def set_password_reset_token(user, token)
   user.password_reset_token = token
   user.password_reset_sent_at = Time.zone.now
