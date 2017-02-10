@@ -1,8 +1,15 @@
-<ul class="section-list">
-  <% sections.each do |section| %>
-    <li><%= link_to section.name, '#' %></li>
+<% sections.each do |section| %>
+  <div id="<%= "section-#{id}" %>" class="section-list <%= 'panel-collapse collapse' if collapse %>">
+    <div class="section">
+      <% if section.sub_sections.any? %>
+        <span class="collapse-button list-group-item-action" href="#<%= "section-#{section.id}" %>", data-toggle="collapse">
+          <%= render 'shared/chevron' %>
+        </span>
+      <% end %>
+      <%= link_to section.name, '#', class: 'list-group-item-action' %>
+    </div>
     <% if section.sub_sections.any? %>
-      <%= render partial: 'sections', locals: { sections: section.sub_sections } %>
+      <%= render 'notebooks/sections', sections: section.sub_sections, id: section.id.to_s, collapse: true %>
     <% end %>
-  <% end %>
-</ul>
+  </div>
+<% end %>

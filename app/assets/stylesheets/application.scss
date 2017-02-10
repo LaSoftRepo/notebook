@@ -2,6 +2,7 @@
 @import "bootstrap_overrides";
 @import "notebooks";
 @import "simple_form";
+@import "octicons";
 
 *, input {
   margin: 0;
@@ -16,12 +17,9 @@ body {
     padding-right: 3rem;
     padding-left: 3rem;
     margin-top: 1rem;
-    margin-left: -1rem;
+    margin-left: -2rem;
     border-bottom: 1px solid #d9d9d9;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     padding-bottom: 0.5rem;
-  }
-  #page {
-    padding: 1rem;
   }
 }

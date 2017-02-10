@@ -1,2 +1,4 @@
 <% provide :page_title, "#{notebook.name} notebook" %>
-<%= render partial: 'sections', locals: { sections: notebook.sections } %>
+<div id="sections">
+  <%= render 'notebooks/sections', sections: notebook.sections, id: nil, collapse: false %>
+</div>
