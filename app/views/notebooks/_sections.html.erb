@@ -3,7 +3,8 @@
     <div class="section">
       <% if section.sub_sections.any? %>
         <span class="collapse-button list-group-item-action" href="#<%= "section-#{section.id}" %>", data-toggle="collapse">
-          <%= render 'shared/chevron' %>
+          <%= octicon 'chevron-right' %>
+          <%= octicon 'chevron-down' %>
         </span>
       <% end %>
       <%= link_to section.name, '#', class: 'list-group-item-action' %>

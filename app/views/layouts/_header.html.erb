@@ -7,8 +7,27 @@
     <span class="mr-auto"></span>
     <ul class="nav navbar-nav">
       <% if current_user %>
-        <li class="nav-item">
-          <%= link_to 'log out', log_out_path, class: 'nav-link', method: :delete %>
+        <li class="nav-item user-name active">
+          <%= link_to current_user.name, '#', class: 'nav-link' %>
+        </li>
+        <li class="nav-item dropdown caret-item active">
+          <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= octicon "triangle-down" %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to 'Notebooks', notebooks_path, class: 'dropdown-item' %>
+            <%= link_to 'Profile', '#', class: 'dropdown-item' %>
+            <%= link_to 'Log out', log_out_path, class: 'dropdown-item', method: :delete %>
+          </div>
+        </li>
+        <li class="nav-item hidden-item">
+          <%= link_to 'Notebooks', notebooks_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item hidden-item">
+          <%= link_to 'Profile', '#', class: 'nav-link' %>
+        </li>
+        <li class="nav-item hidden-item">
+          <%= link_to 'Log out', log_out_path, class: 'nav-link', method: :delete %>
         </li>
       <% else %>
         <li class="nav-item">
