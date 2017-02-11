@@ -3,6 +3,7 @@
 }
 
 .alert {
+  width: 100%;
   margin-top: 1rem;
   margin-bottom: 0rem;
 }
@@ -13,4 +14,8 @@
 
 .list-group-item:first-child, .list-group-item:last-child {
   border-radius: 0;
+}
+
+.row {
+  margin: 0;
 }

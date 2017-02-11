@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= full_title yield(:page_title) %></title>
+    <title><%= full_title yield(:head_title) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
@@ -10,11 +10,8 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container">
-      <%= render partial: 'shared/flash_messages', flash: flash %>
-      <% if content_for?(:page_title) %>
-        <div id="page_title"><%= yield(:page_title) %></div>
-      <% end %>
       <div class="row">
+        <%= render partial: 'shared/flash_messages', flash: flash %>
         <%= yield %>
       </div>
     </div>

@@ -15,22 +15,10 @@ input[type=submit] {
 }
 
 body {
-  #page_title {
-    font-size: 2rem;
-    display: inline-block;
-    padding-right: 3rem;
-    padding-left: 3rem;
-    margin-top: 1rem;
-    margin-left: -2rem;
-    border-bottom: 1px solid #d9d9d9;
-    margin-bottom: 2rem;
-    padding-bottom: 0.5rem;
-  }
   .navbar {
     .navbar-nav {
       .caret-item {
         cursor: pointer;
-
         #navbarDropdownMenuLink {
           padding: 7px;
           .octicon-triangle-down {
@@ -50,22 +38,45 @@ body {
       .hidden-item {
         display: none;
       }
-    }
-    .user-name {
-      border-right: 1px solid #d9d9d9;
-      margin-right: 12px;
-      padding-right: 12px;
-    }
-    .nav-item {
-      .nav-link {
-        color: rgba(0, 0, 0, 0.7);
+      .user-name {
+        border-right: 1px solid #d9d9d9;
+        margin-right: 12px;
+        padding-right: 12px;
       }
-      .nav-link:hover {
-        color: rgba(0, 0, 0, 0.9);
+      .nav-item {
+        .nav-link {
+          color: rgba(0, 0, 0, 0.7);
+        }
+        .nav-link:hover {
+          color: rgba(0, 0, 0, 0.9);
+        }
+      }
+    }
+  }
+  #box {
+    width: 100%;
+    #top-box {
+      padding: 1rem 0rem;
+      .title {
+        font-size: 2rem;
+        display: inline-block;
+        padding: 0rem 3rem 0.4rem 3rem;
+        margin: 0rem 0rem 0rem -2rem;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .button {
+        display: inline-block;
+        float: right;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        a {
+          border-radius: 0;
+        }
       }
     }
   }
 }
+
 
 @media (max-width: 991px) {
   body {

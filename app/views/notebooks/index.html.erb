@@ -1,6 +1,9 @@
-<% provide :page_title, 'Notebooks' %>
-<div class="list-group">
-  <% notebooks.each do |notebook| %>
-    <%= link_to notebook.name, notebook_path(notebook), class: 'list-group-item list-group-item-action' %>
-  <% end %>
-</div>
+<% provide :head_title, 'Notebooks' %>
+
+<%= box title: "Notebooks", button_text: 'Add', button_link: '#' do %>
+  <div class="list-group">
+    <% notebooks.each do |notebook| %>
+      <%= link_to notebook.name, notebook_path(notebook), class: 'list-group-item list-group-item-action' %>
+    <% end %>
+  </div>
+<% end %>

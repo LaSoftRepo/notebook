@@ -1,4 +1,7 @@
-<% provide :page_title, "#{notebook.name} notebook" %>
-<div id="sections">
-  <%= render 'notebooks/sections', sections: notebook.sections, id: nil, collapse: false %>
-</div>
+<% provide :head_title, "#{notebook.name} sections" %>
+
+<%= box title: "#{notebook.name} sections", button_text: 'Add', button_link: '#' do %>
+  <div class="sections">
+    <%= render 'notebooks/sections', sections: notebook.sections, id: nil, collapse: false %>
+  </div>
+<% end %>

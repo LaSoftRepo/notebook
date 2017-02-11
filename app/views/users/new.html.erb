@@ -1,10 +1,13 @@
-<% provide :page_title, 'Sign up' %>
-<%= center_box do %>
-  <%= simple_form_for user do |f| %>
-    <%= f.input :name %>
-    <%= f.input :email %>
-    <%= f.input :password, required: true %>
-    <%= f.input :password_confirmation, required: true %>
-    <%= f.button :submit, 'Sign up', class: 'btn btn-primary' %>
+<% provide :head_title, 'Sign up' %>
+
+<%= box title: 'Sign up' do %>
+  <%= center do %>
+    <%= simple_form_for user do |f| %>
+      <%= f.input :name %>
+      <%= f.input :email %>
+      <%= f.input :password, required: true %>
+      <%= f.input :password_confirmation, required: true %>
+      <%= f.button :submit, 'Sign up', class: 'btn btn-primary' %>
+    <% end %>
   <% end %>
 <% end %>
