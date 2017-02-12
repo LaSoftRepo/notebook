@@ -6,7 +6,7 @@ class PasswordResetService
     return false unless email.match User::VALID_EMAIL_REGEX
     user = User.find_by(email: email)
     if user
-      user.password_reset_token = SecureRandom.uuid
+      user.password_reset_token = TokenGenerator.generate
       user.password_reset_sent_at = Time.zone.now
       user.save
       UserMailer.password_reset(user).deliver_now

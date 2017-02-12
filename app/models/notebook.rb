@@ -1,5 +1,6 @@
 class Notebook
   include Mongoid::Document
+  include ShortID
 
   field :name
 

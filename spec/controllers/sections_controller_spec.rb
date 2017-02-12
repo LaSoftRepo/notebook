@@ -7,14 +7,14 @@ RSpec.describe SectionsController, type: :controller do
     describe 'GET #index' do
       context 'current notebook belongs to current user' do
         let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
-        let(:sections) { FactoryGirl.create_list(:section, 2, notebook: notebook) }
         let(:params) { { notebook_id: notebook.id } }
 
         it "renders 'sections/index' template with notebook sections" do
+          FactoryGirl.create_list(:section, 2, notebook: notebook)
           allow(controller).to receive(:render).with no_args
           expect(controller).to(
             receive(:render).with(
-              'sections/index', locals: { sections: sections }
+              'sections/index', locals: { sections: notebook.sections }
             )
           )
           get :index, params: params

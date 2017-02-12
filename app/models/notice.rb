@@ -1,5 +1,6 @@
 class Notice
   include Mongoid::Document
+  include ShortID
 
   field :name
   field :text

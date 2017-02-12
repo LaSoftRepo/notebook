@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include ShortID
 
   field :name, type: String
   field :email, type: String
@@ -34,7 +35,7 @@ class User
   end
 
   def generate_auth_token
-    self.auth_token = Encryptor.encrypt(SecureRandom.uuid)
+    self.auth_token = Encryptor.encrypt(TokenGenerator.generate)
   end
 
   private

@@ -1,7 +1,7 @@
 module SessionsHelper
 
   def log_in(user, permanent = false)
-    auth_token = SecureRandom.uuid
+    auth_token = TokenGenerator.generate
     if permanent
       cookies.permanent[:auth_token] = auth_token
     else
@@ -23,7 +23,7 @@ module SessionsHelper
 
     if cookies[:auth_token]
       auth_token = Encryptor.encrypt(cookies[:auth_token])
-      @current_user = User.find_by(auth_token: auth_token)
+      @current_user = User.where(auth_token: auth_token).first
     else
       nil
     end

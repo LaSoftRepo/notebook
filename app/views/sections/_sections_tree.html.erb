@@ -1,7 +1,7 @@
 <% sections.each do |section| %>
   <div id="<%= "section-#{id}" %>" class="section-list <%= 'panel-collapse collapse' if collapse %>">
     <div class="section">
-      <% if section.sub_sections.any? %>
+      <% if section.child_sections.any? %>
         <span class="collapse-button list-group-item-action" href="#<%= "section-#{section.id}" %>", data-toggle="collapse">
           <%= octicon 'chevron-right' %>
           <%= octicon 'chevron-down' %>
@@ -9,8 +9,8 @@
       <% end %>
       <%= link_to section.name, '#', class: 'list-group-item-action' %>
     </div>
-    <% if section.sub_sections.any? %>
-      <%= render 'sections/sections_tree', sections: section.sub_sections, id: section.id.to_s, collapse: true %>
+    <% if section.child_sections.any? %>
+      <%= render 'sections/sections_tree', sections: section.child_sections, id: section.id.to_s, collapse: true %>
     <% end %>
   </div>
 <% end %>
