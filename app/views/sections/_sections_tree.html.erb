@@ -10,7 +10,7 @@
       <%= link_to section.name, '#', class: 'list-group-item-action' %>
     </div>
     <% if section.sub_sections.any? %>
-      <%= render 'notebooks/sections', sections: section.sub_sections, id: section.id.to_s, collapse: true %>
+      <%= render 'sections/sections_tree', sections: section.sub_sections, id: section.id.to_s, collapse: true %>
     <% end %>
   </div>
 <% end %>

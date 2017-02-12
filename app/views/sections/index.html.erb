@@ -1,0 +1,7 @@
+<% provide :head_title, "#{current_notebook.name} sections" %>
+
+<%= box title: "#{current_notebook.name} sections", button_text: 'Add', button_link: '#' do %>
+  <div class="sections">
+    <%= render 'sections/sections_tree', sections: sections, id: nil, collapse: false %>
+  </div>
+<% end %>
