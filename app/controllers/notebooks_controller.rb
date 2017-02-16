@@ -5,4 +5,8 @@ class NotebooksController < ApplicationController
     notebooks = current_user.notebooks
     render 'notebooks/index', locals: { notebooks: notebooks }
   end
+
+  def create
+
+  end
 end

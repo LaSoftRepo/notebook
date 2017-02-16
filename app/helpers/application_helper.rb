@@ -26,13 +26,15 @@ module ApplicationHelper
 
   def box(options = {}, &block)
     title, button_text, button_link = options[:title], options[:button_text], options[:button_link]
+    button_data = options[:button_data] ? options[:button_data] : {}
+    button_data.merge! class: 'btn btn-primary'
 
     if title.present?
       title_tag = content_tag :div, title, class: 'title'
     end
 
     if button_text.present?
-      link_tag = link_to(button_text, button_link, class: 'btn btn-primary')
+      link_tag = link_to(button_text, button_link, button_data)
       button_tag = content_tag :div, link_tag, class: 'button'
     end
 
