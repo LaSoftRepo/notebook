@@ -2,7 +2,7 @@
   <div id="<%= "section-#{id}" %>" class="section-list <%= 'panel-collapse collapse' if collapse %>">
     <div class="section">
       <% if section.child_sections.any? %>
-        <span class="collapse-button list-group-item-action" href="#<%= "section-#{section.id}" %>", data-toggle="collapse">
+        <span class="collapse-button list-group-item-action" href='#<%= "section-#{section.id}" %>', data-toggle="collapse">
           <%= octicon 'chevron-right' %>
           <%= octicon 'chevron-down' %>
         </span>
