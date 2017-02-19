@@ -10,6 +10,9 @@ input[type=submit] {
 
 body {
   .navbar {
+    .navbar-brand {
+      width: 75px;
+    }
     .navbar-nav {
       .caret-item {
         cursor: pointer;
