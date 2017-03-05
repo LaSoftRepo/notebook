@@ -19,7 +19,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         expect(flash[:warning]).to be_present
       end
 
-      it 'redirects to root path' do
+      it 'redirects to root_path' do
         get :new
         expect(response).to redirect_to root_path
       end
@@ -34,7 +34,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         expect(flash[:warning]).to be_present
       end
 
-      it 'redirects to root path' do
+      it 'redirects to root_path' do
         post :create, params: params
         expect(response).to redirect_to root_path
       end
@@ -49,7 +49,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         expect(flash[:warning]).to be_present
       end
 
-      it 'redirects to root path' do
+      it 'redirects to root_path' do
         get :edit, params: params
         expect(response).to redirect_to root_path
       end
@@ -69,7 +69,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         expect(flash[:warning]).to be_present
       end
 
-      it 'redirects to root path' do
+      it 'redirects to root_path' do
         patch :update, params: params
         expect(response).to redirect_to root_path
       end
@@ -108,7 +108,7 @@ RSpec.describe PasswordResetsController, type: :controller do
           expect(flash[:notice]).to be_present
         end
 
-        it 'redirects to root path' do
+        it 'redirects to root_path' do
           post :create, params: valid_params
           expect(response).to redirect_to root_path
         end
@@ -216,7 +216,7 @@ RSpec.describe PasswordResetsController, type: :controller do
             expect(flash[:notice]).to be_present
           end
 
-          it 'redirects to root path' do
+          it 'redirects to root_path' do
             patch :update, params: valid_params
             expect(response).to redirect_to root_path
           end

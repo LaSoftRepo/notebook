@@ -9,7 +9,7 @@ class NotebooksController < ApplicationController
   def create
     notebook = current_user.notebooks.build notebooks_params
     if notebook.save
-      flash[:notice] = "#{notebook.name} successfully created."
+      flash[:success] = "#{notebook.name} successfully created."
       redirect_to notebook_sections_path(notebook)
     else
       flash[:error] = notebook.pretty_errors
