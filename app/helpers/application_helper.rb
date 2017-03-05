@@ -24,10 +24,13 @@ module ApplicationHelper
     content_tag(:div, capture(&block), class: 'col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4')
   end
 
-  def box(options = {}, &block)
-    title, button_text, button_link = options[:title], options[:button_text], options[:button_link]
-    button_data = options[:button_data] ? options[:button_data] : {}
-    button_data.merge! class: 'btn btn-primary'
+  def box(args = {}, &block)
+    args.reverse_merge!({ button_link: '#', button_data: {} })
+
+    title = args[:title]
+    button_text = args[:button_text]
+    button_link = args[:button_link]
+    button_data = args[:button_data].merge(class: 'btn btn-primary')
 
     if title.present?
       title_tag = content_tag :div, title, class: 'title'
