@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       redirect_to root_path, notice: 'Signed up!'
     else
       flash.now[:error] = 'The sign up failed. Please correct the fields.'
-      render 'users/new', locals: { user: user }, status: 400
+      render 'users/new', locals: { user: user }, status: 422
     end
   end
 

@@ -102,9 +102,9 @@ RSpec.describe UsersController, type: :controller do
           expect(response).to render_template('users/new')
         end
 
-        it 'returns status 400' do
+        it 'returns status 422' do
           post :create, params: invalid_params
-          expect(response.status).to eq 400
+          expect(response.status).to eq 422
         end
       end
     end

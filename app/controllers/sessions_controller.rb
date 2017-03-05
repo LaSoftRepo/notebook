@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to notebooks_path, notice: 'Logged in!'
     else
       flash.now[:error] = 'Invalid email or password.'
-      render 'sessions/new', status: 400
+      render 'sessions/new', status: 422
     end
   end
 

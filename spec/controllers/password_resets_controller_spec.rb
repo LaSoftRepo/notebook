@@ -132,9 +132,9 @@ RSpec.describe PasswordResetsController, type: :controller do
           expect(response).to render_template('password_resets/new')
         end
 
-        it 'returns status 400' do
+        it 'returns status 422' do
           post :create, params: invalid_params
-          expect(response.status).to eq 400
+          expect(response.status).to eq 422
         end
       end
     end
@@ -247,15 +247,15 @@ RSpec.describe PasswordResetsController, type: :controller do
             allow(controller).to receive(:render).with no_args
             expect(controller).to(
               receive(:render).with(
-                'password_resets/edit', locals: { user: user }, status: 400
+                'password_resets/edit', locals: { user: user }, status: 422
               )
             )
             patch :update, params: invalid_params
           end
 
-          it 'returns status 400' do
+          it 'returns status 422' do
             patch :update, params: invalid_params
-            expect(response.status).to eq 400
+            expect(response.status).to eq 422
           end
         end
 
