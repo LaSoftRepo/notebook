@@ -16,4 +16,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require cable
+//= require rails.validations
+//= require rails.validations.simple_form
 //= require_tree ./views
+
+function enableModalFormValidation(form) {
+  form.parents('.modal').on('shown.bs.modal', function() {
+    form.enableClientSideValidations();
+  });
+}

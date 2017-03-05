@@ -18,7 +18,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for Notebook.new, remote: true do |f| %>
+        <%= simple_form_for Notebook.new, validate: true do |f| %>
           <%= f.input :name, required: true %>
           <%= f.button :submit, 'Create', class: 'btn btn-primary' %>
         <% end %>

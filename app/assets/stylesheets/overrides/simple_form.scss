@@ -1,4 +1,9 @@
-.simple_form .has-error .help-block {
-  color: #a94442;
-  font-size: 14px;
+.simple_form .has-error {
+  input {
+    border-color: #a94442;
+  }
+  .help-block {
+    color: #a94442;
+    font-size: 12px;
+  }
 }
