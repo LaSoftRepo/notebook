@@ -43,6 +43,6 @@ module Repeek
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
-    config.autoload_paths << File.join(Rails.root, 'lib')
+    config.autoload_paths += Dir["#{config.root}/lib/**/*"]
   end
 end
