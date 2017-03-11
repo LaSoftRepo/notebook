@@ -17,7 +17,7 @@ class NotebooksController < ApplicationController
       flash[:success] = "#{notebook.name} successfully created."
       redirect_to notebook_sections_path(notebook)
     else
-      flash.now[:error] = 'Please correct the fields.'
+      flash.now[:error] = 'We can not create a notebook. Please correct the fields.'
       render 'notebooks/new', locals: { notebook: notebook }, status: 422
     end
   end
