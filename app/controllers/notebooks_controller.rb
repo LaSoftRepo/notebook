@@ -6,14 +6,19 @@ class NotebooksController < ApplicationController
     render 'notebooks/index', locals: { notebooks: notebooks }
   end
 
+  def new
+    notebook = current_user.notebooks.build
+    render 'notebooks/new', locals: { notebook: notebook }
+  end
+
   def create
     notebook = current_user.notebooks.build notebooks_params
     if notebook.save
       flash[:success] = "#{notebook.name} successfully created."
       redirect_to notebook_sections_path(notebook)
     else
-      flash[:error] = notebook.pretty_errors
-      redirect_to notebooks_path
+      flash.now[:error] = 'Please correct the fields.'
+      render 'notebooks/new', locals: { notebook: notebook }, status: 422
     end
   end
 

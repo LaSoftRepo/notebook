@@ -1,0 +1,10 @@
+<% provide :head_title, 'New notebook' %>
+
+<%= box title: 'New notebook' do %>
+  <%= center do %>
+    <%= simple_form_for notebook do |f| %>
+      <%= f.input :name, required: true %>
+      <%= f.button :submit, 'Create', class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+<% end %>

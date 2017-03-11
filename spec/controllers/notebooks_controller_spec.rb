@@ -24,6 +24,18 @@ RSpec.describe NotebooksController, type: :controller do
       end
     end
 
+    describe 'GET #new' do
+      it "renders 'notebooks/new' template" do
+        get :new
+        expect(response).to render_template('notebooks/new')
+      end
+
+      it 'returns status 200' do
+        get :new
+        expect(response.status).to eq 200
+      end
+    end
+
     describe 'POST #create' do
 
       context 'WITH VALID PARAMS' do
@@ -57,14 +69,19 @@ RSpec.describe NotebooksController, type: :controller do
           end.to change(Notebook, :count).by(0)
         end
 
-        it 'sets flash[:error] message' do
+        it 'sets flash.now[:error] message' do
           post :create, params: invalid_params
-          expect(flash[:error]).to be_present
+          expect(flash.now[:error]).to be_present
         end
 
-        it 'redirects to notebook_path' do
+        it "renders 'notebooks/new' template" do
           post :create, params: invalid_params
-          expect(response).to redirect_to notebooks_path
+          expect(response).to render_template('notebooks/new')
+        end
+
+        it 'returns status 422' do
+          post :create, params: invalid_params
+          expect(response.status).to eq 422
         end
       end
     end

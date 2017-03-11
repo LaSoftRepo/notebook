@@ -2,7 +2,6 @@ class Notebook
   include Mongoid::Document
   include Mongoid::Timestamps
   include ShortID
-  include PrettyErrors
 
   field :name
 
