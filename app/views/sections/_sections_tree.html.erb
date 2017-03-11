@@ -8,6 +8,12 @@
         </span>
       <% end %>
       <%= link_to section.name, '#', class: 'list-group-item-action' %>
+      <span class="add-button list-group-item-action">
+        <%= octicon 'plus' %>
+      </span>
+      <span class="edit-button list-group-item-action">
+        <%= octicon 'pencil' %>
+      </span>
     </div>
     <% if section.child_sections.any? %>
       <%= render 'sections/sections_tree', sections: section.child_sections, id: section.id.to_s, collapse: true %>

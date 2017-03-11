@@ -15,7 +15,6 @@
           display: table-cell;
           padding: 0.75rem 0.25rem;
           width: 0px;
-          border-right: 1px solid #e0e0e0;
           cursor: pointer;
           vertical-align: middle;
           svg {
@@ -24,6 +23,12 @@
           .octicon-chevron-down {
             display: none;
           }
+        }
+        span.collapse-button {
+          border-right: 1px solid #e0e0e0;
+        }
+        span.add-button, span.edit-button {
+          border-left: 1px solid #e0e0e0;
         }
         a {
           display: table-cell;
