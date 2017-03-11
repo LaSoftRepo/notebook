@@ -1,0 +1,27 @@
+#notebooks-index {
+  .notebooks {
+    width: 100%;
+    .notebook {
+      border: 1px solid #e0e0e0;
+      margin-top: -1px;
+      display: table;
+      vertical-align: middle;
+      width: 100%;
+      span {
+        display: table-cell;
+        padding: 0.75rem 0.25rem;
+        width: 0px;
+        border-left: 1px solid #e0e0e0;
+        cursor: pointer;
+        vertical-align: middle;
+        svg {
+          width: 16px;
+        }
+      }
+      a {
+        display: table-cell;
+        padding: 0.75rem 1.25rem;
+      }
+    }
+  }
+}
