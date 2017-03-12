@@ -7,7 +7,7 @@
       }
       .section {
         @include list-item;
-        span.collapse-button, a.add-button, a.edit-button {
+        span.collapse-button, a.add-child-button, a.edit-button {
           @include additional-button;
         }
         span.collapse-button {
@@ -16,7 +16,7 @@
             display: none;
           }
         }
-        a.add-button, a.edit-button {
+        a.add-child-button, a.edit-button {
           border-left: 1px solid #e0e0e0;
         }
         a.main-button {

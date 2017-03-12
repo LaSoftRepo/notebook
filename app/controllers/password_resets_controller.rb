@@ -6,7 +6,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    if PasswordResetService.new.send_instructions(params[:password_reset][:email])
+    if service.send_instructions(params[:password_reset][:email])
       redirect_to root_path, notice: 'Email was sent with password reset instructions.'
     else
       flash.now[:error] = 'Email format is invalid. Please, enter valid email.'
@@ -19,7 +19,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    if PasswordResetService.new.update_password(user_by_token, params[:user])
+    if service.update_password(user_by_token, password_reset_params)
       redirect_to root_path, notice: 'Password has been reset.'
     else
       flash.now[:error] = 'The password reset failed. Please correct the fields.'
@@ -32,7 +32,15 @@ class PasswordResetsController < ApplicationController
 
   private
 
+    def service
+      PasswordResetService.new
+    end
+
     def user_by_token
       @user ||= User.find_by!(password_reset_token: params[:id])
+    end
+
+    def password_reset_params
+      params.require(:user).permit(:password, :password_confirmation)
     end
 end

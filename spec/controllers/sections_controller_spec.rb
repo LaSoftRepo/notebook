@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe SectionsController, type: :controller do
   context 'LOGGED IN' do
+    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
     log_in
 
     describe 'GET #index' do
       context 'current notebook belongs to current user' do
-        let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
         let(:params) { { notebook_id: notebook.id } }
 
         it "renders 'sections/index' template with notebook sections" do
@@ -27,7 +27,7 @@ RSpec.describe SectionsController, type: :controller do
       end
 
       context 'current notebook does not belong to current user' do
-        let(:params) { { notebook_id: FactoryGirl.create(:notebook).id } }
+        let(:params) { { notebook_id: '12345678' } }
 
         it 'raise an error' do
           expect do
@@ -36,13 +36,42 @@ RSpec.describe SectionsController, type: :controller do
         end
       end
     end
+
+    describe 'GET #new' do
+      let(:params) { { notebook_id: notebook.id } }
+
+       it "renders 'sections/new' template" do
+        get :new, params: params
+        expect(response).to render_template('sections/new')
+      end
+
+      it 'returns status 200' do
+        get :new, params: params
+        expect(response.status).to eq 200
+      end
+
+      context 'current notebook does not belong to current user' do
+        let(:params) { { notebook_id: '12345678' } }
+
+        it 'raise an error' do
+          expect do
+            get :new, params: params
+          end.to raise_error Mongoid::Errors::DocumentNotFound
+        end
+      end
+    end
+
+    describe 'POST #create' do
+      # TODO: add tests
+    end
   end
 
   context 'LOGGED OUT' do
     log_out
-    let(:params) { { notebook_id: FactoryGirl.create(:notebook).id } }
 
     describe 'GET #index' do
+      let(:params) { { notebook_id: FactoryGirl.create(:notebook).id } }
+
       it 'sets flash[:warning] message' do
         get :index, params: params
         expect(flash[:warning]).to be_present
@@ -52,6 +81,24 @@ RSpec.describe SectionsController, type: :controller do
         get :index, params: params
         expect(response).to redirect_to log_in_path
       end
+    end
+
+    describe 'GET #new' do
+      let(:params) { { notebook_id: FactoryGirl.create(:notebook).id } }
+
+      it 'sets flash[:warning] message' do
+        get :new, params: params
+        expect(flash[:warning]).to be_present
+      end
+
+      it 'redirects to login path' do
+        get :new, params: params
+        expect(response).to redirect_to log_in_path
+      end
+    end
+
+    describe 'POST #create' do
+      # TODO: add tests
     end
   end
 end

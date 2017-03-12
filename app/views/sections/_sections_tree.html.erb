@@ -1,5 +1,5 @@
-<% sections.each do |section| %>
-  <div id="<%= "section-#{id}" %>" class="section-list <%= 'panel-collapse collapse' if collapse %>">
+<div id="<%= "section-#{id}" %>" class="section-list <%= 'panel-collapse collapse' if collapse %>">
+  <% sections.each do |section| %>
     <div class="section">
       <% if section.child_sections.any? %>
         <span class="collapse-button list-group-item-action" href='#<%= "section-#{section.id}" %>', data-toggle="collapse">
@@ -8,15 +8,18 @@
         </span>
       <% end %>
       <%= link_to section.name, '#', class: 'main-button list-group-item-action' %>
-      <%= link_to new_notebook_section_path(parent_section_id: section.id), class: 'add-button list-group-item-action' do %>
-        <%= octicon 'plus' %>
+      <% if add_child_button %>
+        <%= link_to new_notebook_section_path(parent_section_id: section.id), class: 'add-child-button list-group-item-action' do %>
+          <%= octicon 'plus' %>
+        <% end %>
       <% end %>
       <%= link_to '#', class: 'edit-button list-group-item-action' do %>
         <%= octicon 'pencil' %>
       <% end %>
     </div>
     <% if section.child_sections.any? %>
-      <%= render 'sections/sections_tree', sections: section.child_sections, id: section.id.to_s, collapse: true %>
+      <%= render 'sections/sections_tree', sections: section.child_sections, id: section.id.to_s, collapse: true,
+        add_child_button: section.child_sections.first.can_create_child_section? %>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>

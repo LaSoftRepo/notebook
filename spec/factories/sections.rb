@@ -4,4 +4,8 @@ FactoryGirl.define do
     description { Faker::Lorem.sentence }
     association :notebook, factory: :notebook
   end
+
+  factory :invalid_section, parent: :section do
+    name nil
+  end
 end

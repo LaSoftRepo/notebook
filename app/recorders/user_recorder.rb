@@ -1,7 +1,8 @@
 class UserRecorder
 
-  def initialize(user)
-    @user = user
+  def initialize(args = {})
+    args.reverse_merge!({ user: nil })
+    @user = args[:user]
   end
 
   def create(params)

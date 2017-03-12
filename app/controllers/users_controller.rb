@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = recorder(nil).create(user_params)
+    user = recorder.create(user_params)
     if user.valid?
       log_in user
       redirect_to root_path, notice: 'Signed up!'
@@ -19,8 +19,8 @@ class UsersController < ApplicationController
 
   private
 
-    def recorder(user)
-      UserRecorder.new(user)
+    def recorder(user = nil)
+      UserRecorder.new(user: user)
     end
 
     def user_params
