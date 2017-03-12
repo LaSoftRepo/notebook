@@ -4,10 +4,10 @@
   <div class="notebooks">
     <% notebooks.each do |notebook| %>
       <div class="notebook">
-        <%= link_to notebook.name, notebook_sections_path(notebook), class: 'list-group-item-action' %>
-        <span class="list-group-item-action">
+        <%= link_to notebook.name, notebook_sections_path(notebook), class: 'main-button list-group-item-action' %>
+        <%= link_to '#', class: 'edit-button list-group-item-action' do %>
           <%= octicon 'pencil' %>
-        </span>
+        <% end %>
       </div>
     <% end %>
   </div>

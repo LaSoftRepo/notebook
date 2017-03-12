@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :notebooks do
-    resources :sections
+    resources :sections do
+      resources :notices
+    end
   end
   resources :sessions
   resources :password_resets

@@ -12,7 +12,7 @@ class NotebooksController < ApplicationController
   end
 
   def create
-    notebook = current_user.notebooks.build notebooks_params
+    notebook = current_user.notebooks.build notebook_params
     if notebook.save
       flash[:success] = "#{notebook.name} successfully created."
       redirect_to notebook_sections_path(notebook)
@@ -24,7 +24,7 @@ class NotebooksController < ApplicationController
 
   private
 
-    def notebooks_params
+    def notebook_params
       params.require(:notebook).permit(:name)
     end
 end

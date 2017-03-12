@@ -1,0 +1,14 @@
+<% provide :head_title, 'New section' %>
+
+<%= box title: 'New section' do %>
+  <%= center do %>
+    <%= simple_form_for [current_notebook, section] do |f| %>
+      <%= f.input :name, required: true %>
+      <%= f.input :description, as: :text %>
+      <% if params[:parent_section_id] %>
+        <%= hidden_field_tag :parent_section_id, params[:parent_section_id] %>
+      <% end %>
+      <%= f.button :submit, 'Create', class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+<% end %>

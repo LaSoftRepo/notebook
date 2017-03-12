@@ -2,8 +2,8 @@ class Notice
   include Mongoid::Document
   include ShortID
 
-  field :name
-  field :text
+  field :name, type: String
+  field :text, type: String
 
   embedded_in :section
 end

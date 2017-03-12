@@ -6,33 +6,21 @@
         padding-left: 25px;
       }
       .section {
-        border: 1px solid #e0e0e0;
-        margin-top: -1px;
-        display: table;
-        vertical-align: middle;
-        width: 100%;
-        span {
-          display: table-cell;
-          padding: 0.75rem 0.25rem;
-          width: 0px;
-          cursor: pointer;
-          vertical-align: middle;
-          svg {
-            width: 16px;
-          }
+        @include list-item;
+        span.collapse-button, a.add-button, a.edit-button {
+          @include additional-button;
+        }
+        span.collapse-button {
+          border-right: 1px solid #e0e0e0;
           .octicon-chevron-down {
             display: none;
           }
         }
-        span.collapse-button {
-          border-right: 1px solid #e0e0e0;
-        }
-        span.add-button, span.edit-button {
+        a.add-button, a.edit-button {
           border-left: 1px solid #e0e0e0;
         }
-        a {
-          display: table-cell;
-          padding: 0.75rem 1.25rem;
+        a.main-button {
+          @include main-button;
         }
       }
     }

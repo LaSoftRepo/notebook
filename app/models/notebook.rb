@@ -3,11 +3,24 @@ class Notebook
   include Mongoid::Timestamps
   include ShortID
 
-  field :name
+  field :name, type: String
 
   embeds_many :sections
 
   belongs_to :user
 
   validates :name, presence: true
+
+  def find_section(id)
+    section = sections.where(id: id).first
+
+    unless section
+      sections.each do |s|
+        section = s.find_section id
+        break if section
+      end
+    end
+
+    section
+  end
 end
