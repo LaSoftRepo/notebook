@@ -1,9 +1,7 @@
-<% provide :head_title, 'Notebooks' %>
-
 <%= box title: 'Notebooks' do %>
-<div class="new-notebook">
-  <%= link_to 'Create new notebook', new_notebook_path %>
-</div>
+  <div class="new-notebook">
+    <%= link_to 'Create new notebook', new_notebook_path %>
+  </div>
   <div class="notebooks">
     <% notebooks.each do |notebook| %>
       <div class="notebook">

@@ -1,5 +1,3 @@
-<% provide :head_title, 'Password reset' %>
-
 <%= box title: 'Password reset' do %>
   <%= center do %>
     <%= simple_form_for user, url: password_reset_path(params[:id]) do |f| %>

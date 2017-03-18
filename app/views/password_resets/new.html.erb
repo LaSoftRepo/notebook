@@ -1,5 +1,3 @@
-<% provide :head_title, 'Forgot password?' %>
-
 <%= box title: 'Forgot password?' do %>
   <%= center do %>
     <%= simple_form_for :password_reset, url: password_resets_path, method: :post do |f| %>

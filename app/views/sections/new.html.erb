@@ -1,7 +1,3 @@
-<% provide :head_title, 'New section' %>
-<%# TODO: if we create a child section then make the title to look something like this
-          New child section for "parent section name"
- %>
 <%= box title: 'New section' do %>
   <%= center do %>
     <%= simple_form_for [current_notebook, section] do |f| %>
