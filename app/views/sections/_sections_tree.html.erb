@@ -7,7 +7,7 @@
           <%= octicon 'chevron-down' %>
         </span>
       <% end %>
-      <%= link_to section.name, '#', class: 'main-button list-group-item-action' %>
+      <%= link_to section.name, notebook_section_notices_path(section_id: section.id), class: 'main-button list-group-item-action' %>
       <% if add_child_button %>
         <%= link_to new_notebook_section_path(parent_section_id: section.id), class: 'add-child-button list-group-item-action' do %>
           <%= octicon 'plus' %>

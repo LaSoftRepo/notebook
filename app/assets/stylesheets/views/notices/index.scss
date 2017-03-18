@@ -1,0 +1,23 @@
+@import "mixins/list";
+@import "mixins/button";
+
+#notices-index {
+  .notices {
+    width: 100%;
+    .notice {
+      @include list-item;
+      a.edit-button {
+        @include additional-button;
+      }
+      a.edit-button {
+        border-left: 1px solid #e0e0e0;
+      }
+      a.main-button {
+        @include main-button;
+      }
+    }
+  }
+  div.new-notice {
+    @include new-item;
+  }
+}

@@ -1,0 +1,15 @@
+<%= box title: "#{current_section.name} notices" do %>
+  <div class="new-notice">
+    <%= link_to 'Create new notice', new_notebook_section_notice_path %>
+  </div>
+  <div class="notices">
+    <% notices.each do |notice| %>
+      <div class="notice">
+        <%= link_to notice.name, notebook_section_notice_path(id: notice.id), class: 'main-button list-group-item-action' %>
+        <%= link_to '#', class: 'edit-button list-group-item-action' do %>
+          <%= octicon 'pencil' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

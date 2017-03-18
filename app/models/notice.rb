@@ -7,4 +7,6 @@ class Notice
   field :text, type: String
 
   embedded_in :section
+
+  validates :name, :text, presence: true
 end

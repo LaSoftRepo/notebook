@@ -98,7 +98,7 @@ RSpec.describe SectionsController, type: :controller do
     end
 
     describe 'POST #create' do
-      # TODO: add tests LOGGED IN SectionsController#create
+      # TODO: add tests LOGGED OUT SectionsController#create
     end
   end
 end

@@ -1,0 +1,9 @@
+<%= box title: 'New notice' do %>
+  <%= center do %>
+    <%= simple_form_for [current_notebook, current_section, notice] do |f| %>
+      <%= f.input :name, required: true %>
+      <%= f.input :text, as: :text, required: true %>
+      <%= f.button :submit, 'Create', class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+<% end %>
