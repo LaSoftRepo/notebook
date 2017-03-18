@@ -19,11 +19,11 @@ class UsersController < ApplicationController
 
   private
 
-    def recorder(user = nil)
-      UserRecorder.new(user: user)
-    end
+  def recorder(user = nil)
+    UserRecorder.new(user: user)
+  end
 
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
 end

@@ -32,15 +32,15 @@ class PasswordResetsController < ApplicationController
 
   private
 
-    def service
-      PasswordResetService.new
-    end
+  def service
+    PasswordResetService.new
+  end
 
-    def user_by_token
-      @user ||= User.find_by!(password_reset_token: params[:id])
-    end
+  def user_by_token
+    @user ||= User.find_by!(password_reset_token: params[:id])
+  end
 
-    def password_reset_params
-      params.require(:user).permit(:password, :password_confirmation)
-    end
+  def password_reset_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
 end

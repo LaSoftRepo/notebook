@@ -31,11 +31,11 @@ class SectionsController < ApplicationController
 
   private
 
-    def recorder(section = nil)
-      SectionRecorder.new(notebook: current_notebook, section: section)
-    end
+  def recorder(section = nil)
+    SectionRecorder.new(notebook: current_notebook, section: section)
+  end
 
-    def section_params
-      params.require(:section).permit(:name, :description)
-    end
+  def section_params
+    params.require(:section).permit(:name, :description)
+  end
 end
