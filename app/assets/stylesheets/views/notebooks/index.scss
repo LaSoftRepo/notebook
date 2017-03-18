@@ -1,4 +1,5 @@
 @import "mixins/list";
+@import "mixins/button";
 
 #notebooks-index {
   .notebooks {
@@ -15,5 +16,8 @@
         @include main-button;
       }
     }
+  }
+  div.new-notebook {
+    @include new-item;
   }
 }

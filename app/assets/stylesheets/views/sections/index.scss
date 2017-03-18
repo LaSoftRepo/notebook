@@ -1,3 +1,6 @@
+@import "mixins/list";
+@import "mixins/button";
+
 #sections-index {
   .sections {
     .section-list {
@@ -24,5 +27,8 @@
         }
       }
     }
+  }
+  div.new-section {
+    @include new-item;
   }
 }

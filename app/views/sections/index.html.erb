@@ -1,6 +1,9 @@
 <% provide :head_title, "#{current_notebook.name} sections" %>
 
-<%= box title: "#{current_notebook.name} sections", button_text: 'Add', button_link: new_notebook_section_path do %>
+<%= box title: "#{current_notebook.name} sections" do %>
+<div class="new-section">
+  <%= link_to 'Create new section', new_notebook_section_path %>
+</div>
   <div class="sections">
     <%= render 'sections/sections_tree', sections: sections, id: nil, collapse: false, add_child_button: true %>
   </div>
