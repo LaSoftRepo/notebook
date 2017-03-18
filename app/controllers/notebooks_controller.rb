@@ -1,6 +1,8 @@
 class NotebooksController < ApplicationController
   before_action :authenticate_user
 
+  # add_breadcrumb 'Notebooks', :notebooks_path
+
   def index
     notebooks = current_user.notebooks.order(created_at: :desc)
     render 'notebooks/index', locals: { notebooks: notebooks }
@@ -26,5 +28,9 @@ class NotebooksController < ApplicationController
 
   def notebook_params
     params.require(:notebook).permit(:name)
+  end
+
+  def notebooks_path
+    notebooks_path
   end
 end

@@ -59,6 +59,9 @@ module ApplicationHelper
       provide :head_title, title if args[:head_title] == true
     end
 
+    # breadcrumbs = content_tag(:div, render_breadcrumbs(separator: '/'), class: 'breadcrumbs')
+
+    # top_box = content_tag(:div, title_tag + breadcrumbs, id: 'top-box')
     top_box = content_tag(:div, title_tag, id: 'top-box')
     content_box = content_tag(:div, capture(&block), id: 'content-box')
     content_tag(:div, (top_box + content_box).html_safe, id: 'box')

@@ -67,6 +67,7 @@ gem 'client_side_validations-simple_form'
 gem 'client_side_validations-mongoid'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'octicons_helper'
+gem "breadcrumbs_on_rails"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
