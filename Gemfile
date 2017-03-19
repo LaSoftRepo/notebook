@@ -58,13 +58,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mongoid'
 
 # Other
-gem 'appsignal'
+# gem 'appsignal'
 gem 'factory_girl_rails'
 gem 'faker'
 gem 'simple_form'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
-gem 'client_side_validations-mongoid'
+# gem 'client_side_validations'
+# gem 'client_side_validations-simple_form'
+# gem 'client_side_validations-mongoid'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'octicons_helper'
 gem "breadcrumbs_on_rails"
