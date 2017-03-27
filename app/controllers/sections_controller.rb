@@ -1,3 +1,10 @@
+# TODO: It would be better to create one more controller.
+# The name will be ChildSectionsController. It's going to work with child
+# section. Currently SectionsController does 2 things:
+# 1. Works with section
+# 2. Works with child sections
+# Which is not right.
+# Excellent solution is a new controller (maybe recorder too).
 class SectionsController < ApplicationController
   before_action :authenticate_user
 

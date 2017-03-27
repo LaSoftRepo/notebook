@@ -16,6 +16,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require cable
-//Not in use// require rails.validations
-//Not in use// require rails.validations.simple_form
+//not in use rails.validations
+//not in use rails.validations.simple_form
 //= require_tree ./views

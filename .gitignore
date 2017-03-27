@@ -16,6 +16,11 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore rubymine temp files
 .idea/
+
+# Ignore rvm gemset file
 .ruby-gemset
-.ruby-version
+
+# Ignore bundle folder for gems
+vendor/bundle
