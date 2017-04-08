@@ -9,7 +9,7 @@ class PasswordResetsController < ApplicationController
     if service.send_instructions(params[:password_reset][:email])
       redirect_to root_path, notice: 'Email was sent with password reset instructions.'
     else
-      @error = 'Email format is invalid. Please, enter valid email.'
+      @error = 'Email format is invalid. Please, enter valid email'
       render 'password_resets/new', status: 422
     end
   end
@@ -25,7 +25,7 @@ class PasswordResetsController < ApplicationController
       render 'password_resets/edit', locals: { user: user_by_token }, status: 422
     end
   rescue PasswordResetService::PasswordResetExpired
-    @error = 'Password reset has expired.'
+    @error = 'Password reset has expired'
     redirect_to new_password_reset_path
   end
 
