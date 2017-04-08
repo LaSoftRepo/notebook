@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require cable
 //= require material.min
-//= require_tree ./views
+// NOT IS USE YET require_tree ./views
 
 $(document).ready(function(){
   setTimeout(function(){
