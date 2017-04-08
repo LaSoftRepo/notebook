@@ -3,8 +3,8 @@
     <li>
       <%= link_to section.name, notebook_section_notices_path(section_id: section.id) %>
       <% if section.can_create_child_section? %>
-        <%= link_to new_notebook_section_path(parent_section_id: section) do %>
-          <i class="add-child-section material-icons">add</i>
+        <%= link_to new_notebook_section_path(parent_section_id: section), class: 'add-child-section' do %>
+          Add Child
         <% end %>
       <% end %>
       <% if section.child_sections.any? %>
