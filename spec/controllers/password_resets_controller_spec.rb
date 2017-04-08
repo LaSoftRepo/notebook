@@ -122,9 +122,9 @@ RSpec.describe PasswordResetsController, type: :controller do
           post :create, params: invalid_params
         end
 
-        it 'sets flash.now[:error] message' do
+        it 'assigns error message to @error' do
           post :create, params: invalid_params
-          expect(flash.now[:error]).to be_present
+          expect(assigns(:error)).to be_present
         end
 
         it "renders 'password_resets/new' template" do
@@ -238,11 +238,6 @@ RSpec.describe PasswordResetsController, type: :controller do
             patch :update, params: invalid_params
           end
 
-          it 'sets flash.now[:error] message' do
-            patch :update, params: invalid_params
-            expect(flash.now[:error]).to be_present
-          end
-
           it "renders 'password_resets/edit' template with user that was found by token" do
             allow(controller).to receive(:render).with no_args
             expect(controller).to(
@@ -276,9 +271,9 @@ RSpec.describe PasswordResetsController, type: :controller do
             patch :update, params: params
           end
 
-          it 'sets flash[:warning] message' do
+          it 'assigns error message to @error' do
             patch :update, params: params
-            expect(flash[:warning]).to be_present
+            expect(assigns(:error)).to be_present
           end
 
           it 'redirects to new password reset path' do

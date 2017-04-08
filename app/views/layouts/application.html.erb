@@ -1,19 +1,65 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= full_title yield(:head_title) %></title>
+    <title>
+      <%= full_title yield(:head_title).blank? ? yield(:title) : yield(:head_title) %>
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+    <%= stylesheet_link_tag    'application' %>
+    <%= javascript_include_tag 'application' %>
   </head>
   <body id='<%= "#{controller_name}-#{action_name}" %>'>
-    <%= render 'layouts/header' %>
-    <div class="container">
-      <div class="row">
-        <%= render partial: 'shared/flash_messages', flash: flash %>
-        <%= yield %>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Repeek</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Repeek</span>
+        <nav class="mdl-navigation">
+          <%= link_to 'Home', root_path, class: 'mdl-navigation__link' %>
+          <% if current_user %>
+            <%= link_to 'Profile', '', class: 'mdl-navigation__link' %>
+            <%= link_to 'Notebooks', notebooks_path, class: 'mdl-navigation__link' %>
+            <%= link_to 'Log out', log_out_path, class: 'mdl-navigation__link', method: :delete %>
+          <% else %>
+            <%= link_to 'Sign up', sign_up_path, class: 'mdl-navigation__link' %>
+            <%= link_to 'Log in', log_in_path, class: 'mdl-navigation__link' %>
+          <% end %>
+        </nav>
       </div>
+      <main class="mdl-layout__content">
+        <div class="page-content">
+          <%= render 'shared/flash_message' %>
+          <div class="mdl-grid">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-cell mdl-cell--9-col">
+              <div class="mdl-color-text--grey-500 breadcrumbs">
+                <!-- This is breadcrumbs -->
+                Google &gt; Material Design Lite &gt; How to install MDL
+              </div>
+              <h1 id="title">
+                <%= yield :title %>
+              </h1>
+            </div>
+            <div class="mdl-layout-spacer"></div>
+          </div>
+          <div class="mdl-grid">
+            <%= yield %>
+          </div>
+        </div>
+      </main>
     </div>
   </body>
 </html>

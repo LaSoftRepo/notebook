@@ -1,9 +1,17 @@
-<%= box title: 'Password reset' do %>
-  <%= center do %>
-    <%= simple_form_for user, url: password_reset_path(params[:id]) do |f| %>
-      <%= f.input :password, required: true %>
-      <%= f.input :password_confirmation, required: true %>
-      <%= f.button :submit, 'Reset password', class: 'btn btn-primary' %>
-    <% end %>
+<% head_title 'Password reset' %>
+
+<%= small_form title: 'Password reset', errors: user.errors.full_messages do %>
+  <%= form_for user, url: password_reset_path(params[:id]) do |f| %>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.password_field :password, class: 'mdl-textfield__input' %>
+      <%= f.label :password, class: 'mdl-textfield__label' %>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.password_field :password_confirmation, class: 'mdl-textfield__input' %>
+      <%= f.label :password_confirmation, class: 'mdl-textfield__label' %>
+    </div>
+
+    <%= f.submit 'Reset password', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
   <% end %>
 <% end %>

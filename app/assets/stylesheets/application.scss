@@ -1,6 +1,5 @@
-@import "bootstrap";
-@import "overrides/bootstrap";
-@import "overrides/simple_form";
-@import "octicons";
+@import "material.min";
+@import "material_icons";
+@import "overrides/mdl";
 @import "layouts/application";
 @import "views/**/*";

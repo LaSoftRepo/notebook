@@ -1,23 +1,16 @@
 @import "mixins/list";
-@import "mixins/button";
+@import "mixins/add-round-button";
 
 #notices-index {
-  .notices {
-    width: 100%;
-    .notice {
-      @include list-item;
-      a.edit-button {
-        @include additional-button;
-      }
-      a.edit-button {
-        border-left: 1px solid #e0e0e0;
-      }
-      a.main-button {
-        @include main-button;
+  .box {
+    .list {
+      @include list;
+      li:first-child {
+        margin-top: 0;
       }
     }
-  }
-  div.new-notice {
-    @include new-item;
+    .add-round-button {
+      @include add-round-button;
+    }
   }
 }

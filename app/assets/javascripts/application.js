@@ -11,11 +11,13 @@
 // about supported directives.
 //
 //= require jquery
-//= require tether
-//= require bootstrap
 //= require jquery_ujs
-//= require turbolinks
 //= require cable
-//not in use rails.validations
-//not in use rails.validations.simple_form
+//= require material.min
 //= require_tree ./views
+
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#flash').slideUp(500);
+  }, 3000);
+});

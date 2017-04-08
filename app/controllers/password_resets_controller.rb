@@ -9,7 +9,7 @@ class PasswordResetsController < ApplicationController
     if service.send_instructions(params[:password_reset][:email])
       redirect_to root_path, notice: 'Email was sent with password reset instructions.'
     else
-      flash.now[:error] = 'Email format is invalid. Please, enter valid email.'
+      @error = 'Email format is invalid. Please, enter valid email.'
       render 'password_resets/new', status: 422
     end
   end
@@ -22,11 +22,10 @@ class PasswordResetsController < ApplicationController
     if service.update_password(user_by_token, password_reset_params)
       redirect_to root_path, notice: 'Password has been reset.'
     else
-      flash.now[:error] = 'The password reset failed. Please correct the fields.'
       render 'password_resets/edit', locals: { user: user_by_token }, status: 422
     end
   rescue PasswordResetService::PasswordResetExpired
-    flash[:warning] = 'Password reset has expired.'
+    @error = 'Password reset has expired.'
     redirect_to new_password_reset_path
   end
 

@@ -1,12 +1,23 @@
-<%= box title: 'New section' do %>
-  <%= center do %>
-    <%= simple_form_for [current_notebook, section] do |f| %>
-      <%= f.input :name, required: true %>
-      <%= f.input :description, as: :text %>
-      <% if params[:parent_section_id] %>
-        <%= hidden_field_tag :parent_section_id, params[:parent_section_id] %>
-      <% end %>
-      <%= f.button :submit, 'Create', class: 'btn btn-primary' %>
+<% title 'New section' %>
+
+<%= box do %>
+  <%= form_for [current_notebook, section] do |f| %>
+    <%= render 'shared/errors', errors: section.errors.full_messages %>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.text_field :name, class: 'mdl-textfield__input' %>
+      <%= f.label :name, class: 'mdl-textfield__label' %>
+    </div>
+
+    <div class="textarea mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.text_area :description, rows: 4, class: 'mdl-textfield__input' %>
+      <%= f.label :description, class: 'mdl-textfield__label' %>
+    </div>
+
+    <% if params[:parent_section_id] %>
+      <%= hidden_field_tag :parent_section_id, params[:parent_section_id] %>
     <% end %>
+
+    <%= f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
   <% end %>
 <% end %>

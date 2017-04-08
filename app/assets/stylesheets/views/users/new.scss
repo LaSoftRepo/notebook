@@ -1,0 +1,7 @@
+@import "mixins/small-form";
+
+#users-new, #users-create {
+  .small-form {
+    @include small-form;
+  }
+}

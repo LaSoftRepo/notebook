@@ -1,15 +1,24 @@
-<%= box title: 'Notebooks' do %>
-  <div class="new-notebook">
-    <%= link_to 'Create new notebook', new_notebook_path %>
-  </div>
-  <div class="notebooks">
-    <% notebooks.each do |notebook| %>
-      <div class="notebook">
-        <%= link_to notebook.name, notebook_sections_path(notebook), class: 'main-button list-group-item-action' %>
-        <%= link_to '#', class: 'edit-button list-group-item-action' do %>
-          <%= octicon 'pencil' %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+<% title 'Notebooks' %>
+
+<%= box do %>
+  <%= link_to new_notebook_path, class: 'add-round-button mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent' do %>
+    <i class="material-icons mdl-color-text--white" role="presentation">add</i>
+    <span class="visuallyhidden">add</span>
+    <span class="mdl-button__ripple-container">
+      <span class="mdl-ripple is-animating"></span>
+    </span>
+  <% end %>
+  <% if notebooks.any? %>
+    <ul class="list">
+      <% notebooks.each do |notebook| %>
+        <li>
+          <%= link_to notebook.name, notebook_sections_path(notebook_id: notebook.id) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>
+      You have no notebooks. Add the first one.
+    </p>
+  <% end %>
 <% end %>

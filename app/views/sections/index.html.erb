@@ -1,8 +1,18 @@
-<%= box title: "#{current_notebook.name} sections" do %>
-  <div class="new-section">
-    <%= link_to 'Create new section', new_notebook_section_path %>
-  </div>
-  <div class="sections">
-    <%= render 'sections/sections_tree', sections: sections, id: nil, collapse: false, add_child_button: true %>
-  </div>
+<% title "#{current_notebook.name} sections" %>
+
+<%= box do %>
+  <%= link_to new_notebook_section_path, class: 'add-round-button mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent' do %>
+    <i class="material-icons mdl-color-text--white" role="presentation">add</i>
+    <span class="visuallyhidden">add</span>
+    <span class="mdl-button__ripple-container">
+      <span class="mdl-ripple is-animating"></span>
+    </span>
+  <% end %>
+  <% if sections.any? %>
+    <%= render 'sections/sections_tree', sections: sections %>
+  <% else %>
+    <p>
+      You have no sections. Add the first one.
+    </p>
+  <% end %>
 <% end %>

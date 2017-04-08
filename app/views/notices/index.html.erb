@@ -1,15 +1,24 @@
-<%= box title: "#{current_section.name} notices" do %>
-  <div class="new-notice">
-    <%= link_to 'Create new notice', new_notebook_section_notice_path %>
-  </div>
-  <div class="notices">
-    <% notices.each do |notice| %>
-      <div class="notice">
-        <%= link_to notice.name, notebook_section_notice_path(id: notice.id), class: 'main-button list-group-item-action' %>
-        <%= link_to '#', class: 'edit-button list-group-item-action' do %>
-          <%= octicon 'pencil' %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+<% title "#{current_section.name} notices" %>
+
+<%= box do %>
+  <%= link_to new_notebook_section_notice_path, class: 'add-round-button mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent' do %>
+    <i class="material-icons mdl-color-text--white" role="presentation">add</i>
+    <span class="visuallyhidden">add</span>
+    <span class="mdl-button__ripple-container">
+      <span class="mdl-ripple is-animating"></span>
+    </span>
+  <% end %>
+  <% if notices.any? %>
+    <ul class="list">
+      <% notices.each do |notice| %>
+        <li>
+          <%= link_to notice.name, notebook_section_notice_path(id: notice.id) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>
+      You have no notices. Add the first one.
+    </p>
+  <% end %>
 <% end %>

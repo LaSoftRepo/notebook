@@ -1,0 +1,11 @@
+@mixin small-form {
+  padding: 16px;
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+  .mdl-textfield {
+    width: 100%;
+  }
+}

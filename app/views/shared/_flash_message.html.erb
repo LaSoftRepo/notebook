@@ -1,0 +1,9 @@
+<% if flash.first %>
+  <div id="flash" class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--9-col flash-message flash-<%= flash.first[0] %>">
+      <%= flash.first[1] %>
+    </div>
+    <div class="mdl-layout-spacer"></div>
+  </div>
+<% end %>

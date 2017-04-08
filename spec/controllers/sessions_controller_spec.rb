@@ -112,9 +112,9 @@ RSpec.describe SessionsController, type: :controller do
           expect(controller.current_user).to eq nil
         end
 
-        it 'sets flash.now[:error] message' do
+        it 'assigns error message to @error' do
           post :create, params: invalid_params
-          expect(flash.now[:error]).to be_present
+          expect(assigns(:error)).to be_present
         end
 
         it "renders 'sessions/new' template" do

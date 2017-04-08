@@ -1,9 +1,19 @@
-<%= box title: 'New notice' do %>
-  <%= center do %>
-    <%= simple_form_for [current_notebook, current_section, notice] do |f| %>
-      <%= f.input :name, required: true %>
-      <%= f.input :text, as: :text, required: true %>
-      <%= f.button :submit, 'Create', class: 'btn btn-primary' %>
-    <% end %>
+<% title 'New notice' %>
+
+<%= box do %>
+  <%= form_for [current_notebook, current_section, notice] do |f| %>
+    <%= render 'shared/errors', errors: notice.errors.full_messages %>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.text_field :name, class: 'mdl-textfield__input' %>
+      <%= f.label :name, class: 'mdl-textfield__label' %>
+    </div>
+
+    <div class="textarea mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.text_area :text, rows: 8, class: 'mdl-textfield__input' %>
+      <%= f.label :text, class: 'mdl-textfield__label' %>
+    </div>
+
+    <%= f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
   <% end %>
 <% end %>

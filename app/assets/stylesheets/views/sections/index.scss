@@ -1,34 +1,29 @@
 @import "mixins/list";
-@import "mixins/button";
+@import "mixins/add-round-button";
+@import "variables/colors";
 
 #sections-index {
-  .sections {
-    .section-list {
-      width: 100%;
-      .section-list {
-        padding-left: 25px;
-      }
-      .section {
-        @include list-item;
-        span.collapse-button, a.add-child-button, a.edit-button {
-          @include additional-button;
-        }
-        span.collapse-button {
-          border-right: 1px solid #e0e0e0;
-          .octicon-chevron-down {
-            display: none;
-          }
-        }
-        a.add-child-button, a.edit-button {
-          border-left: 1px solid #e0e0e0;
-        }
-        a.main-button {
-          @include main-button;
+  .box {
+    .list {
+      @include list;
+      li {
+        position: relative;
+        li {
+          padding-left: 16px;
         }
       }
     }
+    .add-round-button {
+      @include add-round-button;
+    }
+    .add-child-section {
+      position: absolute;
+      margin: -3px 0 0 5px;
+      font-size: 28px;
+      color: $red;
+    }
   }
-  div.new-section {
-    @include new-item;
+  .box > .list > li:first-child {
+    margin-top: 0;
   }
 }
