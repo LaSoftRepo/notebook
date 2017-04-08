@@ -145,7 +145,7 @@ test:
 production:
   clients:
     default:
-      database: repeek_production
-      hosts:
-        - db:27017
-      # uri: <%= ENV['MONGODB_URI'] %>
+      # database: repeek_production
+      # hosts:
+      #   - db:27017
+      uri: <%= ENV['MONGODB_URI'] %>
