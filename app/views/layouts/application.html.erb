@@ -26,12 +26,12 @@
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Repeek</span>
+        <!-- <span class="mdl-layout-title">Repeek</span> -->
         <nav class="mdl-navigation">
           <%= link_to 'Home', root_path, class: 'mdl-navigation__link' %>
           <% if current_user %>
-            <%= link_to 'Profile', '', class: 'mdl-navigation__link' %>
             <%= link_to 'Notebooks', notebooks_path, class: 'mdl-navigation__link' %>
+            <%= link_to 'Profile', '', class: 'mdl-navigation__link' %>
             <%= link_to 'Log out', log_out_path, class: 'mdl-navigation__link', method: :delete %>
           <% else %>
             <%= link_to 'Sign up', sign_up_path, class: 'mdl-navigation__link' %>
