@@ -1,7 +1,7 @@
 class NotebooksController < ApplicationController
-  before_action :authenticate_user
+  include Breadcrumbs::Notebook
 
-  # add_breadcrumb 'Notebooks', :notebooks_path
+  before_action :authenticate_user
 
   def index
     notebooks = current_user.notebooks.order(created_at: :desc)

@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      <%= full_title yield(:head_title).blank? ? yield(:title) : yield(:head_title) %>
+      <%= full_title yield(:head_title) %>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
@@ -46,8 +46,7 @@
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-cell mdl-cell--9-col">
               <div class="mdl-color-text--grey-500 breadcrumbs">
-                <!-- This is breadcrumbs -->
-                <!-- Google &gt; Material Design Lite &gt; How to install MDL -->
+                <%= render_breadcrumbs %>
               </div>
               <h1 id="title">
                 <%= yield :title %>

@@ -4,8 +4,9 @@ module ApplicationHelper
     page_title.blank? ? base_title : "#{page_title} | #{base_title}"
   end
 
-  def title(text)
-    provide :title, text
+  def title(text, args = {})
+    [:title, :head_title].each { |i| provide i, text }
+    add_breadcrumb text if args[:last_breadcrumb]
   end
 
   def head_title(text)
