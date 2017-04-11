@@ -3,23 +3,18 @@ module Breadcrumbs
     extend ActiveSupport::Concern
 
     included do
-      include Base::Object
-      extend  Base::Class
+      include AppRoutes
+      include CrumbsBeforeRender
 
-      cattr_reader :actions do
-        [:index, :new]
+      def add_breadcrumbs(action)
+        case action
+        when :index
+          add_breadcrumb 'Home', app_routes.root_path
+        when :new
+          add_breadcrumb 'Home', app_routes.root_path
+          add_breadcrumb 'Notebooks', app_routes.notebooks_path
+        end
       end
-
-      def index_crumbs
-        add_breadcrumb 'Home', app_routes.root_path
-      end
-
-      def new_crumbs
-        add_breadcrumb 'Home', app_routes.root_path
-        add_breadcrumb 'Notebooks', app_routes.notebooks_path
-      end
-
-      add_breadcrumbs_to(actions)
     end
   end
 end
