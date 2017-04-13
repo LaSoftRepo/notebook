@@ -61,4 +61,5 @@ gem 'mongoid'
 # gem 'appsignal'
 gem 'factory_girl_rails'
 gem 'faker'
-gem "breadcrumbs_on_rails"
+gem 'breadcrumbs_on_rails'
+gem 'haml-rails'
