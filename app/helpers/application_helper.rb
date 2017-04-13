@@ -39,4 +39,19 @@ module ApplicationHelper
 
     (spacer + content + spacer).html_safe
   end
+
+  def add_round_button(args = {})
+    mini = args[:mini] ? 'mdl-button--mini-fab' : ''
+    klass = "add-round-button #{mini} mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent"
+
+    link_to args[:link], class: klass do
+      raw(
+        '<i class="material-icons mdl-color-text--white" role="presentation">add</i>' +
+        '<span class="visuallyhidden">add</span>' +
+        '<span class="mdl-button__ripple-container">' +
+          '<span class="mdl-ripple is-animating"></span>' +
+        '</span>'
+      )
+    end
+  end
 end
