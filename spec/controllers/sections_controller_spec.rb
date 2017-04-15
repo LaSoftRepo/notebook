@@ -9,15 +9,9 @@ RSpec.describe SectionsController, type: :controller do
       context 'current notebook belongs to current user' do
         let(:params) { { notebook_id: notebook.id } }
 
-        it "renders 'sections/index' template with notebook sections" do
-          FactoryGirl.create_list(:section, 2, notebook: notebook)
-          allow(controller).to receive(:render).with no_args
-          expect(controller).to(
-            receive(:render).with(
-              'sections/index', locals: { sections: notebook.sections }
-            )
-          )
+        it "renders 'sections/index' template" do
           get :index, params: params
+          expect(response).to render_template('sections/index')
         end
 
         it 'returns status 200' do

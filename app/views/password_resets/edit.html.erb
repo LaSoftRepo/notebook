@@ -1,7 +1,7 @@
 <% head_title 'Password reset' %>
 
-<%= small_form title: 'Password reset', errors: user.errors.full_messages do %>
-  <%= form_for user, url: password_reset_path(params[:id]) do |f| %>
+<%= small_form title: 'Password reset', errors: @user.errors.full_messages do %>
+  <%= form_for @user, url: password_reset_path(params[:id]) do |f| %>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.password_field :password, class: 'mdl-textfield__input' %>
       <%= f.label :password, class: 'mdl-textfield__label' %>

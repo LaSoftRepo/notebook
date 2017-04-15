@@ -1,4 +1,4 @@
-<% title "#{current_section.name} notices" %>
+<% title 'Notices', last_breadcrumb: true %>
 
 <%= box do %>
   <%= link_to new_notebook_section_notice_path, class: 'add-round-button mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent' do %>
@@ -8,9 +8,9 @@
       <span class="mdl-ripple is-animating"></span>
     </span>
   <% end %>
-  <% if notices.any? %>
+  <% if @notices.any? %>
     <ul class="list">
-      <% notices.each do |notice| %>
+      <% @notices.each do |notice| %>
         <li>
           <%= link_to notice.name, notebook_section_notice_path(id: notice.id) %>
         </li>

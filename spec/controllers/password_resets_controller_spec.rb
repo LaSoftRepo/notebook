@@ -1,6 +1,5 @@
 require 'rails_helper'
-# TODO: Add tests for render like in notebooks_controller_spec file.
-# They should also check locals which are passed to template.
+
 def set_password_reset_token(user, token)
   user.password_reset_token = token
   user.password_reset_sent_at = Time.zone.now
@@ -155,14 +154,9 @@ RSpec.describe PasswordResetsController, type: :controller do
         let(:user) { FactoryGirl.create(:user) }
         before { set_password_reset_token(user, params[:id]) }
 
-        it "renders 'password_resets/edit' template with user that was found by token" do
-          allow(controller).to receive(:render).with no_args
-          expect(controller).to(
-            receive(:render).with(
-              'password_resets/edit', locals: { user: user }
-            )
-          )
+        it "renders 'password_resets/edit' template" do
           get :edit, params: params
+          expect(response).to render_template('password_resets/edit')
         end
 
         it 'returns status 200' do
@@ -238,14 +232,9 @@ RSpec.describe PasswordResetsController, type: :controller do
             patch :update, params: invalid_params
           end
 
-          it "renders 'password_resets/edit' template with user that was found by token" do
-            allow(controller).to receive(:render).with no_args
-            expect(controller).to(
-              receive(:render).with(
-                'password_resets/edit', locals: { user: user }, status: 422
-              )
-            )
+          it "renders 'password_resets/edit' template" do
             patch :update, params: invalid_params
+            expect(response).to render_template('password_resets/edit')
           end
 
           it 'returns status 422' do

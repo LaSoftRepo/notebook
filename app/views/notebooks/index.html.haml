@@ -3,9 +3,9 @@
 = box do
   = add_round_button(link: new_notebook_path, mini: true)
 
-  - if notebooks.any?
+  - if @notebooks.any?
     %ul.list
-      - notebooks.each do |notebook|
+      - @notebooks.each do |notebook|
         %li= link_to notebook.name, notebook_sections_path(notebook_id: notebook.id)
   - else
     %p You have no notebooks. Add the first one.

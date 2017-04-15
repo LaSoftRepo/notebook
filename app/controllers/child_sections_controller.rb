@@ -4,18 +4,18 @@ class ChildSectionsController < ApplicationController
   before_action :set_parent_section
 
   def new
-    section = @parent_section.child_sections.build
-    render 'sections/new', locals: { section: section }
+    @section = @parent_section.child_sections.build
+    render 'sections/new'
   end
 
   def create
-    section = recorder.create(section_params)
-    if section.valid?
-      flash[:success] = "#{section.name} successfully created."
-      redirect_to notebook_section_notices_path(section_id: section.id)
+    @section = recorder.create(section_params)
+    if @section.valid?
+      flash[:success] = "#{@section.name} successfully created."
+      redirect_to notebook_section_notices_path(section_id: @section.id)
     else
       flash.now[:error] = 'We can not create a section. Please correct the fields.'
-      render 'sections/new', locals: { section: section }, status: 422
+      render 'sections/new', status: 422
     end
   end
 

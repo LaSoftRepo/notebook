@@ -1,5 +1,6 @@
 class PasswordResetsController < ApplicationController
   before_action :redirect_authenticated_user
+  before_action :user_by_token, only: [:edit, :update]
 
   def new
     render 'password_resets/new'
@@ -15,14 +16,14 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    render 'password_resets/edit', locals: { user: user_by_token }
+    render 'password_resets/edit'
   end
 
   def update
-    if service.update_password(user_by_token, password_reset_params)
+    if service.update_password(@user, password_reset_params)
       redirect_to root_path, notice: 'Password has been reset.'
     else
-      render 'password_resets/edit', locals: { user: user_by_token }, status: 422
+      render 'password_resets/edit', status: 422
     end
   rescue PasswordResetService::PasswordResetExpired
     @error = 'Password reset has expired'

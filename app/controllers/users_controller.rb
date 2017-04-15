@@ -2,18 +2,18 @@ class UsersController < ApplicationController
   before_action :redirect_authenticated_user, only: [:new, :create]
 
   def new
-    user = User.new
-    render 'users/new', locals: { user: user }
+    @user = User.new
+    render 'users/new'
   end
 
   def create
-    user = recorder.create(user_params)
-    if user.valid?
-      log_in user
+    @user = recorder.create(user_params)
+    if @user.valid?
+      log_in @user
       redirect_to root_path, notice: 'Signed up!'
     else
       flash.now[:error] = 'The sign up failed. Please correct the fields.'
-      render 'users/new', locals: { user: user }, status: 422
+      render 'users/new', status: 422
     end
   end
 

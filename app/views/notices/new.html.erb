@@ -1,8 +1,8 @@
 <% title 'New notice' %>
 
 <%= box do %>
-  <%= form_for [current_notebook, current_section, notice] do |f| %>
-    <%= render 'shared/errors', errors: notice.errors.full_messages %>
+  <%= form_for [current_notebook, current_section, @notice] do |f| %>
+    <%= render 'shared/errors', errors: @notice.errors.full_messages %>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.text_field :name, class: 'mdl-textfield__input' %>

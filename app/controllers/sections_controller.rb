@@ -3,8 +3,8 @@ class SectionsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    sections = current_notebook.sections
-    render 'sections/index', locals: { sections: sections }
+    @sections = current_notebook.sections
+    render 'sections/index'
   end
 
   def show
@@ -12,18 +12,18 @@ class SectionsController < ApplicationController
   end
 
   def new
-    section = current_notebook.sections.build
-    render 'sections/new', locals: { section: section }
+    @section = current_notebook.sections.build
+    render 'sections/new'
   end
 
   def create
-    section = current_notebook.sections.build(section_params)
-    if section.save
-      flash[:success] = "#{section.name} successfully created."
-      redirect_to notebook_section_notices_path(section_id: section.id)
+    @section = current_notebook.sections.build(section_params)
+    if @section.save
+      flash[:success] = "#{@section.name} successfully created."
+      redirect_to notebook_section_notices_path(section_id: @section.id)
     else
       flash.now[:error] = 'We can not create a section. Please correct the fields.'
-      render 'sections/new', locals: { section: section }, status: 422
+      render 'sections/new', status: 422
     end
   end
 

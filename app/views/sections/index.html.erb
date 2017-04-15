@@ -8,8 +8,8 @@
       <span class="mdl-ripple is-animating"></span>
     </span>
   <% end %>
-  <% if sections.any? %>
-    <%= render 'sections/sections_tree', sections: sections %>
+  <% if @sections.any? %>
+    <%= render 'sections/sections_tree', sections: @sections %>
   <% else %>
     <p>
       You have no sections. Add the first one.

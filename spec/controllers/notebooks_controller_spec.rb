@@ -5,17 +5,9 @@ RSpec.describe NotebooksController, type: :controller do
     log_in
 
     describe 'GET #index' do
-      it "renders 'notebooks/index' template with ordered desc by created_at notebooks of current user" do
-        notebooks = FactoryGirl.create_list(:notebook, 2, user: controller.current_user)
-        allow(controller).to receive(:render).with no_args
-        expect(controller).to(
-          receive(:render).with(
-            'notebooks/index', locals: {
-              notebooks: notebooks.sort { |x, y| y.created_at <=> x.created_at }
-            }
-          )
-        )
+      it "renders 'notebooks/index' template" do
         get :index
+        expect(response).to render_template('notebooks/index')
       end
 
       it 'returns status 200' do

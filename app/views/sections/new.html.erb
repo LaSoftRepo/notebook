@@ -2,8 +2,8 @@
 
 <%= box do %>
   <% if @parent_section %>
-    <%= form_for section, url: notebook_child_sections_path(notebook_id: current_notebook.id), method: :post do |f| %>
-      <%= render 'shared/errors', errors: section.errors.full_messages %>
+    <%= form_for @section, url: notebook_child_sections_path(notebook_id: current_notebook.id), method: :post do |f| %>
+      <%= render 'shared/errors', errors: @section.errors.full_messages %>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <%= f.text_field :name, class: 'mdl-textfield__input' %>
@@ -20,8 +20,8 @@
       <%= f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
     <% end %>
   <% else %>
-    <%= form_for [current_notebook, section] do |f| %>
-      <%= render 'shared/errors', errors: section.errors.full_messages %>
+    <%= form_for [current_notebook, @section] do |f| %>
+      <%= render 'shared/errors', errors: @section.errors.full_messages %>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <%= f.text_field :name, class: 'mdl-textfield__input' %>

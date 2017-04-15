@@ -1,8 +1,8 @@
 - title 'New notebook', last_breadcrumb: true
 
 = box do
-  = form_for notebook do |f|
-    = render 'shared/errors', errors: notebook.errors.full_messages
+  = form_for @notebook do |f|
+    = render 'shared/errors', errors: @notebook.errors.full_messages
 
     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
       = f.text_field :name, class: 'mdl-textfield__input'
