@@ -18,6 +18,6 @@
 
 $(document).ready(function(){
   setTimeout(function(){
-    $('#flash').slideUp(500);
+    $('.flash').slideUp(500);
   }, 3000);
 });
