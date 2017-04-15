@@ -8,7 +8,6 @@ module Breadcrumbs
       def add_breadcrumbs(action)
         case action
         when :index
-          add_breadcrumb t('title.notebook.index'), notebooks_path
           add_breadcrumb current_notebook.name, notebook_path(current_notebook)
           add_breadcrumb t('title.section.index'), notebook_sections_path(current_notebook)
           current_section.parent_sections.reverse.push(current_section).each do |s|
