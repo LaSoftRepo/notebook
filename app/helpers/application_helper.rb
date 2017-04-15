@@ -6,7 +6,6 @@ module ApplicationHelper
 
   def title(text, args = {})
     [:title, :head_title].each { |i| provide i, text }
-    add_breadcrumb text if args[:last_breadcrumb]
   end
 
   def head_title(text)

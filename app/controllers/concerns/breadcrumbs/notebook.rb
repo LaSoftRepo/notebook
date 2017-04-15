@@ -7,11 +7,8 @@ module Breadcrumbs
 
       def add_breadcrumbs(action)
         case action
-        when :index
-          add_breadcrumb 'Home', root_path
         when :new, :create
-          add_breadcrumb 'Home', root_path
-          add_breadcrumb 'Notebooks', notebooks_path
+          add_breadcrumb t('title.notebook.index'), notebooks_path
         end
       end
     end

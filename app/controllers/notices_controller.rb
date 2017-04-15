@@ -1,4 +1,5 @@
 class NoticesController < ApplicationController
+  include Breadcrumbs::Notice
   before_action :authenticate_user
 
   def index

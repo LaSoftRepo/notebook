@@ -20,4 +20,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  title:
+    home: 'Home'
+    notebook:
+      index: 'Notebooks'
+      new: 'New notebook'
+    notice:
+      index: 'Notices'
+      new: 'New notice'
+    password_reset:
+      new: 'Forgot password?'
+      edit: 'Password reset'
+    section:
+      index: 'Sections'
+      new: 'New section'
+    session:
+      new: 'Log in'
+    user:
+      new: 'Sign up'

@@ -46,7 +46,7 @@
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-cell mdl-cell--9-col">
               <div class="mdl-color-text--grey-500 breadcrumbs">
-                <%= render_breadcrumbs %>
+                <%= render_breadcrumbs separator: '<span class="breadcrumb-separator"> / </span>'.html_safe %>
               </div>
               <h1 id="title">
                 <%= yield :title %>
