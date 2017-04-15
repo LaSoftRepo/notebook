@@ -15,7 +15,7 @@ module ApplicationHelper
 
   def box(&block)
     spacer  = content_tag(:div, '', class: 'mdl-layout-spacer')
-    content = content_tag(:div, capture(&block), class: 'box mdl-cell mdl-cell--9-col mdl-shadow--4dp')
+    content = content_tag(:div, capture(&block), class: 'box mdl-cell mdl-cell--9-col mdl-shadow--2dp')
 
     (spacer + content + spacer).html_safe
   end

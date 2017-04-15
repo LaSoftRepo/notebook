@@ -1,4 +1,5 @@
 class SectionsController < ApplicationController
+  include Breadcrumbs::Section
   before_action :authenticate_user
 
   def index

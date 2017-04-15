@@ -35,9 +35,14 @@ p {
   margin: 0;
 }
 
+main {
+  background: #fafafa;
+}
+
 .box {
   position: relative;
   padding: 20px;
+  background: #fff;
 }
 
 .errors {

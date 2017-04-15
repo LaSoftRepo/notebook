@@ -31,11 +31,23 @@ class Section
     embedding_level = 1
     section = self
 
-    while section._parent && section._parent.class == Section
-      section = section._parent
+    while section.parent_section?
+      section = section.parent_section
       embedding_level += 1
     end
 
     embedding_level <= MAX_EMBEDDING_LEVEL
+  end
+
+  def parent_sections
+    parents = []
+    section = self
+
+    while section.parent_section?
+      section = section.parent_section
+      parents << section
+    end
+
+    parents
   end
 end
