@@ -16,6 +16,7 @@ services:
     links:
       - "db"
     environment:
-      - SECRET_KEY_BASE=83f4e7d7ba776cc37448b132b5a305caff265faf9b895d507e9bac3c50fcc88b2a8cb42b4d08533ba89958bf7d23fd89797a53ab27e534d9a25ce08d8221edb8
+      - REPEEK_SECRET_KEY_BASE=83f4e7d7ba776cc37448b132b5a305caff265faf9b895d507e9bac3c50fcc88b2a8cb42b4d08533ba89958bf7d23fd89797a53ab27e534d9a25ce08d8221edb8
+      - REPEEK_SERVE_STATIC_FILES=true
     # volumes:
     #   - ".:/app"
