@@ -1,5 +1,4 @@
 @import "mixins/list";
-@import "mixins/add-round-button";
 
 #notices-index {
   .box {
@@ -8,9 +7,6 @@
       li:first-child {
         margin-top: 0;
       }
-    }
-    .add-round-button {
-      @include add-round-button;
     }
   }
 }

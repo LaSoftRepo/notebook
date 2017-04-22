@@ -1,18 +1,13 @@
 <% title t('title.section.index') %>
 
 <%= box do %>
-  <%= link_to new_notebook_section_path, class: 'add-round-button mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent' do %>
-    <i class="material-icons mdl-color-text--white" role="presentation">add</i>
-    <span class="visuallyhidden">add</span>
-    <span class="mdl-button__ripple-container">
-      <span class="mdl-ripple is-animating"></span>
-    </span>
-  <% end %>
   <% if @sections.any? %>
     <%= render 'sections/sections_tree', sections: @sections %>
   <% else %>
-    <p>
-      You have no sections. Add the first one.
-    </p>
+    <%= box do %>
+      You have no notices. Add the first one.
+    <% end %>
   <% end %>
 <% end %>
+
+<%= add_fixed_button link: new_notebook_section_path %>

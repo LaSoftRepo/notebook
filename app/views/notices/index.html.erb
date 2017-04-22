@@ -1,24 +1,15 @@
 <% title t('title.notice.index') %>
 
-<%= box do %>
-  <%= link_to new_notebook_section_notice_path, class: 'add-round-button mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent' do %>
-    <i class="material-icons mdl-color-text--white" role="presentation">add</i>
-    <span class="visuallyhidden">add</span>
-    <span class="mdl-button__ripple-container">
-      <span class="mdl-ripple is-animating"></span>
-    </span>
+<% if @notices.any? %>
+  <% @notices.each do |notice| %>
+    <div class="box mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+      <%= link_to notice.name, notebook_section_notice_path(id: notice.id) %>
+    </div>
   <% end %>
-  <% if @notices.any? %>
-    <ul class="list">
-      <% @notices.each do |notice| %>
-        <li>
-          <%= link_to notice.name, notebook_section_notice_path(id: notice.id) %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>
-      You have no notices. Add the first one.
-    </p>
+<% else %>
+  <%= box do %>
+    You have no notices. Add the first one.
   <% end %>
 <% end %>
+
+<%= add_fixed_button link: new_notebook_section_notice_path %>

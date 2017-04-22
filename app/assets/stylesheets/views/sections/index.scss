@@ -1,5 +1,4 @@
 @import "mixins/list";
-@import "mixins/add-round-button";
 @import "variables/colors";
 
 #sections-index {
@@ -16,10 +15,6 @@
         }
       }
     }
-    .add-round-button {
-      @include add-round-button;
-    }
-
   }
   .box > .list > li:first-child {
     margin-top: 0;

@@ -13,10 +13,8 @@ module ApplicationHelper
   end
 
   def box(&block)
-    spacer  = content_tag(:div, '', class: 'mdl-layout-spacer')
-    content = content_tag(:div, capture(&block), class: 'box mdl-cell mdl-cell--9-col mdl-shadow--2dp')
-
-    (spacer + content + spacer).html_safe
+    content = content_tag(:div, capture(&block), class: 'box mdl-cell mdl-cell--12-col')
+    content.html_safe
   end
 
   def small_form(args = {}, &block)
@@ -33,15 +31,14 @@ module ApplicationHelper
     content = content_tag(
       :div,
       title + errors + form,
-      class: 'small-form mdl-cell mdl-cell--4-col mdl-shadow--2dp'
+      class: 'box small-form mdl-cell mdl-cell--4-col'
     )
 
     (spacer + content + spacer).html_safe
   end
 
-  def add_round_button(args = {})
-    mini = args[:mini] ? 'mdl-button--mini-fab' : ''
-    klass = "add-round-button #{mini} mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent"
+  def add_fixed_button(args = {})
+    klass = "add-fixed-button mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent"
 
     link_to args[:link], class: klass do
       raw(
