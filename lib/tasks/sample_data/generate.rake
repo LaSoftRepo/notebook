@@ -6,7 +6,7 @@ namespace :sample_data do
 end
 
 def notebooks(user)
-  5.times { sections(create_notebook(user)) }
+  15.times { sections(create_notebook(user)) }
 end
 
 def sections(notebook)
@@ -25,7 +25,7 @@ def sections(notebook)
 end
 
 def notices(section)
-  rand(1..5).times { create_notice(section) }
+  rand(5..20).times { create_notice(section) }
 end
 
 def create_section_with_notices(notebook)
@@ -77,5 +77,5 @@ def create_notice(section)
 end
 
 def fake_name
-  Faker::Lorem.words(rand(1..5)).map(&:capitalize).join(' ')
+  Faker::Lorem.words(rand(1..3)).map(&:capitalize).join(' ')
 end
