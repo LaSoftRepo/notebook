@@ -4,9 +4,7 @@
   <% if @sections.any? %>
     <%= render 'sections/sections_tree', sections: @sections %>
   <% else %>
-    <%= box do %>
-      You have no notices. Add the first one.
-    <% end %>
+    You have no notices. Add the first one.
   <% end %>
 <% end %>
 
