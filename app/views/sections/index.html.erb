@@ -1,10 +1,39 @@
 <% title t('title.section.index') %>
 
-<%= box do %>
-  <% if @sections.any? %>
-    <%= render 'sections/sections_tree', sections: @sections %>
-  <% else %>
-    You have no notices. Add the first one.
+<% if @sections.any? %>
+  <% @sections.each do |section| %>
+    <div class="box card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+      <div class="top-section">
+        <%= link_to section.name, notebook_section_notices_path(section_id: section.id) %>
+        <div class="card-menu">
+          <button id="menu-button-<%= section.id %>" class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-button-<%= section.id %>">
+            <li class="mdl-menu__item">Add notice</li>
+            <li class="mdl-menu__item">Add subsection</li>
+            <li class="mdl-menu__item">Edit</li>
+            <li class="mdl-menu__item">Delete</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom-section">
+        <div>
+          <%= link_to notebook_section_notices_path(section_id: section.id) do %>
+            <%= pluralize(section.notices.count, 'notice') %>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to '#' do %>
+            <%= pluralize(section.child_sections.count, 'subsection') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <%= box do %>
+    You have no sections. Add the first one.
   <% end %>
 <% end %>
 

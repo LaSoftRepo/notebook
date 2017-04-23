@@ -1,11 +1,11 @@
 - title t('title.notebook.index')
 
-= box do
-  - if @notebooks.any?
-    %ul.list
-      - @notebooks.each do |notebook|
-        %li= link_to notebook.name, notebook_sections_path(notebook_id: notebook.id)
-  - else
-    You have no notices. Add the first one.
+- if @notebooks.any?
+  - @notebooks.each do |notebook|
+    .box.mdl-cell.mdl-cell--3-col.mdl-cell--4-col-tablet.mdl-cell--4-col-phone
+      = link_to notebook.name, notebook_sections_path(notebook_id: notebook.id)
+- else
+  = box do
+    You have no notebooks. Add the first one.
 
 = add_fixed_button link: new_notebook_path
