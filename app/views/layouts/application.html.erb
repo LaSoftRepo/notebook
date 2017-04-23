@@ -44,10 +44,10 @@
           <div id="content" class="mdl-grid">
             <div class="mdl-cell mdl-cell--9-col">
               <%= render 'shared/flash_messages' %>
-              <div id="breadcrumbs", class="mdl-cell mdl-cell--12-col">
-                <%= render_breadcrumbs separator: '<span class="breadcrumb-separator"> / </span>'.html_safe %>
+              <div id="breadcrumbs" class="mdl-cell mdl-cell--12-col">
+                <%= render_breadcrumbs separator: '<span class="breadcrumb-separator"> » </span>'.html_safe %>
               </div>
-              <h1 id="title", class="mdl-cell mdl-cell--12-col">
+              <h1 id="title" class="mdl-cell mdl-cell--12-col">
                 <%= yield :title %>
               </h1>
               <div id="view-content" class="mdl-grid">

@@ -4,7 +4,7 @@ module ApplicationHelper
     page_title.blank? ? base_title : "#{page_title} | #{base_title}"
   end
 
-  def title(text, args = {})
+  def title(text)
     [:title, :head_title].each { |i| provide i, text }
   end
 
@@ -13,8 +13,11 @@ module ApplicationHelper
   end
 
   def box(&block)
-    content = content_tag(:div, capture(&block), class: 'box mdl-cell mdl-cell--12-col')
-    content.html_safe
+    content_tag(
+      :div,
+      capture(&block),
+      class: 'box mdl-cell mdl-cell--12-col'
+    ).html_safe
   end
 
   def small_form(args = {}, &block)
@@ -31,7 +34,7 @@ module ApplicationHelper
     content = content_tag(
       :div,
       title + errors + form,
-      class: 'box small-form mdl-cell mdl-cell--4-col'
+      class: 'box small-form mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet'
     )
 
     (spacer + content + spacer).html_safe
