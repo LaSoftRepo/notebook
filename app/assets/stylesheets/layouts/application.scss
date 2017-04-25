@@ -96,5 +96,9 @@ main {
     a {
       display: inline-block;
     }
+    .separator {
+      color: $grey;
+      margin: 0 4px;
+    }
   }
 }
