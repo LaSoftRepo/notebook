@@ -1,5 +1,5 @@
 module Breadcrumbs
-  module Section
+  module Notebook
     extend ActiveSupport::Concern
 
     included do
@@ -9,10 +9,9 @@ module Breadcrumbs
         case action
         when :index
           add_breadcrumb t('title.home'), root_path
-          add_breadcrumb t('title.notebook.index'), notebooks_path
-        when :new, :create
+        when :new
           add_breadcrumbs(:index)
-          add_breadcrumb current_notebook.name, notebook_sections_path(current_notebook)
+          add_breadcrumb t('title.notebook.index'), notebooks_path
         end
       end
     end

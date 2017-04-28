@@ -1,4 +1,5 @@
 class NotebooksController < ApplicationController
+  include Breadcrumbs::Notebook
   before_action :authenticate_user
 
   def index

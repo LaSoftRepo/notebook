@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :notebooks do
-    resources :child_sections, only: [:new, :create]
+    resources :child_sections, only: [:index, :new, :create]
     resources :sections do
       resources :notices
     end

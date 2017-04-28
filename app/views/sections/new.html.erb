@@ -1,7 +1,7 @@
 <% title t('title.section.new') %>
 
 <%= box do %>
-  <% if @parent_section %>
+  <% if current_section.present? %>
     <%= form_for @section, url: notebook_child_sections_path(notebook_id: current_notebook.id), method: :post do |f| %>
       <%= render 'shared/errors', errors: @section.errors.full_messages %>
 
@@ -15,7 +15,7 @@
         <%= f.label :description, class: 'mdl-textfield__label' %>
       </div>
 
-      <%= hidden_field_tag :parent_section_id, @parent_section.id %>
+      <%= hidden_field_tag :parent_section_id, current_section.id %>
 
       <%= f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
     <% end %>

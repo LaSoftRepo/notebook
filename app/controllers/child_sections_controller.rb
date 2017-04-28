@@ -1,10 +1,14 @@
 class ChildSectionsController < ApplicationController
   include Breadcrumbs::ChildSection
   before_action :authenticate_user
-  before_action :set_parent_section
+
+  def index
+    @sections = current_section.child_sections
+    render 'sections/index'
+  end
 
   def new
-    @section = @parent_section.child_sections.build
+    @section = current_section.child_sections.build
     render 'sections/new'
   end
 
@@ -21,13 +25,8 @@ class ChildSectionsController < ApplicationController
 
   private
 
-  def set_parent_section
-    @parent_section ||=
-      current_notebook.find_section(params[:parent_section_id])
-  end
-
   def recorder
-    ChildSectionRecorder.new(parent_section: @parent_section)
+    ChildSectionRecorder.new(parent_section: current_section)
   end
 
   def section_params
