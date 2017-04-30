@@ -6,8 +6,10 @@
         %i.material-icons more_vert
       %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{for: "menu-button-#{section.id}"}
         %li.mdl-menu__item Add notice
-        %li.mdl-menu__item Add subsection
+        - if section.can_create_child_section?
+          %li.mdl-menu__item Add subsection
         %li.mdl-menu__item Edit
         %li.mdl-menu__item Delete
-  .bottom-section
-    = link_to 'Subsection', notebook_child_sections_path(parent_section_id: section.id)
+  - if section.can_create_child_section?
+    .bottom-section
+      = link_to 'Subsection', notebook_child_sections_path(parent_section_id: section.id)
