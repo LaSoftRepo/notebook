@@ -1,0 +1,9 @@
+.box.card.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--4-col-phone
+  .top-section
+    = link_to notice.name, notebook_section_notice_path(id: notice.id)
+    .card-menu
+      %button.mdl-button.mdl-js-button.mdl-button--icon{id: "menu-button-#{notice.id}"}
+        %i.material-icons more_vert
+      %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{for: "menu-button-#{notice.id}"}
+        %li.mdl-menu__item Edit
+        %li.mdl-menu__item Delete

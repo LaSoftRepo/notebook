@@ -1,0 +1,9 @@
+- title current_section.name
+
+- if @notices.any?
+  - @notices.each do |notice|
+    = render 'notices/card', notice: notice
+- else
+  = box { 'You have no notices. Add the first one.' }
+
+= add_fixed_button link: new_notebook_section_notice_path
