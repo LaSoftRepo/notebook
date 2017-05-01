@@ -1,7 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe NotebooksController, type: :controller do
-  context 'LOGGED IN' do
+
+  describe 'Authentication' do
+    it "doesn't allow unauthenticated users to access all actions" do
+      expect(controller).to filter(:before, with: :authenticate_user)
+    end
+  end
+
+  describe 'Actions' do
     log_in
     let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 
@@ -95,33 +102,6 @@ RSpec.describe NotebooksController, type: :controller do
 
     describe 'PATCH #update' do
       # TODO: add tests LOGGED IN NotebooksController#update
-    end
-  end
-
-  context 'LOGGED OUT' do
-    log_out
-
-    describe 'GET #index' do
-      redirects_unauthenticated_user_to_login(:get, :index)
-    end
-
-    describe 'GET #new' do
-      redirects_unauthenticated_user_to_login(:get, :new)
-    end
-
-    describe 'POST #create' do
-      params = FactoryGirl.attributes_for(:notebook)
-      redirects_unauthenticated_user_to_login(:post, :create, params)
-    end
-
-    describe 'GET #edit' do
-      params = { id: FactoryGirl.create(:notebook).id }
-      redirects_unauthenticated_user_to_login(:get, :edit, params)
-    end
-
-    describe 'PATCH #update' do
-      params = FactoryGirl.attributes_for(:notebook).merge(id: FactoryGirl.create(:notebook).id)
-      redirects_unauthenticated_user_to_login(:patch, :update, params)
     end
   end
 end
