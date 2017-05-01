@@ -1,8 +1,5 @@
-@import "mixins/small-form";
-
 #sessions-new, #sessions-create {
   .small-form {
-    @include small-form;
     .remember-me {
       margin-bottom: 20px;
     }

@@ -1,7 +1,0 @@
-@import "mixins/small-form";
-
-#password_resets-new, #password_resets-create {
-  .small-form {
-    @include small-form;
-  }
-}
