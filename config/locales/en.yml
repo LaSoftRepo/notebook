@@ -25,6 +25,7 @@ en:
     notebook:
       index: 'Notebooks'
       new: 'New notebook'
+      edit: 'Edit %{notebook}'
     notice:
       new: 'New notice'
     password_reset:
@@ -38,3 +39,8 @@ en:
       new: 'Log in'
     user:
       new: 'Sign up'
+
+  helpers:
+    submit:
+      create: "Create"
+      update: "Update"

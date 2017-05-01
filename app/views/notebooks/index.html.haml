@@ -2,8 +2,7 @@
 
 - if @notebooks.any?
   - @notebooks.each do |notebook|
-    .box.mdl-cell.mdl-cell--3-col.mdl-cell--4-col-tablet.mdl-cell--4-col-phone
-      = link_to notebook.name, notebook_sections_path(notebook_id: notebook.id)
+    = render 'notebooks/card', notebook: notebook
 - else
   = box do
     You have no notebooks. Add the first one.

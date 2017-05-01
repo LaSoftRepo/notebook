@@ -1,6 +1,7 @@
 class NotebooksController < ApplicationController
   include Breadcrumbs::Notebook
   before_action :authenticate_user
+  before_action :find_notebook, only: [:edit, :update]
 
   def index
     @notebooks = current_user.notebooks.order(created_at: :desc)
@@ -23,7 +24,25 @@ class NotebooksController < ApplicationController
     end
   end
 
+  def edit
+    render 'notebooks/edit'
+  end
+
+  def update
+    if @notebook.update_attributes(notebook_params)
+      flash[:success] = "#{@notebook.name} successfully updated."
+      redirect_to notebook_sections_path(@notebook)
+    else
+      flash.now[:error] = 'We can not update a notebook. Please correct the fields.'
+      render 'notebooks/edit', status: 422
+    end
+  end
+
   private
+
+  def find_notebook
+    @notebook ||= current_user.notebooks.find params[:id]
+  end
 
   def notebook_params
     params.require(:notebook).permit(:name)

@@ -1,0 +1,11 @@
+.box.card.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--4-col-phone
+  .top-section
+    = link_to notebook.name, notebook_sections_path(notebook_id: notebook.id)
+    .card-menu
+      %button.mdl-button.mdl-js-button.mdl-button--icon{id: "menu-button-#{notebook.id}"}
+        %i.material-icons more_vert
+      %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{for: "menu-button-#{notebook.id}"}
+        %li.mdl-menu__item
+          = link_to 'Add section', new_notebook_section_path(notebook_id: notebook.id)
+        %li.mdl-menu__item Edit
+        %li.mdl-menu__item Delete

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe NotebooksController, type: :controller do
   context 'LOGGED IN' do
     log_in
+    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 
     describe 'GET #index' do
       it "renders 'notebooks/index' template" do
@@ -77,21 +78,50 @@ RSpec.describe NotebooksController, type: :controller do
         end
       end
     end
+
+    describe 'GET #edit' do
+      let(:params) { { id: notebook.id } }
+
+      it "renders 'notebooks/edit' template" do
+        get :edit, params: params
+        expect(response).to render_template('notebooks/edit')
+      end
+
+      it 'returns status 200' do
+        get :edit, params: params
+        expect(response.status).to eq 200
+      end
+    end
+
+    describe 'PATCH #update' do
+      # TODO: add tests LOGGED IN NotebooksController#update
+    end
   end
 
   context 'LOGGED OUT' do
     log_out
 
     describe 'GET #index' do
-      it 'sets flash[:warning] message' do
-        get :index
-        expect(flash[:warning]).to be_present
-      end
+      redirects_unauthenticated_user_to_login(:get, :index)
+    end
 
-      it 'redirects to login path' do
-        get :index
-        expect(response).to redirect_to log_in_path
-      end
+    describe 'GET #new' do
+      redirects_unauthenticated_user_to_login(:get, :new)
+    end
+
+    describe 'POST #create' do
+      params = FactoryGirl.attributes_for(:notebook)
+      redirects_unauthenticated_user_to_login(:post, :create, params)
+    end
+
+    describe 'GET #edit' do
+      params = { id: FactoryGirl.create(:notebook).id }
+      redirects_unauthenticated_user_to_login(:get, :edit, params)
+    end
+
+    describe 'PATCH #update' do
+      params = FactoryGirl.attributes_for(:notebook).merge(id: FactoryGirl.create(:notebook).id)
+      redirects_unauthenticated_user_to_login(:patch, :update, params)
     end
   end
 end
