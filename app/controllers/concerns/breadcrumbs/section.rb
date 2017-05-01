@@ -5,6 +5,8 @@ module Breadcrumbs
     included do
       include CrumbsBeforeRender
 
+      private
+
       def add_breadcrumbs(action)
         case action
         when :index
