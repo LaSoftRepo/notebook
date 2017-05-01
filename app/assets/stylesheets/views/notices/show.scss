@@ -1,7 +1,12 @@
+@import "variables/colors";
+
 #notices-show {
   .actions {
     text-align: right;
     margin-top: 0;
     margin-bottom: 0;
+    .separetor {
+      color: $grey;
+    }
   }
 }
