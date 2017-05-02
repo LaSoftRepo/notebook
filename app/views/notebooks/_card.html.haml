@@ -7,5 +7,6 @@
       %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{for: "menu-button-#{notebook.id}"}
         %li.mdl-menu__item
           = link_to 'Add section', new_notebook_section_path(notebook_id: notebook.id)
-        %li.mdl-menu__item Edit
+        %li.mdl-menu__item
+          = link_to 'Edit', edit_notebook_path(notebook)
         %li.mdl-menu__item Delete

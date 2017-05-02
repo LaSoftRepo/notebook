@@ -12,6 +12,10 @@ module ApplicationHelper
     provide :head_title, text
   end
 
+  def actions(&block)
+    provide :actions, &block
+  end
+
   def box(&block)
     content_tag(
       :div,

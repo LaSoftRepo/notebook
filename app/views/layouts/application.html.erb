@@ -47,9 +47,14 @@
               <div id="breadcrumbs" class="mdl-cell mdl-cell--12-col">
                 <%= render_breadcrumbs separator: '<span class="breadcrumb-separator"> » </span>'.html_safe %>
               </div>
-              <h1 id="title" class="mdl-cell mdl-cell--12-col">
-                <%= yield :title %>
-              </h1>
+              <div id="top-content" class="mdl-cell mdl-cell--12-col">
+                <div class="title">
+                  <%= yield :title %>
+                </div>
+                <div class="actions">
+                  <%= yield :actions %>
+                </div>
+              </div>
               <div id="view-content" class="mdl-grid">
                 <%= yield %>
               </div>
