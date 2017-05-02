@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe NotebooksController, type: :controller do
-
   describe 'Authentication' do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
@@ -37,7 +36,6 @@ RSpec.describe NotebooksController, type: :controller do
     end
 
     describe 'POST #create' do
-
       context 'WITH VALID PARAMS' do
         let(:valid_params) { { notebook: FactoryGirl.attributes_for(:notebook) } }
 

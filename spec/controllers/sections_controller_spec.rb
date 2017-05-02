@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe SectionsController, type: :controller do
-  context 'LOGGED IN' do
-    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+  describe 'Authentication' do
+    it "doesn't allow unauthenticated users to access all actions" do
+      expect(controller).to filter(:before, with: :authenticate_user)
+    end
+  end
+
+  describe 'Actions' do
     log_in
+    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 
     describe 'GET #index' do
       context 'current notebook belongs to current user' do
@@ -57,42 +63,6 @@ RSpec.describe SectionsController, type: :controller do
 
     describe 'POST #create' do
       # TODO: add tests LOGGED IN SectionsController#create
-    end
-  end
-
-  context 'LOGGED OUT' do
-    log_out
-
-    describe 'GET #index' do
-      let(:params) { { notebook_id: FactoryGirl.create(:notebook).id } }
-
-      it 'sets flash[:warning] message' do
-        get :index, params: params
-        expect(flash[:warning]).to be_present
-      end
-
-      it 'redirects to login path' do
-        get :index, params: params
-        expect(response).to redirect_to log_in_path
-      end
-    end
-
-    describe 'GET #new' do
-      let(:params) { { notebook_id: FactoryGirl.create(:notebook).id } }
-
-      it 'sets flash[:warning] message' do
-        get :new, params: params
-        expect(flash[:warning]).to be_present
-      end
-
-      it 'redirects to login path' do
-        get :new, params: params
-        expect(response).to redirect_to log_in_path
-      end
-    end
-
-    describe 'POST #create' do
-      # TODO: add tests LOGGED OUT SectionsController#create
     end
   end
 end

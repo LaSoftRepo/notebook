@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe StaticsController, type: :controller do
-  shared_examples 'statics_controller' do
+  describe 'Actions' do
     describe 'GET #home' do
       it "renders 'statics/home' template" do
         get :home
@@ -13,17 +13,5 @@ RSpec.describe StaticsController, type: :controller do
         expect(response.status).to eq 200
       end
     end
-  end
-
-  context 'LOGGED IN' do
-    log_in
-
-    include_examples 'statics_controller'
-  end
-
-  context 'LOGGED OUT' do
-    log_out
-
-    include_examples 'statics_controller'
   end
 end

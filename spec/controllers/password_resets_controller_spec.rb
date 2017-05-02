@@ -9,73 +9,13 @@ end
 RSpec.describe PasswordResetsController, type: :controller do
   let(:token) { 'token' }
 
-  context 'LOGGED IN' do
-    log_in
-
-    describe 'GET #new' do
-      it 'sets flash[:warning] message' do
-        get :new
-        expect(flash[:warning]).to be_present
-      end
-
-      it 'redirects to root_path' do
-        get :new
-        expect(response).to redirect_to root_path
-      end
-    end
-
-    describe 'POST #create' do
-      let(:params) { { password_reset: { email: 'email@example.com' } } }
-      before { FactoryGirl.create(:user, email: params[:password_reset][:email]) }
-
-      it 'sets flash[:warning] message' do
-        post :create, params: params
-        expect(flash[:warning]).to be_present
-      end
-
-      it 'redirects to root_path' do
-        post :create, params: params
-        expect(response).to redirect_to root_path
-      end
-    end
-
-    describe 'GET #edit' do
-      let(:params) { { id: token } }
-      before { set_password_reset_token(controller.current_user, params[:id]) }
-
-      it 'sets flash[:warning] message' do
-        get :edit, params: params
-        expect(flash[:warning]).to be_present
-      end
-
-      it 'redirects to root_path' do
-        get :edit, params: params
-        expect(response).to redirect_to root_path
-      end
-    end
-
-    describe 'PATCH #update' do
-      let(:params) do
-        {
-          id: token,
-          user: { password: '123456', password_confirmation: '123456' }
-        }
-      end
-      before { set_password_reset_token(controller.current_user, params[:id]) }
-
-      it 'sets flash[:warning] message' do
-        patch :update, params: params
-        expect(flash[:warning]).to be_present
-      end
-
-      it 'redirects to root_path' do
-        patch :update, params: params
-        expect(response).to redirect_to root_path
-      end
+  describe 'Authentication' do
+    it "allows only unauthenticated users to access all actions" do
+      expect(controller).to filter(:before, with: :redirect_authenticated_user)
     end
   end
 
-  context 'LOGGED OUT' do
+  describe 'Actions' do
     log_out
 
     describe 'GET #new' do

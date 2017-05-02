@@ -1,37 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  context 'LOGGED IN' do
-    log_in
-
-    describe 'GET #new' do
-      it 'sets flash[:warning] message' do
-        get :new
-        expect(flash[:warning]).to be_present
-      end
-
-      it 'redirects to root_path' do
-        get :new
-        expect(response).to redirect_to root_path
-      end
-    end
-
-    describe 'POST #create' do
-      let(:params) { { user: FactoryGirl.attributes_for(:user) } }
-
-      it 'sets flash[:warning] message' do
-        post :create, params: params
-        expect(flash[:warning]).to be_present
-      end
-
-      it "redirects to root_path" do
-        post :create, params: params
-        expect(response).to redirect_to root_path
-      end
+  describe 'Authentication' do
+    it "allows only unauthenticated users to create account" do
+      expect(controller).to(
+        filter(:before, with: :redirect_authenticated_user, only: [:new, :create])
+      )
     end
   end
 
-  context 'LOGGED OUT' do
+  describe 'Actions' do
     log_out
 
     describe 'GET #new' do

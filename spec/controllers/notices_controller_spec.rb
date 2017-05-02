@@ -1,43 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe NoticesController, type: :controller do
-  context 'LOGGED IN' do
-    log_in
-
-    describe 'GET #index' do
-      # TODO: add tests LOGGED IN NoticesController#index
-    end
-
-    describe 'GET #show' do
-      # TODO: add tests LOGGED IN NoticesController#show
-    end
-
-    describe 'GET #new' do
-      # TODO: add tests LOGGED IN NoticesController#new
-    end
-
-    describe 'POST #create' do
-      # TODO: add tests LOGGED IN NoticesController#create
+  describe 'Authentication' do
+    it "doesn't allow unauthenticated users to access all actions" do
+      expect(controller).to filter(:before, with: :authenticate_user)
     end
   end
 
-  context 'LOGGED OUT' do
-    log_out
+  context 'Actions' do
+    log_in
 
     describe 'GET #index' do
-      # TODO: add tests LOGGED OUT NoticesController#index
+      # TODO: add tests NoticesController#index
     end
 
     describe 'GET #show' do
-      # TODO: add tests LOGGED OUT NoticesController#show
+      # TODO: add tests NoticesController#show
     end
 
     describe 'GET #new' do
-      # TODO: add tests LOGGED OUT NoticesController#new
+      # TODO: add tests NoticesController#new
     end
 
     describe 'POST #create' do
-      # TODO: add tests LOGGED OUT NoticesController#create
+      # TODO: add tests NoticesController#create
     end
   end
 end
