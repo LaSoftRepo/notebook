@@ -27,7 +27,7 @@ module ApplicationHelper
   def small_form(args = {}, &block)
     spacer = content_tag(:div, '', class: 'mdl-layout-spacer')
     form   = content_tag(:div, capture(&block))
-    title  = content_tag(:h1, args[:title])
+    title  = content_tag(:div, args[:title], class: 'title')
     errors = if args[:errors].try(:any?)
       ApplicationController.render(
         partial: 'shared/errors',
