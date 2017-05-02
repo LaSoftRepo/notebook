@@ -11,7 +11,7 @@ module Breadcrumbs
         case action
         when :index
           add_breadcrumb t('title.home'), root_path
-        when :new
+        when :new, :create
           add_breadcrumbs(:index)
           add_breadcrumb t('title.notebook.index'), notebooks_path
         end
