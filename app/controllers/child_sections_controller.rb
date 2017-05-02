@@ -18,7 +18,7 @@ class ChildSectionsController < ApplicationController
       flash[:success] = "#{@section.name} successfully created."
       redirect_to notebook_section_notices_path(section_id: @section.id)
     else
-      flash.now[:error] = 'We can not create a section. Please correct the fields.'
+      flash.now[:error] = 'We can not create a subsection. Please correct the fields.'
       render 'sections/new', status: 422
     end
   end
