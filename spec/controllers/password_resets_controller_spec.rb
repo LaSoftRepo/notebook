@@ -9,13 +9,13 @@ end
 RSpec.describe PasswordResetsController, type: :controller do
   let(:token) { 'token' }
 
-  describe 'Authentication' do
+  describe 'AUTHENTICATION' do
     it "allows only unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :redirect_authenticated_user)
     end
   end
 
-  describe 'Actions' do
+  describe 'ACTIONS' do
     log_out
 
     describe 'GET #new' do
@@ -31,7 +31,7 @@ RSpec.describe PasswordResetsController, type: :controller do
     end
 
     describe 'POST #create' do
-      context 'WITH VALID PARAMS' do
+      context 'VALID PARAMS' do
         let(:valid_params) do
           user = FactoryGirl.create(:user, email: 'valid_email@example.com')
           { password_reset: { email: user.email } }
@@ -53,7 +53,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         end
       end
 
-      context 'WITH INVALID PARAMS' do
+      context 'INVALID PARAMS' do
         let(:invalid_params) { { password_reset: { email: 'invalid_email@example' } } }
 
         it 'calls send_instructions method of PasswordResetService' do
@@ -129,7 +129,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         let(:user) { FactoryGirl.create(:user) }
         before { set_password_reset_token(user, token) }
 
-        context 'WITH VALID PARAMS' do
+        context 'VALID PARAMS' do
           let(:valid_params) do
             {
               id: token,
@@ -156,7 +156,7 @@ RSpec.describe PasswordResetsController, type: :controller do
           end
         end
 
-        context 'WITH INVALID PARAMS' do
+        context 'INVALID PARAMS' do
           let(:invalid_params) do
             {
               id: token,

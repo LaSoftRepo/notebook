@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe StaticsController, type: :controller do
-  describe 'Actions' do
+  describe 'ACTIONS' do
     describe 'GET #home' do
       it "renders 'statics/home' template" do
         get :home

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-  describe 'Authentication' do
+  describe 'AUTHENTICATION' do
     it "allows only unauthenticated users to log in" do
       expect(controller).to(
         filter(:before, with: :redirect_authenticated_user, only: [:new, :create])
@@ -15,8 +15,8 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-  describe 'Actions' do
-    context 'Logged in' do
+  describe 'ACTIONS' do
+    context 'LOGGED IN' do
       log_in
 
       describe 'DELETE #destroy' do
@@ -37,7 +37,7 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
 
-    context 'Logged out' do
+    context 'LOGGED OUT' do
       log_out
 
       describe 'GET #new' do
@@ -57,7 +57,7 @@ RSpec.describe SessionsController, type: :controller do
           FactoryGirl.create(:user, password: '12345678', password_confirmation: '12345678')
         end
 
-        context 'WITH VALID PARAMS' do
+        context 'VALID PARAMS' do
           let(:valid_params) do
             {
               log_in: {
@@ -83,7 +83,7 @@ RSpec.describe SessionsController, type: :controller do
           end
         end
 
-        context 'WITH INVALID PARAMS' do
+        context 'INVALID PARAMS' do
           let(:invalid_params) do
             {
               log_in: {

@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe NotebooksController, type: :controller do
-  describe 'Authentication' do
+  describe 'AUTHENTICATION' do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
     end
   end
 
-  describe 'Actions' do
+  describe 'ACTIONS' do
     log_in
     let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 
@@ -36,7 +36,7 @@ RSpec.describe NotebooksController, type: :controller do
     end
 
     describe 'POST #create' do
-      context 'WITH VALID PARAMS' do
+      context 'VALID PARAMS' do
         let(:valid_params) { { notebook: FactoryGirl.attributes_for(:notebook) } }
 
         it 'creates new notebook for current user' do
@@ -58,7 +58,7 @@ RSpec.describe NotebooksController, type: :controller do
         end
       end
 
-      context 'WITH INVALID PARAMS' do
+      context 'INVALID PARAMS' do
         let(:invalid_params) { { notebook: FactoryGirl.attributes_for(:invalid_notebook) } }
 
         it 'does not create new notebook' do
@@ -99,7 +99,74 @@ RSpec.describe NotebooksController, type: :controller do
     end
 
     describe 'PATCH #update' do
-      # TODO: add tests LOGGED IN NotebooksController#update
+      context 'VALID PARAMS' do
+        let(:valid_params) do
+          {
+            notebook: FactoryGirl.attributes_for(:notebook),
+            id: notebook.id
+          }
+        end
+
+        it 'updates notebook' do
+          patch :update, params: valid_params
+          notebook.reload
+          valid_params[:notebook].each do |key, value|
+            expect(notebook[key]).to eq value
+          end
+        end
+
+        it 'sets flash[:success] message' do
+          patch :update, params: valid_params
+          expect(flash[:success]).to be_present
+        end
+
+        it 'redirects to notebook sections path' do
+          patch :update, params: valid_params
+          expect(response).to redirect_to notebook_sections_path(notebook)
+        end
+      end
+
+      context 'INVALID PARAMS' do
+        let(:invalid_params) do
+          {
+            notebook: FactoryGirl.attributes_for(:invalid_notebook),
+            id: notebook.id
+          }
+        end
+
+        it 'does not update notebook' do
+          patch :update, params: invalid_params
+          notebook.reload
+          invalid_params[:notebook].each do |key, value|
+            expect(notebook[key]).not_to eq value
+          end
+        end
+
+        it 'sets flash[:error] message' do
+          patch :update, params: invalid_params
+          expect(flash[:error]).to be_present
+        end
+
+        it "renders 'notebooks/edit' template" do
+          patch :update, params: invalid_params
+          expect(response).to render_template('notebooks/edit')
+        end
+      end
+
+      context 'INVALID ID' do
+        let(:params) do
+          {
+            notebook: FactoryGirl.attributes_for(:notebook),
+            id: FactoryGirl.create(:notebook).id
+          }
+        end
+
+        it 'raises an error' do
+          expect do
+            patch :update, params: params
+          end.to raise_error Mongoid::Errors::DocumentNotFound
+        end
+      end
     end
   end
 end

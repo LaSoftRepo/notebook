@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  describe 'Authentication' do
+  describe 'AUTHENTICATION' do
     it "allows only unauthenticated users to create account" do
       expect(controller).to(
         filter(:before, with: :redirect_authenticated_user, only: [:new, :create])
@@ -9,7 +9,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe 'Actions' do
+  describe 'ACTIONS' do
     log_out
 
     describe 'GET #new' do
@@ -25,7 +25,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     describe 'POST #create' do
-      context 'WITH VALID PARAMS' do
+      context 'VALID PARAMS' do
         let(:valid_params) { { user: FactoryGirl.attributes_for(:user) } }
 
         it 'creates new user' do
@@ -56,7 +56,7 @@ RSpec.describe UsersController, type: :controller do
         end
       end
 
-      context 'WITH INVALID PARAMS' do
+      context 'INVALID PARAMS' do
         let(:invalid_params) { { user: FactoryGirl.attributes_for(:invalid_user) } }
 
         it 'does not create new user' do
@@ -68,11 +68,6 @@ RSpec.describe UsersController, type: :controller do
         it 'calls create method of UserRecorder' do
           expect_any_instance_of(UserRecorder).to receive(:create) { FactoryGirl.build :invalid_user }
           post :create, params: invalid_params
-        end
-
-        it 'sets flash.now[:error] message' do
-          post :create, params: invalid_params
-          expect(flash[:error]).to be_present
         end
 
         it "renders 'users/new' template" do

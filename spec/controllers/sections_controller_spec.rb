@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe SectionsController, type: :controller do
-  describe 'Authentication' do
+  describe 'AUTHENTICATION' do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
     end
   end
 
-  describe 'Actions' do
+  describe 'ACTIONS' do
     log_in
     let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 

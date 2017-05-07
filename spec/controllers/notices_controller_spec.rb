@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe NoticesController, type: :controller do
-  describe 'Authentication' do
+  describe 'AUTHENTICATION' do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
     end
   end
 
-  context 'Actions' do
+  context 'ACTIONS' do
     log_in
 
     describe 'GET #index' do
