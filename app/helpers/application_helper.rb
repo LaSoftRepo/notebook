@@ -38,7 +38,7 @@ module ApplicationHelper
     content = content_tag(
       :div,
       title + errors + form,
-      class: 'box small-form mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet'
+      class: 'box small-form mdl-cell mdl-cell--5-col mdl-cell--4-col-tablet'
     )
 
     (spacer + content + spacer).html_safe
