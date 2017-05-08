@@ -25,7 +25,7 @@ en:
     notebook:
       index: 'Notebooks'
       new: 'New notebook'
-      edit: 'Edit %{notebook}'
+      edit: 'Edit %{name}'
     notice:
       new: 'New notice'
     password_reset:
@@ -46,7 +46,15 @@ en:
       update: 'Update'
 
   are_you_sure: 'Are you sure?'
+
   no_notebooks: 'You have no notebooks. Add the first one.'
   no_sections: 'You have no sections. Add the first one.'
   no_subsections: 'You have no subsections. Add the first one.'
   no_notices: 'You have no notices. Add the first one.'
+
+  created: '%{name} was successfully created.'
+  updated: '%{name} was successfully updated.'
+  deleted: '%{name} was successfully deleted.'
+
+  not_created: 'We can not create a %{name}. Please correct the fields.'
+  not_updated: 'We can not update a %{name}. Please correct the fields.'

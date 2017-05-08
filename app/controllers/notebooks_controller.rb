@@ -16,10 +16,10 @@ class NotebooksController < ApplicationController
   def create
     @notebook = current_user.notebooks.build notebook_params
     if @notebook.save
-      flash[:success] = "#{@notebook.name} successfully created."
+      flash[:success] = t('created', name: @notebook.name)
       redirect_to notebook_sections_path(@notebook)
     else
-      flash.now[:error] = 'We can not create a notebook. Please correct the fields.'
+      flash.now[:error] = t('not_created', name: 'notebook')
       render 'notebooks/new', status: 422
     end
   end
@@ -30,16 +30,17 @@ class NotebooksController < ApplicationController
 
   def update
     if @notebook.update_attributes(notebook_params)
-      flash[:success] = "#{@notebook.name} successfully updated."
+      flash[:success] = t('updated', name: @notebook.name)
       redirect_to notebook_sections_path(@notebook)
     else
-      flash.now[:error] = 'We can not update a notebook. Please correct the fields.'
+      flash.now[:error] = t('not_updated', name: 'notebook')
       render 'notebooks/edit', status: 422
     end
   end
 
   def destroy
     @notebook.destroy
+    flash[:success] = t('deleted', name: @notebook.name)
     redirect_to notebooks_path
   end
 

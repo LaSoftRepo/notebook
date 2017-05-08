@@ -14,6 +14,9 @@ module Breadcrumbs
         when :new, :create
           add_breadcrumbs(:index)
           add_breadcrumb t('title.notebook.index'), notebooks_path
+        when :edit, :update
+          add_breadcrumbs(:new)
+          add_breadcrumb @notebook.name, notebook_sections_path(notebook_id: @notebook.id)
         end
       end
     end

@@ -7,10 +7,6 @@ class SectionsController < ApplicationController
     render 'sections/index'
   end
 
-  def show
-    # current_section...
-  end
-
   def new
     @section = current_notebook.sections.build
     render 'sections/new'
@@ -19,24 +15,12 @@ class SectionsController < ApplicationController
   def create
     @section = current_notebook.sections.build(section_params)
     if @section.save
-      flash[:success] = "#{@section.name} successfully created."
+      flash[:success] = t('created', name: @section.name)
       redirect_to notebook_section_notices_path(section_id: @section.id)
     else
-      flash.now[:error] = 'We can not create a section. Please correct the fields.'
+      flash.now[:error] = t('not_created', name: 'section')
       render 'sections/new', status: 422
     end
-  end
-
-  def edit
-    # current_section...
-  end
-
-  def update
-    # current_section...
-  end
-
-  def destroy
-    # current_section...
   end
 
   private

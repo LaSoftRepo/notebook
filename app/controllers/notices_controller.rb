@@ -20,10 +20,10 @@ class NoticesController < ApplicationController
   def create
     @notice = current_section.notices.build notice_params
     if @notice.save
-      flash[:success] = "#{@notice.name} successfully created."
+      flash[:success] = t('created', name: @notice.name)
       redirect_to notebook_section_notice_path(id: @notice.id)
     else
-      flash.now[:error] = 'We can not create a notice. Please correct the fields.'
+      flash.now[:error] = t('not_created', name: 'notice')
       render 'notices/new', status: 422
     end
   end
