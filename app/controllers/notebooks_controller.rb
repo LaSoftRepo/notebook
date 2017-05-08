@@ -19,7 +19,7 @@ class NotebooksController < ApplicationController
       flash[:success] = t('created', name: @notebook.name)
       redirect_to notebook_sections_path(@notebook)
     else
-      flash.now[:error] = t('not_created', name: 'notebook')
+      flash.now[:error] = t('notebook.not_created')
       render 'notebooks/new', status: 422
     end
   end
@@ -33,7 +33,7 @@ class NotebooksController < ApplicationController
       flash[:success] = t('updated', name: @notebook.name)
       redirect_to notebook_sections_path(@notebook)
     else
-      flash.now[:error] = t('not_updated', name: 'notebook')
+      flash.now[:error] = t('notebook.not_updated')
       render 'notebooks/edit', status: 422
     end
   end

@@ -23,7 +23,7 @@ class NoticesController < ApplicationController
       flash[:success] = t('created', name: @notice.name)
       redirect_to notebook_section_notice_path(id: @notice.id)
     else
-      flash.now[:error] = t('not_created', name: 'notice')
+      flash.now[:error] = t('notice.not_created')
       render 'notices/new', status: 422
     end
   end

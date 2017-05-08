@@ -18,7 +18,7 @@ class ChildSectionsController < ApplicationController
       flash[:success] = t('created', name: @section.name)
       redirect_to notebook_section_notices_path(section_id: @section.id)
     else
-      flash.now[:error] = t('not_created', name: 'subsection')
+      flash.now[:error] = t('child_section.not_created')
       render 'sections/new', status: 422
     end
   end

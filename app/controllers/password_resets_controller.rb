@@ -8,9 +8,9 @@ class PasswordResetsController < ApplicationController
 
   def create
     if service.send_instructions(params[:password_reset][:email])
-      redirect_to root_path, notice: 'Email was sent with password reset instructions.'
+      redirect_to root_path, notice: t('password_reset.email_was_sent')
     else
-      @error = 'Email format is invalid. Please, enter valid email'
+      @error = t('password_reset.invalid_email')
       render 'password_resets/new', status: 422
     end
   end
@@ -21,12 +21,13 @@ class PasswordResetsController < ApplicationController
 
   def update
     if service.update_password(@user, password_reset_params)
-      redirect_to root_path, notice: 'Password has been reset.'
+      redirect_to root_path, notice: t('password_reset.password_has_been_reset')
     else
       render 'password_resets/edit', status: 422
     end
   rescue PasswordResetService::PasswordResetExpired
-    @error = 'Password reset has expired'
+    # TODO: The error isn't showed cause we do redirect, need to fix it
+    @error = t('password_reset.expired')
     redirect_to new_password_reset_path
   end
 

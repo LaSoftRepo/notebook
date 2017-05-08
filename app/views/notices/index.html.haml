@@ -11,6 +11,6 @@
   - @notices.each do |notice|
     = render 'notices/card', notice: notice
 - else
-  = box { t('no_notices') }
+  = box { t('notice.no_notices') }
 
 = add_fixed_button link: new_notebook_section_notice_path

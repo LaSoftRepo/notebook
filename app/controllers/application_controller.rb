@@ -9,14 +9,14 @@ class ApplicationController < ActionController::Base
 
   def redirect_authenticated_user
     if current_user
-      flash[:warning] = 'You are logged in already.'
+      flash[:warning] = t('logged_in_already')
       redirect_to root_path
     end
   end
 
   def authenticate_user
     unless current_user
-      flash[:warning] = 'You are not logged in. Please log in.'
+      flash[:warning] = t('not_logged_in')
       redirect_to log_in_path
     end
   end
