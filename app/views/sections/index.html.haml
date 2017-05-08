@@ -19,10 +19,10 @@
 - else
   - title current_notebook.name
   - actions do
-    = link_to '#' do
+    = link_to edit_notebook_path(current_notebook) do
       %button.mdl-button.mdl-js-button.mdl-button--icon
         %i.material-icons edit
-    = link_to '#' do
+    = link_to notebook_path(current_notebook), method: :delete, data: { confirm: t('are_you_sure') } do
       %button.mdl-button.mdl-js-button.mdl-button--icon
         %i.material-icons delete
 

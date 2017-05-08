@@ -1,7 +1,7 @@
 class NotebooksController < ApplicationController
   include Breadcrumbs::Notebook
   before_action :authenticate_user
-  before_action :find_notebook, only: [:edit, :update]
+  before_action :find_notebook, only: [:edit, :update, :destroy]
 
   def index
     @notebooks = current_user.notebooks.order(created_at: :desc)
@@ -36,6 +36,11 @@ class NotebooksController < ApplicationController
       flash.now[:error] = 'We can not update a notebook. Please correct the fields.'
       render 'notebooks/edit', status: 422
     end
+  end
+
+  def destroy
+    @notebook.destroy
+    redirect_to notebooks_path
   end
 
   private

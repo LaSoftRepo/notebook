@@ -1,6 +1,12 @@
 require 'rails_helper'
 
+# Not sure if we have to add context "INVALID ID".
+# There're tests for find_notebook method, which covers invalid id case.
+# That's why they are commented for now.
+
 RSpec.describe NotebooksController, type: :controller do
+  let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+
   describe 'AUTHENTICATION' do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
@@ -9,7 +15,6 @@ RSpec.describe NotebooksController, type: :controller do
 
   describe 'ACTIONS' do
     log_in
-    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 
     describe 'GET #index' do
       it "renders 'notebooks/index' template" do
@@ -96,6 +101,16 @@ RSpec.describe NotebooksController, type: :controller do
         get :edit, params: params
         expect(response.status).to eq 200
       end
+
+      # context 'INVALID ID' do
+      #   let(:params_with_invalid_id) { { id: FactoryGirl.create(:notebook).id } }
+      #
+      #   it 'raises error' do
+      #     expect do
+      #       get :edit, params: params_with_invalid_id
+      #     end.to raise_error Mongoid::Errors::DocumentNotFound
+      #   end
+      # end
     end
 
     describe 'PATCH #update' do
@@ -153,19 +168,82 @@ RSpec.describe NotebooksController, type: :controller do
         end
       end
 
-      context 'INVALID ID' do
-        let(:params) do
-          {
-            notebook: FactoryGirl.attributes_for(:notebook),
-            id: FactoryGirl.create(:notebook).id
-          }
-        end
+      # context 'INVALID ID' do
+      #   let(:params_with_invalid_id) do
+      #     {
+      #       notebook: FactoryGirl.attributes_for(:notebook),
+      #       id: FactoryGirl.create(:notebook).id
+      #     }
+      #   end
+      #
+      #   it 'raises error' do
+      #     expect do
+      #       patch :update, params: params_with_invalid_id
+      #     end.to raise_error Mongoid::Errors::DocumentNotFound
+      #   end
+      # end
+    end
 
-        it 'raises an error' do
+    describe 'DELETE #destroy' do
+      let!(:params) { { id: notebook.id } }
+
+      it 'deletes notebook of current user' do
+        expect do
+          delete :destroy, params: params
+        end.to change(controller.current_user.notebooks, :count).by(-1)
+      end
+
+      it 'redirects to notebooks path' do
+        delete :destroy, params: params
+        expect(response).to redirect_to notebook_path
+      end
+
+      # context 'INVALID ID' do
+      #   let(:params_with_invalid_id) { { id: FactoryGirl.create(:notebook).id } }
+      #
+      #   it 'raises error' do
+      #     expect do
+      #       delete :destroy, params: params_with_invalid_id
+      #     end.to raise_error Mongoid::Errors::DocumentNotFound
+      #   end
+      # end
+    end
+  end
+
+  describe '#find_notebook' do
+    it 'is called as before action for edit, update and destroy' do
+      expect(controller).to(
+        filter(:before, with: :find_notebook, only: [:edit, :update, :destroy])
+      )
+    end
+
+    context 'LOGGED IN' do
+      log_in
+
+      it 'finds notebook of current user by id from params' do
+        controller.params[:id] = notebook.id
+        controller.send(:find_notebook)
+        expect(assigns(:notebook)).to eq notebook
+      end
+
+      context 'INVALID ID' do
+        it 'raises error DocumentNotFound' do
+          controller.params[:id] = FactoryGirl.create(:notebook).id
           expect do
-            patch :update, params: params
+            controller.send(:find_notebook)
           end.to raise_error Mongoid::Errors::DocumentNotFound
         end
+      end
+    end
+
+    context 'LOGGED OUT' do
+      log_out
+
+      it 'raises error NoMethodError' do
+        controller.params[:id] = FactoryGirl.create(:notebook).id
+        expect do
+          controller.send(:find_notebook)
+        end.to raise_error NoMethodError
       end
     end
   end
