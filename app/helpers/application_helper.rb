@@ -1,7 +1,7 @@
 module ApplicationHelper
   def full_title(page_title)
     base_title = 'Repeek'
-    page_title.blank? ? base_title : "#{page_title} | #{base_title}"
+    page_titles.blank? ? base_title : "#{page_title} | #{base_title}"
   end
 
   def title(text)

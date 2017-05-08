@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  title:
+  titles:
     home: 'Home'
     notebook:
       index: 'Notebooks'
@@ -74,6 +74,9 @@ en:
     logged_in_already: 'You are logged in already.'
     not_logged_in: 'You are not logged in. Please log in.'
     invalid_email_or_password: 'Invalid email or password'
+
+  user:
+    created: 'Signed up!'
 
   created: '%{name} was successfully created.'
   updated: '%{name} was successfully updated.'

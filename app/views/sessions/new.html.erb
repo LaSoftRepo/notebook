@@ -1,6 +1,6 @@
-<% head_title t('title.session.new') %>
+<% head_title t('titles.session.new') %>
 
-<%= small_form title: t('title.session.new'), errors: [@error] do %>
+<%= small_form title: t('titles.session.new'), errors: [@error] do %>
   <%= form_for :log_in, url: sessions_path do |f| %>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.text_field :email, class: 'mdl-textfield__input', autofocus: true %>

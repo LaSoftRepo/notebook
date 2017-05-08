@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = recorder.create(user_params)
     if @user.valid?
       log_in @user
-      redirect_to root_path, notice: 'Signed up!'
+      redirect_to root_path, notice: t('user.created')
     else
       render 'users/new', status: 422
     end

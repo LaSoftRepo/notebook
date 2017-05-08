@@ -1,6 +1,6 @@
 = box do
   - if current_section.present?
-    - title t('title.child_section.new')
+    - title t('titles.child_section.new')
 
     = form_for @section, url: notebook_child_sections_path(notebook_id: current_notebook.id), method: :post do |f|
       = render 'shared/errors', errors: @section.errors.full_messages
@@ -18,7 +18,7 @@
       = f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
 
   - else
-    - title t('title.section.new')
+    - title t('titles.section.new')
 
     = form_for [current_notebook, @section] do |f|
       = render 'shared/errors', errors: @section.errors.full_messages
