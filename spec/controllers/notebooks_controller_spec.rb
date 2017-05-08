@@ -195,7 +195,7 @@ RSpec.describe NotebooksController, type: :controller do
 
       it 'redirects to notebooks path' do
         delete :destroy, params: params
-        expect(response).to redirect_to notebook_path
+        expect(response).to redirect_to notebooks_path
       end
 
       # context 'INVALID ID' do
