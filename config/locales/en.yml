@@ -68,10 +68,15 @@ en:
     password_has_been_reset: 'Password has been reset.'
     expired: 'Password reset has expired'
 
+  session:
+    logged_in: 'Logged in!'
+    logged_out: 'Logged out!'
+    logged_in_already: 'You are logged in already.'
+    not_logged_in: 'You are not logged in. Please log in.'
+    invalid_email_or_password: 'Invalid email or password'
+
   created: '%{name} was successfully created.'
   updated: '%{name} was successfully updated.'
   deleted: '%{name} was successfully deleted.'
 
-  logged_in_already: 'You are logged in already.'
-  not_logged_in: 'You are not logged in. Please log in.'
   are_you_sure: 'Are you sure?'

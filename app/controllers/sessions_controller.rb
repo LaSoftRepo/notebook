@@ -10,15 +10,15 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:log_in][:email], params[:log_in][:password])
     if user
       log_in(user, params[:log_in][:remember_me] == '1')
-      redirect_to notebooks_path, notice: 'Logged in!'
+      redirect_to notebooks_path, notice: t('session.logged_in')
     else
-      @error = 'Invalid email or password'
+      @error = t('session.invalid_email_or_password')
       render 'sessions/new', status: 422
     end
   end
 
   def destroy
     log_out
-    redirect_to root_path, notice: 'Logged out!'
+    redirect_to root_path, notice: t('session.logged_out')
   end
 end
