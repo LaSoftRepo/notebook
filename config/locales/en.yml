@@ -42,5 +42,11 @@ en:
 
   helpers:
     submit:
-      create: "Create"
-      update: "Update"
+      create: 'Create'
+      update: 'Update'
+
+  are_you_sure: 'Are you sure?'
+  no_notebooks: 'You have no notebooks. Add the first one.'
+  no_sections: 'You have no sections. Add the first one.'
+  no_subsections: 'You have no subsections. Add the first one.'
+  no_notices: 'You have no notices. Add the first one.'

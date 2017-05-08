@@ -4,7 +4,6 @@
   - @notebooks.each do |notebook|
     = render 'notebooks/card', notebook: notebook
 - else
-  = box do
-    You have no notebooks. Add the first one.
+  = box { t('no_notebooks') }
 
 = add_fixed_button link: new_notebook_path
