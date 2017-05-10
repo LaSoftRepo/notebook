@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
       redirect_to log_in_path
     end
   end
+
+  def verify_notebook
+    current_notebook || not_found
+  end
 end

@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-# TODO: There's gonna be before action "check_notebook". We will test it here.
-# As a result we won't have to make tests like INVALID NOTEOOK ID each time
-
 RSpec.describe SectionsController, type: :controller do
   describe 'AUTHENTICATION' do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
+    end
+
+    it "verifies notebook for all actions" do
+      expect(controller).to filter(:before, with: :verify_notebook)
     end
   end
 
@@ -24,18 +25,6 @@ RSpec.describe SectionsController, type: :controller do
           expect(response.status).to eq 200
         end
       end
-
-      context 'INVALID NOTEBOOK ID' do
-        let(:invalid_notebook_id_params) do
-          { notebook_id: FactoryGirl.create(:notebook).id }
-        end
-
-        it 'raises error DocumentNotFound' do
-          expect do
-            get :index, params: invalid_notebook_id_params
-          end.to raise_error Mongoid::Errors::DocumentNotFound
-        end
-      end
     end
 
     describe 'GET #new' do
@@ -45,18 +34,6 @@ RSpec.describe SectionsController, type: :controller do
         get :new, params: params
         expect(response).to render_template('sections/new')
         expect(response.status).to eq 200
-      end
-
-      context 'INVALID NOTEBOOK ID' do
-        let(:invalid_notebook_id_params) do
-          { notebook_id: FactoryGirl.create(:notebook).id }
-        end
-
-        it 'raises error DocumentNotFound' do
-          expect do
-            get :new, params: invalid_notebook_id_params
-          end.to raise_error Mongoid::Errors::DocumentNotFound
-        end
       end
     end
 
@@ -114,21 +91,6 @@ RSpec.describe SectionsController, type: :controller do
           post :create, params: invalid_params
           expect(response).to render_template('sections/new')
           expect(response.status).to eq 422
-        end
-      end
-
-      context 'INVALID NOTEBOOK ID' do
-        let(:invalid_notebook_id_params) do
-          {
-            section: FactoryGirl.attributes_for(:section),
-            notebook_id: FactoryGirl.create(:notebook).id
-          }
-        end
-
-        it 'raises error DocumentNotFound' do
-          expect do
-            post :create, params: invalid_notebook_id_params
-          end.to raise_error Mongoid::Errors::DocumentNotFound
         end
       end
     end

@@ -1,9 +1,5 @@
 require 'rails_helper'
 
-# Not sure if we have to add context "INVALID ID".
-# There're tests for find_notebook method, which covers invalid id case.
-# That's why they are commented for now.
-
 RSpec.describe NotebooksController, type: :controller do
   let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 
@@ -85,16 +81,6 @@ RSpec.describe NotebooksController, type: :controller do
         expect(response).to render_template('notebooks/edit')
         expect(response.status).to eq 200
       end
-
-      # context 'INVALID ID' do
-      #   let(:params_with_invalid_id) { { id: FactoryGirl.create(:notebook).id } }
-      #
-      #   it 'raises error' do
-      #     expect do
-      #       get :edit, params: params_with_invalid_id
-      #     end.to raise_error Mongoid::Errors::DocumentNotFound
-      #   end
-      # end
     end
 
     describe 'PATCH #update' do
@@ -152,21 +138,6 @@ RSpec.describe NotebooksController, type: :controller do
           expect(response.status).to eq 422
         end
       end
-
-      # context 'INVALID ID' do
-      #   let(:params_with_invalid_id) do
-      #     {
-      #       notebook: FactoryGirl.attributes_for(:notebook),
-      #       id: FactoryGirl.create(:notebook).id
-      #     }
-      #   end
-      #
-      #   it 'raises error' do
-      #     expect do
-      #       patch :update, params: params_with_invalid_id
-      #     end.to raise_error Mongoid::Errors::DocumentNotFound
-      #   end
-      # end
     end
 
     describe 'DELETE #destroy' do
@@ -187,16 +158,6 @@ RSpec.describe NotebooksController, type: :controller do
         delete :destroy, params: params
         expect(response).to redirect_to notebooks_path
       end
-
-      # context 'INVALID ID' do
-      #   let(:params_with_invalid_id) { { id: FactoryGirl.create(:notebook).id } }
-      #
-      #   it 'raises error' do
-      #     expect do
-      #       delete :destroy, params: params_with_invalid_id
-      #     end.to raise_error Mongoid::Errors::DocumentNotFound
-      #   end
-      # end
     end
   end
 
