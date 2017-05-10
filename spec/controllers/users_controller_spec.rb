@@ -13,13 +13,9 @@ RSpec.describe UsersController, type: :controller do
     log_out
 
     describe 'GET #new' do
-      it "renders 'users/new' template" do
+      it "renders 'users/new' template with status 200" do
         get :new
         expect(response).to render_template('users/new')
-      end
-
-      it 'returns status 200' do
-        get :new
         expect(response.status).to eq 200
       end
     end
@@ -70,13 +66,9 @@ RSpec.describe UsersController, type: :controller do
           post :create, params: invalid_params
         end
 
-        it "renders 'users/new' template" do
+        it "renders 'users/new' template with status 422" do
           post :create, params: invalid_params
           expect(response).to render_template('users/new')
-        end
-
-        it 'returns status 422' do
-          post :create, params: invalid_params
           expect(response.status).to eq 422
         end
       end

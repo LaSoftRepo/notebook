@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+# TODO: There's gonna be before action "check_notebook". We will test it here.
+# As a result we won't have to make tests like INVALID NOTEOOK ID each time
+
 RSpec.describe SectionsController, type: :controller do
   describe 'AUTHENTICATION' do
     it "doesn't allow unauthenticated users to access all actions" do
@@ -15,23 +18,21 @@ RSpec.describe SectionsController, type: :controller do
       context 'current notebook belongs to current user' do
         let(:params) { { notebook_id: notebook.id } }
 
-        it "renders 'sections/index' template" do
+        it "renders 'sections/index' template with status 200" do
           get :index, params: params
           expect(response).to render_template('sections/index')
-        end
-
-        it 'returns status 200' do
-          get :index, params: params
           expect(response.status).to eq 200
         end
       end
 
-      context 'current notebook does not belong to current user' do
-        let(:params) { { notebook_id: '12345678' } }
+      context 'INVALID NOTEBOOK ID' do
+        let(:invalid_notebook_id_params) do
+          { notebook_id: FactoryGirl.create(:notebook).id }
+        end
 
-        it 'raise an error' do
+        it 'raises error DocumentNotFound' do
           expect do
-            get :index, params: params
+            get :index, params: invalid_notebook_id_params
           end.to raise_error Mongoid::Errors::DocumentNotFound
         end
       end
@@ -40,29 +41,96 @@ RSpec.describe SectionsController, type: :controller do
     describe 'GET #new' do
       let(:params) { { notebook_id: notebook.id } }
 
-       it "renders 'sections/new' template" do
+       it "renders 'sections/new' template with status 200" do
         get :new, params: params
         expect(response).to render_template('sections/new')
-      end
-
-      it 'returns status 200' do
-        get :new, params: params
         expect(response.status).to eq 200
       end
 
-      context 'current notebook does not belong to current user' do
-        let(:params) { { notebook_id: '12345678' } }
+      context 'INVALID NOTEBOOK ID' do
+        let(:invalid_notebook_id_params) do
+          { notebook_id: FactoryGirl.create(:notebook).id }
+        end
 
-        it 'raise an error' do
+        it 'raises error DocumentNotFound' do
           expect do
-            get :new, params: params
+            get :new, params: invalid_notebook_id_params
           end.to raise_error Mongoid::Errors::DocumentNotFound
         end
       end
     end
 
     describe 'POST #create' do
-      # TODO: add tests LOGGED IN SectionsController#create
+      context 'VALID PARAMS' do
+        let(:valid_params) do
+          {
+            section: FactoryGirl.attributes_for(:section),
+            notebook_id: notebook.id
+          }
+        end
+
+        it 'creates new section for current notebook' do
+          # I don't know why, but "expect {}.to change..." doesn't work here
+          prev_count = notebook.sections.count
+          post :create, params: valid_params
+          expect(notebook.reload.sections.count - prev_count).to eq 1
+        end
+
+        it 'sets flash[:success] message' do
+          post :create, params: valid_params
+          expect(flash[:success]).to be_present
+        end
+
+        it 'redirects to notices index action' do
+          post :create, params: valid_params
+          section = notebook.reload.sections.last
+          expect(response).to(
+            redirect_to notebook_section_notices_path(section_id: section.id)
+          )
+        end
+      end
+
+      context 'INVALID PARAMS' do
+        let(:invalid_params) do
+          {
+            section: FactoryGirl.attributes_for(:invalid_section),
+            notebook_id: notebook.id
+          }
+        end
+
+        it 'does not create new section' do
+          # I don't know why, but "expect {}.to change..." doesn't work here
+          prev_count = notebook.sections.count
+          post :create, params: invalid_params
+          expect(notebook.reload.sections.count - prev_count).to eq 0
+        end
+
+        it 'sets flash.now[:error] message' do
+          post :create, params: invalid_params
+          expect(flash.now[:error]).to be_present
+        end
+
+        it 'renders sections/new template with status 422' do
+          post :create, params: invalid_params
+          expect(response).to render_template('sections/new')
+          expect(response.status).to eq 422
+        end
+      end
+
+      context 'INVALID NOTEBOOK ID' do
+        let(:invalid_notebook_id_params) do
+          {
+            section: FactoryGirl.attributes_for(:section),
+            notebook_id: FactoryGirl.create(:notebook).id
+          }
+        end
+
+        it 'raises error DocumentNotFound' do
+          expect do
+            post :create, params: invalid_notebook_id_params
+          end.to raise_error Mongoid::Errors::DocumentNotFound
+        end
+      end
     end
   end
 end

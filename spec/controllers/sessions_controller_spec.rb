@@ -41,13 +41,9 @@ RSpec.describe SessionsController, type: :controller do
       log_out
 
       describe 'GET #new' do
-        it "renders 'sessions/new' template" do
+        it "renders 'sessions/new' template with status 200" do
           get :new
           expect(response).to render_template('sessions/new')
-        end
-
-        it 'returns status 200' do
-          get :new
           expect(response.status).to eq 200
         end
       end
@@ -103,13 +99,9 @@ RSpec.describe SessionsController, type: :controller do
             expect(assigns(:error)).to be_present
           end
 
-          it "renders 'sessions/new' template" do
+          it "renders 'sessions/new' template with status 422" do
             post :create, params: invalid_params
             expect(response).to render_template('sessions/new')
-          end
-
-          it 'returns status 422' do
-            post :create, params: invalid_params
             expect(response.status).to eq 422
           end
         end

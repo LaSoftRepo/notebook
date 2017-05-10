@@ -17,25 +17,17 @@ RSpec.describe NotebooksController, type: :controller do
     log_in
 
     describe 'GET #index' do
-      it "renders 'notebooks/index' template" do
+      it "renders 'notebooks/index' template with status 200" do
         get :index
         expect(response).to render_template('notebooks/index')
-      end
-
-      it 'returns status 200' do
-        get :index
         expect(response.status).to eq 200
       end
     end
 
     describe 'GET #new' do
-      it "renders 'notebooks/new' template" do
+      it "renders 'notebooks/new' template with status 200" do
         get :new
         expect(response).to render_template('notebooks/new')
-      end
-
-      it 'returns status 200' do
-        get :new
         expect(response.status).to eq 200
       end
     end
@@ -55,7 +47,7 @@ RSpec.describe NotebooksController, type: :controller do
           expect(flash[:success]).to be_present
         end
 
-        it 'redirects to notebook sections path' do
+        it 'redirects to sections index action' do
           post :create, params: valid_params
           expect(response).to redirect_to(
             notebook_sections_path controller.current_user.notebooks.last
@@ -77,13 +69,9 @@ RSpec.describe NotebooksController, type: :controller do
           expect(flash.now[:error]).to be_present
         end
 
-        it "renders 'notebooks/new' template" do
+        it "renders 'notebooks/new' template with status 422" do
           post :create, params: invalid_params
           expect(response).to render_template('notebooks/new')
-        end
-
-        it 'returns status 422' do
-          post :create, params: invalid_params
           expect(response.status).to eq 422
         end
       end
@@ -92,13 +80,9 @@ RSpec.describe NotebooksController, type: :controller do
     describe 'GET #edit' do
       let(:params) { { id: notebook.id } }
 
-      it "renders 'notebooks/edit' template" do
+      it "renders 'notebooks/edit' template with status 200" do
         get :edit, params: params
         expect(response).to render_template('notebooks/edit')
-      end
-
-      it 'returns status 200' do
-        get :edit, params: params
         expect(response.status).to eq 200
       end
 
@@ -135,7 +119,7 @@ RSpec.describe NotebooksController, type: :controller do
           expect(flash[:success]).to be_present
         end
 
-        it 'redirects to notebook sections path' do
+        it 'redirects to sections index action' do
           patch :update, params: valid_params
           expect(response).to redirect_to notebook_sections_path(notebook)
         end
@@ -162,9 +146,10 @@ RSpec.describe NotebooksController, type: :controller do
           expect(flash[:error]).to be_present
         end
 
-        it "renders 'notebooks/edit' template" do
+        it "renders 'notebooks/edit' template with status 422" do
           patch :update, params: invalid_params
           expect(response).to render_template('notebooks/edit')
+          expect(response.status).to eq 422
         end
       end
 
@@ -193,7 +178,12 @@ RSpec.describe NotebooksController, type: :controller do
         end.to change(controller.current_user.notebooks, :count).by(-1)
       end
 
-      it 'redirects to notebooks path' do
+      it 'sets flash[:notice] message' do
+        delete :destroy, params: params
+        expect(flash[:notice]).to be_present
+      end
+
+      it 'redirects to notebooks index action' do
         delete :destroy, params: params
         expect(response).to redirect_to notebooks_path
       end

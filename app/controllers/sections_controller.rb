@@ -1,6 +1,9 @@
 class SectionsController < ApplicationController
   include Breadcrumbs::Section
   before_action :authenticate_user
+  # TODO: Add before action "check_notebook". You will check if notebook
+  # belonds to current user. Maybe current_notebook helper should return nil
+  # if there's no notebook found. Testing will be very easy
 
   def index
     @sections = current_notebook.sections

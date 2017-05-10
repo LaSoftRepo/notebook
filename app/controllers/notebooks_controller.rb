@@ -40,8 +40,7 @@ class NotebooksController < ApplicationController
 
   def destroy
     @notebook.destroy
-    flash[:success] = t('deleted', name: @notebook.name)
-    redirect_to notebooks_path
+    redirect_to notebooks_path, notice: t('deleted', name: @notebook.name)
   end
 
   private
