@@ -33,6 +33,7 @@ en:
       edit: 'Password reset'
     section:
       new: 'New section'
+      edit: 'Edit %{name}'
     child_section:
       new: 'New subsection'
     session:
@@ -53,6 +54,7 @@ en:
   section:
     no_sections: 'You have no sections. Add the first one.'
     not_created: 'We can not create a section. Please correct the fields.'
+    not_updated: 'We can not update a section. Please correct the fields.'
 
   child_section:
     no_child_sections: 'You have no subsections. Add the first one.'

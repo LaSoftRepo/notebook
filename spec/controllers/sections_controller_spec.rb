@@ -94,5 +94,13 @@ RSpec.describe SectionsController, type: :controller do
         end
       end
     end
+
+    describe 'GET #edit' do
+      # TODO: SectionsController#edit tests
+    end
+
+    describe 'PATCH #update' do
+      # TODO: SectionsController#update tests
+    end
   end
 end

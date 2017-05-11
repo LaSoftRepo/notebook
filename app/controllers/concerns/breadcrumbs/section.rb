@@ -15,6 +15,11 @@ module Breadcrumbs
         when :new, :create
           add_breadcrumbs(:index)
           add_breadcrumb current_notebook.name, notebook_sections_path(current_notebook)
+        when :edit, :update
+          add_breadcrumbs(:new)
+          @section.parent_sections.push(@section).reverse.each do |section|
+            add_breadcrumb section.name, notebook_child_sections_path(parent_section_id: section.id)
+          end
         end
       end
     end
