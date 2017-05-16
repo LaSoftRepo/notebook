@@ -33,7 +33,9 @@ main {
 }
 
 #view-content {
-  padding: 0;
+  .mdl-grid {
+    padding: 0;
+  }
   .card {
     font-size: 16px;
     padding: 0;

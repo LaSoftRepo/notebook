@@ -1,4 +1,5 @@
 - title t('titles.notebook.edit', name: @notebook.name)
 
-= box do
-  = render 'notebooks/form', notebook: @notebook
+.mdl-grid
+  = box do
+    = render 'notebooks/form', notebook: @notebook

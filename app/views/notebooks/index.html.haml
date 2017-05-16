@@ -1,9 +1,10 @@
 - title t('titles.notebook.index')
 
-- if @notebooks.any?
-  - @notebooks.each do |notebook|
-    = render 'notebooks/card', notebook: notebook
-- else
-  = box { t('notebook.no_notebooks') }
+.mdl-grid
+  - if @notebooks.any?
+    - @notebooks.each do |notebook|
+      = render 'notebooks/card', notebook: notebook
+  - else
+    = box { t('notebook.no_notebooks') }
 
 = add_fixed_button link: new_notebook_path

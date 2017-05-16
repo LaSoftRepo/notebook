@@ -1,22 +1,23 @@
-= box do
-  - if current_section.present?
-    - title t('titles.child_section.new')
+.mdl-grid
+  = box do
+    - if current_section.present?
+      - title t('titles.child_section.new')
 
-    = form_for @section, url: notebook_child_sections_path(notebook_id: current_notebook.id), method: :post do |f|
-      = render 'shared/errors', errors: @section.errors.full_messages
+      = form_for @section, url: notebook_child_sections_path(notebook_id: current_notebook.id), method: :post do |f|
+        = render 'shared/errors', errors: @section.errors.full_messages
 
-      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-        = f.text_field :name, class: 'mdl-textfield__input', autofocus: true
-        = f.label :name, class: 'mdl-textfield__label'
+        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.text_field :name, class: 'mdl-textfield__input', autofocus: true
+          = f.label :name, class: 'mdl-textfield__label'
 
-      .textarea.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-        = f.text_area :description, rows: 4, class: 'mdl-textfield__input'
-        = f.label :description, class: 'mdl-textfield__label'
+        .textarea.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.text_area :description, rows: 4, class: 'mdl-textfield__input'
+          = f.label :description, class: 'mdl-textfield__label'
 
-      = hidden_field_tag :parent_section_id, current_section.id
+        = hidden_field_tag :parent_section_id, current_section.id
 
-      = f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
+        = f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
 
-  - else
-    - title t('titles.section.new')
-    = render 'sections/form', notebook: current_notebook, section: @section
+    - else
+      - title t('titles.section.new')
+      = render 'sections/form', notebook: current_notebook, section: @section
