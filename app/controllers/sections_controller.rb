@@ -5,7 +5,7 @@ class SectionsController < ApplicationController
   before_action :find_section, only: [:edit, :update]
 
   def index
-    @sections = current_notebook.sections
+    @sections = current_notebook.sections.order(created_at: :desc)
     render 'sections/index'
   end
 
