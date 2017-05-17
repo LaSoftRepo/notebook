@@ -1,4 +1,8 @@
 - title t('titles.notebook.index')
+- actions do
+  = link_to new_notebook_path do
+    %button.mdl-button.mdl-js-button.mdl-button--icon
+      %i.material-icons add
 
 .mdl-grid
   - if @notebooks.any?
@@ -7,4 +11,4 @@
   - else
     = box { t('notebook.no_notebooks') }
 
-= add_fixed_button link: new_notebook_path
+-# = add_fixed_button link: new_notebook_path

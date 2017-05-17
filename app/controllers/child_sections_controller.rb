@@ -2,11 +2,6 @@ class ChildSectionsController < ApplicationController
   include Breadcrumbs::ChildSection
   before_action :authenticate_user
 
-  def index
-    @sections = current_section.child_sections
-    render 'sections/index'
-  end
-
   def new
     @section = current_section.child_sections.build
     render 'sections/new'

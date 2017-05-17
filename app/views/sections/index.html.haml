@@ -1,37 +1,20 @@
-- if current_section.present?
-  - title current_section.name
-  - actions do
-    = link_to edit_notebook_section_path(id: current_section.id) do
-      %button.mdl-button.mdl-js-button.mdl-button--icon
-        %i.material-icons edit
-    = link_to '#' do
-      %button.mdl-button.mdl-js-button.mdl-button--icon
-        %i.material-icons delete
+- title current_notebook.name
+- actions do
+  = link_to new_notebook_section_path do
+    %button.mdl-button.mdl-js-button.mdl-button--icon
+      %i.material-icons add
+  = link_to edit_notebook_path(current_notebook) do
+    %button.mdl-button.mdl-js-button.mdl-button--icon
+      %i.material-icons edit
+  = link_to notebook_path(current_notebook), method: :delete, data: { confirm: t('are_you_sure') } do
+    %button.mdl-button.mdl-js-button.mdl-button--icon
+      %i.material-icons delete
 
-  .mdl-grid
-    - if @sections.any?
-      - @sections.each do |section|
-        = render 'sections/card', section: section
-    - else
-      = box { t('child_section.no_child_sections') }
+.mdl-grid
+  - if @sections.any?
+    - @sections.each do |section|
+      = render 'sections/card', section: section
+  - else
+    = box { t('section.no_sections') }
 
-  = add_fixed_button link: new_notebook_child_section_path(parent_section_id: current_section.id)
-
-- else
-  - title current_notebook.name
-  - actions do
-    = link_to edit_notebook_path(current_notebook) do
-      %button.mdl-button.mdl-js-button.mdl-button--icon
-        %i.material-icons edit
-    = link_to notebook_path(current_notebook), method: :delete, data: { confirm: t('are_you_sure') } do
-      %button.mdl-button.mdl-js-button.mdl-button--icon
-        %i.material-icons delete
-
-  .mdl-grid
-    - if @sections.any?
-      - @sections.each do |section|
-        = render 'sections/card', section: section
-    - else
-      = box { t('section.no_sections') }
-
-  = add_fixed_button link: new_notebook_section_path
+-# = add_fixed_button link: new_notebook_section_path

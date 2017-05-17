@@ -3,7 +3,8 @@ class NoticesController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @notices = current_section.notices
+    @notices = current_section.notices.order(created_at: :desc)
+    @child_sections = current_section.child_sections(created_at: :desc)
     render 'notices/index'
   end
 
