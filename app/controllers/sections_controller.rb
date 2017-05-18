@@ -43,6 +43,7 @@ class SectionsController < ApplicationController
 
   def find_section
     @section ||= current_notebook.find_section params[:id]
+    @section || not_found
   end
 
   def section_params
