@@ -47,6 +47,8 @@ class NotebooksController < ApplicationController
 
   def find_notebook
     @notebook ||= current_user.notebooks.find params[:id]
+  rescue Mongoid::Errors::DocumentNotFound
+    not_found
   end
 
   def notebook_params
