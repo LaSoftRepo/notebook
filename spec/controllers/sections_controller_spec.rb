@@ -166,12 +166,50 @@ RSpec.describe SectionsController, type: :controller do
         end
       end
     end
+
+    describe 'DELETE #destroy' do
+      let!(:params) { { notebook_id: notebook.id, id: section.id } }
+
+      it 'deletes section of current notebook' do
+        # I don't know why, but "expect {}.to change..." doesn't work here
+        prev_count = notebook.sections.count
+        delete :destroy, params: params
+        expect(notebook.reload.sections.count - prev_count).to eq -1
+      end
+
+      it 'sets flash[:notice] message' do
+        delete :destroy, params: params
+        expect(flash[:notice]).to be_present
+      end
+
+      it 'redirects to sections index action' do
+        delete :destroy, params: params
+        expect(response).to redirect_to notebook_sections_path
+      end
+
+      context 'CHILD SECTION' do
+        let!(:params) do
+          {
+            notebook_id: notebook.id,
+            id: FactoryGirl.create(:section, :child, parent_section: section).id
+          }
+        end
+
+        it 'redirects to notices index action' do
+          notebook.upsert # need to do that because after reload child section disappear
+          delete :destroy, params: params
+          expect(response).to(
+            redirect_to notebook_section_notices_path(section_id: section.id)
+          )
+        end
+      end
+    end
   end
 
   describe '#find_section' do
     it 'is called as before action for edit, update and destroy' do
       expect(controller).to(
-        filter(:before, with: :find_section, only: [:edit, :update])
+        filter(:before, with: :find_section, only: [:edit, :update, :destroy])
       )
     end
 

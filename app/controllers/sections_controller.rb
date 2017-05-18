@@ -2,7 +2,7 @@ class SectionsController < ApplicationController
   include Breadcrumbs::Section
   before_action :authenticate_user
   before_action :verify_notebook
-  before_action :find_section, only: [:edit, :update]
+  before_action :find_section, only: [:edit, :update, :destroy]
 
   def index
     @sections = current_notebook.sections.order(created_at: :desc)
@@ -36,6 +36,18 @@ class SectionsController < ApplicationController
     else
       flash.now[:error] = t('section.not_updated')
       render 'sections/edit', status: 422
+    end
+  end
+
+  def destroy
+    @section.destroy
+    flash[:notice] = t('deleted', name: @section.name)
+    if @section.parent_section?
+      redirect_to(
+        notebook_section_notices_path(section_id: @section.parent_section.id)
+      )
+    else
+      redirect_to notebook_sections_path
     end
   end
 
