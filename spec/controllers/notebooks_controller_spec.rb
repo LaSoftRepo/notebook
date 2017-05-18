@@ -107,7 +107,9 @@ RSpec.describe NotebooksController, type: :controller do
 
         it 'redirects to sections index action' do
           patch :update, params: valid_params
-          expect(response).to redirect_to notebook_sections_path(notebook)
+          expect(response).to(
+            redirect_to notebook_sections_path(notebook_id: notebook.id)
+          )
         end
       end
 
@@ -178,11 +180,11 @@ RSpec.describe NotebooksController, type: :controller do
       end
 
       context 'INVALID ID' do
-        it 'raises error DocumentNotFound' do
+        it 'raises error ActionController::RoutingError' do
           controller.params[:id] = FactoryGirl.create(:notebook).id
           expect do
             controller.send(:find_notebook)
-          end.to raise_error Mongoid::Errors::DocumentNotFound
+          end.to raise_error ActionController::RoutingError
         end
       end
     end
