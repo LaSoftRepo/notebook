@@ -29,4 +29,8 @@ class ApplicationController < ActionController::Base
   def verify_notebook
     current_notebook || not_found
   end
+
+  def verify_section
+    verify_notebook && current_section || not_found
+  end
 end
