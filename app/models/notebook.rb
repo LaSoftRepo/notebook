@@ -11,6 +11,8 @@ class Notebook
 
   validates :name, presence: true
 
+  default_scope order(created_at: :desc)
+
   def find_section(id)
     section = sections.where(id: id).first
 

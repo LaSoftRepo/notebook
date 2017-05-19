@@ -14,6 +14,8 @@ class Section
 
   validates :name, presence: true
 
+  default_scope order(created_at: :desc)
+
   def find_section(id)
     section = child_sections.where(id: id).first
 
