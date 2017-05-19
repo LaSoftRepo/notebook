@@ -43,7 +43,6 @@ RSpec.describe NoticesController, type: :controller do
         end
 
         it 'creates new notice' do
-          # I don't know why, but "expect {}.to change..." doesn't work here
           prev_count = section.notices.count
           post :create, params: valid_params
           expect(section.reload.notices.count - prev_count).to eq 1
@@ -72,7 +71,6 @@ RSpec.describe NoticesController, type: :controller do
         end
 
         it 'does not create new notice' do
-          # I don't know why, but "expect {}.to change..." doesn't work here
           prev_count = section.notices.count
           post :create, params: invalid_params
           expect(section.reload.notices.count - prev_count).to eq 0

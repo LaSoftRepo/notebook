@@ -48,7 +48,6 @@ RSpec.describe SectionsController, type: :controller do
         end
 
         it 'creates new section' do
-          # I don't know why, but "expect {}.to change..." doesn't work here
           prev_count = notebook.sections.count
           post :create, params: valid_params
           expect(notebook.reload.sections.count - prev_count).to eq 1
@@ -77,7 +76,6 @@ RSpec.describe SectionsController, type: :controller do
         end
 
         it 'does not create new section' do
-          # I don't know why, but "expect {}.to change..." doesn't work here
           prev_count = notebook.sections.count
           post :create, params: invalid_params
           expect(notebook.reload.sections.count - prev_count).to eq 0
@@ -170,7 +168,6 @@ RSpec.describe SectionsController, type: :controller do
       let!(:params) { { notebook_id: notebook.id, id: section.id } }
 
       it 'deletes section of current notebook' do
-        # I don't know why, but "expect {}.to change..." doesn't work here
         prev_count = notebook.sections.count
         delete :destroy, params: params
         expect(notebook.reload.sections.count - prev_count).to eq -1
