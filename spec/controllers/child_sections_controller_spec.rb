@@ -12,6 +12,6 @@ RSpec.describe ChildSectionsController, type: :controller do
   end
 
   describe 'ACTIONS' do
-
+    # TODO: Add tests for child sections controller
   end
 end
