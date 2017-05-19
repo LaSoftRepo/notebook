@@ -1,10 +1,11 @@
 class NoticesController < ApplicationController
   include Breadcrumbs::Notice
   before_action :authenticate_user
+  before_action :verify_section
 
   def index
-    @notices = current_section.notices.order(created_at: :desc)
-    @child_sections = current_section.child_sections(created_at: :desc)
+    @notices = current_section.notices
+    @child_sections = current_section.child_sections
     render 'notices/index'
   end
 
