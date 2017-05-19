@@ -223,11 +223,13 @@ RSpec.describe SectionsController, type: :controller do
         expect(assigns(:section)).to eq section
       end
 
-      it 'finds child section of current notebook by id from params' do
-        # TODO Create a few child sections factories with different embedding
-        # TODO and test it here.
-        # TODO Or it's even better to check that find_section method was called
-        # TODO and write tests for that method in notebook_spec.rb file
+      it 'calls find_section to find section' do
+        controller.params[:notebook_id] = notebook.id
+        controller.params[:id] = section.id
+        expect_any_instance_of(Notebook).to(
+          receive(:find_section).with(section.id) { section }
+        )
+        controller.send(:find_section)
       end
 
       context 'INVALID ID' do
