@@ -1,6 +1,7 @@
 class ChildSectionsController < ApplicationController
   include Breadcrumbs::ChildSection
   before_action :authenticate_user
+  before_action :verify_notebook
 
   def new
     @section = current_section.child_sections.build

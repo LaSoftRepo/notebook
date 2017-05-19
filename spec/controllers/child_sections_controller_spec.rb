@@ -5,6 +5,10 @@ RSpec.describe ChildSectionsController, type: :controller do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
     end
+
+    it 'verifies notebook in all actions' do
+      expect(controller).to filter(:before, with: :verify_notebook)
+    end
   end
 
   describe 'ACTIONS' do
