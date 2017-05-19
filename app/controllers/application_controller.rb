@@ -10,27 +10,26 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new('Not Found')
   end
 
-  private
-
   def redirect_authenticated_user
     if current_user
-      flash[:warning] = t('session.logged_in_already')
+      flash[:error] = t('session.logged_in_already')
       redirect_to root_path
     end
   end
 
   def authenticate_user
     unless current_user
-      flash[:warning] = t('session.not_logged_in')
+      flash[:error] = t('session.not_logged_in')
       redirect_to log_in_path
     end
   end
 
   def verify_notebook
-    current_notebook || not_found
+    not_found unless current_notebook
   end
 
   def verify_section
-    verify_notebook && current_section || not_found
+    verify_notebook
+    not_found unless current_section
   end
 end
