@@ -4,7 +4,7 @@ class NotebooksController < ApplicationController
   before_action :find_notebook, only: [:edit, :update, :destroy]
 
   def index
-    @notebooks = current_user.notebooks.order(created_at: :desc)
+    @notebooks = current_user.notebooks
     render 'notebooks/index'
   end
 
