@@ -214,7 +214,7 @@ RSpec.describe SectionsController, type: :controller do
       let(:notebook) { FactoryGirl.create(:notebook, user: current_user) }
       let(:section) { FactoryGirl.create(:section, notebook: notebook) }
 
-      it 'finds section of current notebook by id from params' do
+      it 'finds section by id from params' do
         controller.params[:notebook_id] = notebook.id
         controller.params[:id] = section.id
         controller.send(:find_section)
