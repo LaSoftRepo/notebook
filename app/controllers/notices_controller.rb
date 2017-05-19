@@ -2,7 +2,7 @@ class NoticesController < ApplicationController
   include Breadcrumbs::Notice
   before_action :authenticate_user
   before_action :verify_section
-  before_action :find_notice, only: [:show, :edit, :update]
+  before_action :find_notice, only: [:show, :edit, :update, :destroy]
 
   def index
     @notices = current_section.notices
@@ -41,6 +41,12 @@ class NoticesController < ApplicationController
       flash.now[:error] = t('notice.not_updated')
       render 'notices/edit'
     end
+  end
+
+  def destroy
+    @notice.destroy
+    flash[:notice] = t('deleted', name: @notice.name)
+    redirect_to notebook_section_notices_path
   end
 
   private

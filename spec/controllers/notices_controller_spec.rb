@@ -163,5 +163,25 @@ RSpec.describe NoticesController, type: :controller do
         end
       end
     end
+
+    describe 'DELETE #destroy' do
+      before { params.merge!(id: notice.id) }
+
+      it 'deletes notice' do
+        prev_count = section.notices.count
+        delete :destroy, params: params
+        expect(section.reload.notices.count - prev_count).to eq -1
+      end
+
+      it 'sets flash[:notice] message' do
+        delete :destroy, params: params
+        expect(flash[:notice]).to be_present
+      end
+
+      it 'redirects to notices index action' do
+        delete :destroy, params: params
+        expect(response).to redirect_to notebook_section_notices_path
+      end
+    end
   end
 end
