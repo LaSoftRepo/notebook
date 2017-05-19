@@ -53,6 +53,8 @@ class NoticesController < ApplicationController
 
   def find_notice
     @notice ||= current_section.notices.find params[:id]
+  rescue Mongoid::Errors::DocumentNotFound
+    not_found
   end
 
   def notice_params

@@ -184,4 +184,51 @@ RSpec.describe NoticesController, type: :controller do
       end
     end
   end
+
+  describe '#find_notice' do
+    it 'is called as before action for show, edit, update and destroy' do
+      expect(controller).to(
+        filter(:before, with: :find_notice, only: [:show, :edit, :update, :destroy])
+      )
+    end
+
+    context 'LOGGED IN' do
+      log_in
+      let(:notebook) { FactoryGirl.create(:notebook, user: current_user) }
+      let(:section) { FactoryGirl.create(:section, notebook: notebook) }
+      let(:notice) { FactoryGirl.create(:notice, section: section) }
+
+      it 'finds notice by id from params' do
+        controller.params[:notebook_id] = notebook.id
+        controller.params[:section_id] = section.id
+        controller.params[:id] = notice.id
+        controller.send(:find_notice)
+        expect(assigns(:notice)).to eq notice
+      end
+
+      context 'INVALID ID' do
+        it 'calls not_found method' do
+          controller.params[:notebook_id] = notebook.id
+          controller.params[:section_id] = section.id
+          controller.params[:id] = FactoryGirl.create(:notice).id
+          expect(controller).to receive(:not_found)
+          controller.send(:find_notice)
+        end
+      end
+    end
+
+    context 'LOGGED OUT' do
+      log_out
+
+      it 'raises error NoMethodError' do
+        notice = FactoryGirl.create(:notice)
+        controller.params[:notebook_id] = notice.section.notebook.id
+        controller.params[:section_id] = notice.section.id
+        controller.params[:id] = notice.id
+        expect do
+          controller.send(:find_notice)
+        end.to raise_error NoMethodError
+      end
+    end
+  end
 end
