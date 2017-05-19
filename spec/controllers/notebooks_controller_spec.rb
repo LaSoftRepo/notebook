@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe NotebooksController, type: :controller do
-  let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
-
   describe 'AUTHENTICATION' do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
@@ -11,6 +9,7 @@ RSpec.describe NotebooksController, type: :controller do
 
   describe 'ACTIONS' do
     log_in
+    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 
     describe 'GET #index' do
       it "renders 'notebooks/index' template with status 200" do
@@ -32,7 +31,7 @@ RSpec.describe NotebooksController, type: :controller do
       context 'VALID PARAMS' do
         let(:valid_params) { { notebook: FactoryGirl.attributes_for(:notebook) } }
 
-        it 'creates new notebook for current user' do
+        it 'creates new notebook' do
           expect do
             post :create, params: valid_params
           end.to change(controller.current_user.notebooks, :count).by(1)
@@ -172,6 +171,7 @@ RSpec.describe NotebooksController, type: :controller do
 
     context 'LOGGED IN' do
       log_in
+      let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
 
       it 'finds notebook of current user by id from params' do
         controller.params[:id] = notebook.id

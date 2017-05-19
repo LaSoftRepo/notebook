@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe SectionsController, type: :controller do
-  let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
-  let(:section) { FactoryGirl.create(:section, notebook: notebook) }
-
   describe 'AUTHENTICATION' do
     it "doesn't allow unauthenticated users to access all actions" do
       expect(controller).to filter(:before, with: :authenticate_user)
@@ -16,6 +13,8 @@ RSpec.describe SectionsController, type: :controller do
 
   describe 'ACTIONS' do
     log_in
+    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+    let(:section) { FactoryGirl.create(:section, notebook: notebook) }
 
     describe 'GET #index' do
       context 'current notebook belongs to current user' do
@@ -48,7 +47,7 @@ RSpec.describe SectionsController, type: :controller do
           }
         end
 
-        it 'creates new section for current notebook' do
+        it 'creates new section' do
           # I don't know why, but "expect {}.to change..." doesn't work here
           prev_count = notebook.sections.count
           post :create, params: valid_params
@@ -215,6 +214,8 @@ RSpec.describe SectionsController, type: :controller do
 
     context 'LOGGED IN' do
       log_in
+      let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+      let(:section) { FactoryGirl.create(:section, notebook: notebook) }
 
       it 'finds section of current notebook by id from params' do
         controller.params[:notebook_id] = notebook.id
