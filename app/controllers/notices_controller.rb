@@ -2,7 +2,7 @@ class NoticesController < ApplicationController
   include Breadcrumbs::Notice
   before_action :authenticate_user
   before_action :verify_section
-  before_action :find_notice, only: [:show, :edit]
+  before_action :find_notice, only: [:show, :edit, :update]
 
   def index
     @notices = current_section.notices
@@ -32,6 +32,16 @@ class NoticesController < ApplicationController
 
   def edit
     render 'notices/edit'
+  end
+
+  def update
+    if @notice.update_attributes(notice_params)
+      flash[:success] = t('updated', name: @notice.name)
+      redirect_to notebook_section_notice_path(id: @notice.id)
+    else
+      flash.now[:error] = t('notice.not_updated')
+      render 'notices/edit'
+    end
   end
 
   private

@@ -22,7 +22,7 @@ module Breadcrumbs
         when :new, :create, :show
           add_breadcrumbs(:index)
           add_breadcrumb current_section.name, notebook_section_notices_path
-        when :edit
+        when :edit, :update
           add_breadcrumbs(:new)
           add_breadcrumb(
             @notice.name,

@@ -64,6 +64,7 @@ en:
   notice:
     no_notices: 'You have no notices. Add the first one.'
     not_created: 'We can not create a notice. Please correct the fields.'
+    not_updated: 'We can not update a notice. Please correct the fields'
 
   password_reset:
     email_was_sent: 'Email was sent with password reset instructions.'
