@@ -9,5 +9,9 @@ RSpec.describe Section, type: :model do
     it 'section factory builds valid section' do
       expect(FactoryGirl.build(:section).valid?).to eq true
     end
+
+    it 'trait child of factory section builds child section' do
+      expect(FactoryGirl.build(:section, :child).parent_section?).to eq true
+    end
   end
 end
