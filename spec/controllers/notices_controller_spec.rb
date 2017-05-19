@@ -23,7 +23,6 @@ RSpec.describe NoticesController, type: :controller do
       it "renders 'notices/index'" do
         get :index, params: params
         expect(assigns(:notices)).to eq section.reload.notices
-        expect(assigns(:child_sections)).to eq section.reload.child_sections
         expect(response).to render_template('notices/index')
         expect(response.status).to eq 200
       end

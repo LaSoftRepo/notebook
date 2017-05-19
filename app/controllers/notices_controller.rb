@@ -6,7 +6,6 @@ class NoticesController < ApplicationController
 
   def index
     @notices = current_section.notices
-    @child_sections = current_section.child_sections
     render 'notices/index'
   end
 
