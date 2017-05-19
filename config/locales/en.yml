@@ -28,6 +28,7 @@ en:
       edit: 'Edit %{name}'
     notice:
       new: 'New notice'
+      edit: 'Edit %{name}'
     password_reset:
       new: 'Forgot password?'
       edit: 'Password reset'

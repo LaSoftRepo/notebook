@@ -2,6 +2,7 @@ class NoticesController < ApplicationController
   include Breadcrumbs::Notice
   before_action :authenticate_user
   before_action :verify_section
+  before_action :find_notice, only: [:show, :edit]
 
   def index
     @notices = current_section.notices
@@ -10,7 +11,6 @@ class NoticesController < ApplicationController
   end
 
   def show
-    @notice = current_section.notices.find params[:id]
     render 'notices/show'
   end
 
@@ -30,7 +30,15 @@ class NoticesController < ApplicationController
     end
   end
 
+  def edit
+    render 'notices/edit'
+  end
+
   private
+
+  def find_notice
+    @notice ||= current_section.notices.find params[:id]
+  end
 
   def notice_params
     params.require(:notice).permit(:name, :text)

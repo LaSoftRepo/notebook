@@ -11,9 +11,9 @@ RSpec.describe NoticesController, type: :controller do
     log_in
     let(:notebook) { FactoryGirl.create(:notebook, user: current_user) }
     let(:section) { FactoryGirl.create(:section, notebook: notebook) }
+    let(:params) { { notebook_id: notebook.id, section_id: section.id } }
 
     describe 'GET #index' do
-      let(:params) { { notebook_id: notebook.id, section_id: section.id } }
       before do
         FactoryGirl.create_list(:notice, 2, section: section)
         FactoryGirl.create_list(:section, 2, :child, parent_section: section)
@@ -30,9 +30,7 @@ RSpec.describe NoticesController, type: :controller do
 
     describe 'GET #show' do
       let(:notice) { FactoryGirl.create(:notice, section: section) }
-      let(:params) do
-        { notebook_id: notebook.id, section_id: section.id, id: notice.id }
-      end
+      before { params.merge!(id: notice.id) }
 
       it "renders 'notices/show'" do
         get :show, params: params
@@ -43,8 +41,6 @@ RSpec.describe NoticesController, type: :controller do
     end
 
     describe 'GET #new' do
-      let(:params) { { notebook_id: notebook.id, section_id: section.id } }
-
       it "renders 'notices/new'" do
         get :new, params: params
         expect(response).to render_template('notices/new')
@@ -55,11 +51,7 @@ RSpec.describe NoticesController, type: :controller do
     describe 'POST #create' do
       context 'VALID PARAMS' do
         let(:valid_params) do
-          {
-            notebook_id: notebook.id,
-            section_id: section.id,
-            notice: FactoryGirl.attributes_for(:notice)
-          }
+          params.merge(notice: FactoryGirl.attributes_for(:notice))
         end
 
         it 'creates new notice' do
@@ -83,11 +75,7 @@ RSpec.describe NoticesController, type: :controller do
 
       context 'INVALID PARAMS' do
         let(:invalid_params) do
-          {
-            notebook_id: notebook.id,
-            section_id: section.id,
-            notice: FactoryGirl.attributes_for(:invalid_notice)
-          }
+          params.merge(notice: FactoryGirl.attributes_for(:invalid_notice))
         end
 
         it 'does not create new notice' do
@@ -106,6 +94,17 @@ RSpec.describe NoticesController, type: :controller do
           expect(response).to render_template('notices/new')
           expect(response.status).to eq 422
         end
+      end
+    end
+
+    describe 'GET #edit' do
+      let(:notice) { FactoryGirl.create(:notice, section: section) }
+      before { params.merge!(id: notice.id) }
+
+      it "renders 'notices/edit'" do
+        get :edit, params: params
+        expect(response).to render_template('notices/edit')
+        expect(response.status).to eq 200
       end
     end
   end
