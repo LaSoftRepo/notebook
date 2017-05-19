@@ -1,5 +1,4 @@
 module SessionsHelper
-
   def log_in(user, permanent = false)
     auth_token = TokenGenerator.generate
     if permanent
