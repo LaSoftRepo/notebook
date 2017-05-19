@@ -36,6 +36,11 @@ RSpec.describe SectionsController, type: :controller do
         expect(response).to render_template('sections/new')
         expect(response.status).to eq 200
       end
+
+      it 'builds not child section' do
+        get :new, params: params
+        expect(assigns(:section).parent_section?).to eq false
+      end
     end
 
     describe 'POST #create' do

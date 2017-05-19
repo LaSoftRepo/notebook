@@ -11,5 +11,10 @@ FactoryGirl.define do
 
   factory :invalid_section, parent: :section do
     name nil
+
+    trait :child do
+      name nil
+      association :parent_section, factory: :section
+    end
   end
 end
