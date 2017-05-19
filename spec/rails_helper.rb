@@ -48,7 +48,8 @@ RSpec.configure do |config|
 
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 
-  config.extend ControllerMacros, type: :controller
+  config.extend  ControllerMacros::Klass, type: :controller
+  config.include ControllerMacros::Instance, type: :controller
 
   config.use_transactional_fixtures = false
 

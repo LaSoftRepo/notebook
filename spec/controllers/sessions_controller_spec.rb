@@ -22,7 +22,7 @@ RSpec.describe SessionsController, type: :controller do
       describe 'DELETE #destroy' do
         it 'logout user from system' do
           delete :destroy
-          expect(controller.current_user).to eq nil
+          expect(current_user).to eq nil
         end
 
         it 'sets flash[:notice] message' do
@@ -41,7 +41,7 @@ RSpec.describe SessionsController, type: :controller do
       log_out
 
       describe 'GET #new' do
-        it "renders 'sessions/new' template with status 200" do
+        it "renders 'sessions/new'" do
           get :new
           expect(response).to render_template('sessions/new')
           expect(response.status).to eq 200
@@ -65,7 +65,7 @@ RSpec.describe SessionsController, type: :controller do
 
           it 'authenticates user' do
             post :create, params: valid_params
-            expect(controller.current_user).to eq user
+            expect(current_user).to eq user
           end
 
           it 'sets flash[:notice] message' do
@@ -91,7 +91,7 @@ RSpec.describe SessionsController, type: :controller do
 
           it 'does not authenticate user' do
             post :create, params: invalid_params
-            expect(controller.current_user).to eq nil
+            expect(current_user).to eq nil
           end
 
           it 'assigns error message to @error' do
@@ -99,7 +99,7 @@ RSpec.describe SessionsController, type: :controller do
             expect(assigns(:error)).to be_present
           end
 
-          it "renders 'sessions/new' template with status 422" do
+          it "renders 'sessions/new'" do
             post :create, params: invalid_params
             expect(response).to render_template('sessions/new')
             expect(response.status).to eq 422

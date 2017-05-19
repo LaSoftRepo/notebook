@@ -9,18 +9,21 @@ RSpec.describe NotebooksController, type: :controller do
 
   describe 'ACTIONS' do
     log_in
-    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+    let(:notebook) { FactoryGirl.create(:notebook, user: current_user) }
 
     describe 'GET #index' do
-      it "renders 'notebooks/index' template with status 200" do
+      before { FactoryGirl.create_list(:notebook, 2, user: current_user) }
+
+      it "renders 'notebooks/index'" do
         get :index
+        expect(assigns(:notebooks)).to eq current_user.notebooks
         expect(response).to render_template('notebooks/index')
         expect(response.status).to eq 200
       end
     end
 
     describe 'GET #new' do
-      it "renders 'notebooks/new' template with status 200" do
+      it "renders 'notebooks/new'" do
         get :new
         expect(response).to render_template('notebooks/new')
         expect(response.status).to eq 200
@@ -34,7 +37,7 @@ RSpec.describe NotebooksController, type: :controller do
         it 'creates new notebook' do
           expect do
             post :create, params: valid_params
-          end.to change(controller.current_user.notebooks, :count).by(1)
+          end.to change(current_user.notebooks, :count).by(1)
         end
 
         it 'sets flash[:success] message' do
@@ -45,7 +48,7 @@ RSpec.describe NotebooksController, type: :controller do
         it 'redirects to sections index action' do
           post :create, params: valid_params
           expect(response).to redirect_to(
-            notebook_sections_path controller.current_user.notebooks.last
+            notebook_sections_path current_user.notebooks.last
           )
         end
       end
@@ -64,7 +67,7 @@ RSpec.describe NotebooksController, type: :controller do
           expect(flash.now[:error]).to be_present
         end
 
-        it "renders 'notebooks/new' template with status 422" do
+        it "renders 'notebooks/new'" do
           post :create, params: invalid_params
           expect(response).to render_template('notebooks/new')
           expect(response.status).to eq 422
@@ -75,7 +78,7 @@ RSpec.describe NotebooksController, type: :controller do
     describe 'GET #edit' do
       let(:params) { { id: notebook.id } }
 
-      it "renders 'notebooks/edit' template with status 200" do
+      it "renders 'notebooks/edit'" do
         get :edit, params: params
         expect(response).to render_template('notebooks/edit')
         expect(response.status).to eq 200
@@ -133,7 +136,7 @@ RSpec.describe NotebooksController, type: :controller do
           expect(flash[:error]).to be_present
         end
 
-        it "renders 'notebooks/edit' template with status 422" do
+        it "renders 'notebooks/edit'" do
           patch :update, params: invalid_params
           expect(response).to render_template('notebooks/edit')
           expect(response.status).to eq 422
@@ -144,10 +147,10 @@ RSpec.describe NotebooksController, type: :controller do
     describe 'DELETE #destroy' do
       let!(:params) { { id: notebook.id } }
 
-      it 'deletes notebook of current user' do
+      it 'deletes notebook' do
         expect do
           delete :destroy, params: params
-        end.to change(controller.current_user.notebooks, :count).by(-1)
+        end.to change(current_user.notebooks, :count).by(-1)
       end
 
       it 'sets flash[:notice] message' do
@@ -171,9 +174,9 @@ RSpec.describe NotebooksController, type: :controller do
 
     context 'LOGGED IN' do
       log_in
-      let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+      let(:notebook) { FactoryGirl.create(:notebook, user: current_user) }
 
-      it 'finds notebook of current user by id from params' do
+      it 'finds notebook by id from params' do
         controller.params[:id] = notebook.id
         controller.send(:find_notebook)
         expect(assigns(:notebook)).to eq notebook

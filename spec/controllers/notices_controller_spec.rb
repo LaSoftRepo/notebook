@@ -9,15 +9,35 @@ RSpec.describe NoticesController, type: :controller do
 
   describe 'ACTIONS' do
     log_in
-    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+    let(:notebook) { FactoryGirl.create(:notebook, user: current_user) }
     let(:section) { FactoryGirl.create(:section, notebook: notebook) }
 
     describe 'GET #index' do
       let(:params) { { notebook_id: notebook.id, section_id: section.id } }
+      before do
+        FactoryGirl.create_list(:notice, 2, section: section)
+        FactoryGirl.create_list(:section, 2, :child, parent_section: section)
+      end
 
-      it "renders 'notices/index' template with status 200" do
+      it "renders 'notices/index'" do
         get :index, params: params
+        expect(assigns(:notices)).to eq section.reload.notices
+        expect(assigns(:child_sections)).to eq section.reload.child_sections
         expect(response).to render_template('notices/index')
+        expect(response.status).to eq 200
+      end
+    end
+
+    describe 'GET #show' do
+      let(:notice) { FactoryGirl.create(:notice, section: section) }
+      let(:params) do
+        { notebook_id: notebook.id, section_id: section.id, id: notice.id }
+      end
+
+      it "renders 'notices/show'" do
+        get :show, params: params
+        expect(assigns(:notice)).to eq notice
+        expect(response).to render_template('notices/show')
         expect(response.status).to eq 200
       end
     end
@@ -25,7 +45,7 @@ RSpec.describe NoticesController, type: :controller do
     describe 'GET #new' do
       let(:params) { { notebook_id: notebook.id, section_id: section.id } }
 
-      it "renders 'notices/new' template with status 200" do
+      it "renders 'notices/new'" do
         get :new, params: params
         expect(response).to render_template('notices/new')
         expect(response.status).to eq 200
@@ -81,7 +101,7 @@ RSpec.describe NoticesController, type: :controller do
           expect(flash.now[:error]).to be_present
         end
 
-        it "renders 'notices/new' template with status 422" do
+        it "renders 'notices/new'" do
           post :create, params: invalid_params
           expect(response).to render_template('notices/new')
           expect(response.status).to eq 422

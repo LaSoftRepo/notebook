@@ -13,25 +13,25 @@ RSpec.describe SectionsController, type: :controller do
 
   describe 'ACTIONS' do
     log_in
-    let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+    let(:notebook) { FactoryGirl.create(:notebook, user: current_user) }
     let(:section) { FactoryGirl.create(:section, notebook: notebook) }
 
     describe 'GET #index' do
-      context 'current notebook belongs to current user' do
-        let(:params) { { notebook_id: notebook.id } }
+      let(:params) { { notebook_id: notebook.id } }
+      before { FactoryGirl.create_list(:section, 2, notebook: notebook) }
 
-        it "renders 'sections/index' template with status 200" do
-          get :index, params: params
-          expect(response).to render_template('sections/index')
-          expect(response.status).to eq 200
-        end
+      it "renders 'sections/index'" do
+        get :index, params: params
+        expect(assigns(:sections)).to eq notebook.reload.sections
+        expect(response).to render_template('sections/index')
+        expect(response.status).to eq 200
       end
     end
 
     describe 'GET #new' do
       let(:params) { { notebook_id: notebook.id } }
 
-       it "renders 'sections/new' template with status 200" do
+       it "renders 'sections/new'" do
         get :new, params: params
         expect(response).to render_template('sections/new')
         expect(response.status).to eq 200
@@ -86,7 +86,7 @@ RSpec.describe SectionsController, type: :controller do
           expect(flash.now[:error]).to be_present
         end
 
-        it 'renders sections/new template with status 422' do
+        it 'renders sections/new' do
           post :create, params: invalid_params
           expect(response).to render_template('sections/new')
           expect(response.status).to eq 422
@@ -156,7 +156,7 @@ RSpec.describe SectionsController, type: :controller do
           expect(flash[:error]).to be_present
         end
 
-        it "renders 'sections/edit' template with status 422" do
+        it "renders 'sections/edit'" do
           patch :update, params: invalid_params
           expect(response).to render_template('sections/edit')
           expect(response.status).to eq 422
@@ -167,7 +167,7 @@ RSpec.describe SectionsController, type: :controller do
     describe 'DELETE #destroy' do
       let!(:params) { { notebook_id: notebook.id, id: section.id } }
 
-      it 'deletes section of current notebook' do
+      it 'deletes section' do
         prev_count = notebook.sections.count
         delete :destroy, params: params
         expect(notebook.reload.sections.count - prev_count).to eq -1
@@ -211,7 +211,7 @@ RSpec.describe SectionsController, type: :controller do
 
     context 'LOGGED IN' do
       log_in
-      let(:notebook) { FactoryGirl.create(:notebook, user: controller.current_user) }
+      let(:notebook) { FactoryGirl.create(:notebook, user: current_user) }
       let(:section) { FactoryGirl.create(:section, notebook: notebook) }
 
       it 'finds section of current notebook by id from params' do

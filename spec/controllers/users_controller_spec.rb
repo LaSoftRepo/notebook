@@ -13,7 +13,7 @@ RSpec.describe UsersController, type: :controller do
     log_out
 
     describe 'GET #new' do
-      it "renders 'users/new' template with status 200" do
+      it "renders 'users/new'" do
         get :new
         expect(response).to render_template('users/new')
         expect(response.status).to eq 200
@@ -38,7 +38,7 @@ RSpec.describe UsersController, type: :controller do
         it 'authenticates created user' do
           valid_params[:user][:email] = 'new@user.com'
           post :create, params: valid_params
-          expect(controller.current_user.email).to eq valid_params[:user][:email]
+          expect(current_user.email).to eq valid_params[:user][:email]
         end
 
         it 'sets flash[:notice] message' do
@@ -66,7 +66,7 @@ RSpec.describe UsersController, type: :controller do
           post :create, params: invalid_params
         end
 
-        it "renders 'users/new' template with status 422" do
+        it "renders 'users/new'" do
           post :create, params: invalid_params
           expect(response).to render_template('users/new')
           expect(response.status).to eq 422
