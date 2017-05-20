@@ -1,6 +1,8 @@
 namespace :sample_data do
   desc 'Generates a sample data for the app'
   task generate: :environment do
+    User.delete_all
+    Notebook.delete_all
     notebooks(create_user)
   end
 end
