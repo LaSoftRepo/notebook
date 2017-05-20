@@ -10,10 +10,6 @@
           = f.text_field :name, class: 'mdl-textfield__input', autofocus: true
           = f.label :name, class: 'mdl-textfield__label'
 
-        .textarea.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-          = f.text_area :description, rows: 4, class: 'mdl-textfield__input'
-          = f.label :description, class: 'mdl-textfield__label'
-
         = hidden_field_tag :parent_section_id, current_section.id
 
         = f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'

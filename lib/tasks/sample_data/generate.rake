@@ -56,17 +56,11 @@ def create_notebook(user)
 end
 
 def create_section(notebook)
-  notebook.sections.create!(
-    name: fake_name,
-    description: Faker::Lorem.paragraph
-  )
+  notebook.sections.create!(name: fake_name)
 end
 
 def create_child_section(section)
-  section.child_sections.create!(
-    name: fake_name,
-    description: Faker::Lorem.paragraph
-  )
+  section.child_sections.create!(name: fake_name)
 end
 
 def create_notice(section)

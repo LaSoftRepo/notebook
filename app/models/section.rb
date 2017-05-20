@@ -4,7 +4,6 @@ class Section
   include ShortID
 
   field :name, type: String
-  field :description, type: String
 
   MAX_EMBEDDING_LEVEL = 3
 
