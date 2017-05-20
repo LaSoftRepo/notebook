@@ -1,0 +1,45 @@
+!!!
+%html
+  %head
+    %title
+      = full_title yield(:head_title)
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+
+  %body{id: "#{controller_name}-#{action_name}"}
+    .mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+      %header.mdl-layout__header
+        .mdl-layout__header-row
+          %span.mdl-layout-title Repeek
+          .mdl-layout-spacer
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label.mdl-textfield--align-right
+            %label.mdl-button.mdl-js-button.mdl-button--icon{for: 'fixed-header-drawer-exp'}
+              %i.material-icons search
+            .mdl-textfield__expandable-holder
+              %input#fixed-header-drawer-exp.mdl-textfield__input{type: 'text', name: 'sample'}
+
+      .mdl-layout__drawer
+        -# %span.mdl-layout-title Repeek
+        %nav.mdl-navigation
+          = link_to 'Home', root_path, class: 'mdl-navigation__link'
+          - if current_user
+            = link_to 'Notebooks', notebooks_path, class: 'mdl-navigation__link'
+            = link_to 'Profile', '#', class: 'mdl-navigation__link'
+            = link_to 'Log out', log_out_path, class: 'mdl-navigation__link', method: :delete
+          - else
+            = link_to 'Sign up', sign_up_path, class: 'mdl-navigation__link'
+            = link_to 'Log in', log_in_path, class: 'mdl-navigation__link'
+
+      %main.mdl-layout__content
+        .page-content
+          #content.mdl-grid
+            .mdl-cell.mdl-cell--9-col
+              = render 'shared/flash_messages'
+              #breadcrumbs.mdl-cell.mdl-cell--12-col
+                = render_breadcrumbs separator: '<span class="breadcrumb-separator"> » </span>'.html_safe
+              #top-content.mdl-cell.mdl-cell--12-col
+                .title= yield :title
+                .actions= yield :actions
+              #view-content= yield

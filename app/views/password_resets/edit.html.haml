@@ -1,0 +1,14 @@
+- head_title t('titles.password_reset.edit')
+
+.mdl-grid
+  = small_form title: t('titles.password_reset.edit'), errors: @user.errors.full_messages do
+    = form_for @user, url: password_reset_path(params[:id]) do |f|
+      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.password_field :password, class: 'mdl-textfield__input', autofocus: true
+        = f.label :password, class: 'mdl-textfield__label'
+
+      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.password_field :password_confirmation, class: 'mdl-textfield__input'
+        = f.label :password_confirmation, class: 'mdl-textfield__label'
+
+      = f.submit t('password_reset.reset'), class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
