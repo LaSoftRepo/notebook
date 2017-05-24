@@ -12,7 +12,7 @@
 
         = hidden_field_tag :parent_section_id, current_section.id
 
-        = f.submit 'Create', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
+        = f.submit class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
 
     - else
       - title t('titles.section.new')

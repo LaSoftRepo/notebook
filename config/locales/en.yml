@@ -42,6 +42,14 @@ en:
     user:
       new: Sign up
 
+  main_menu:
+    home: Home
+    notebooks: Notebooks
+    profile: Profile
+    log_out: Log out
+    sign_up: Sign up
+    log_in: Log in
+
   helpers:
     submit:
       create: Create
@@ -56,15 +64,18 @@ en:
     no_sections: You have no sections. Add the first one.
     not_created: We can not create a section. Please correct the fields.
     not_updated: We can not update a section. Please correct the fields.
+    add: Add section
 
   child_section:
     no_child_sections: You have no subsections. Add the first one.
     not_created: We can not create a subsection. Please correct the fields.
+    add: Add subsection
 
   notice:
     no_notices: You have no notices. Add the first one.
     not_created: We can not create a notice. Please correct the fields.
     not_updated: We can not update a notice. Please correct the fields.
+    add: Add notice
 
   password_reset:
     send_instructions: Send instructions
@@ -86,12 +97,18 @@ en:
     not_logged_in: You are not logged in. Please log in.
     invalid_email_or_password: Invalid email or password.
     log_in: Log in
+    remember_me: Remember me
 
   user:
     created: Signed up!
+    create: Sign up
 
   created: '%{name} was successfully created.'
   updated: '%{name} was successfully updated.'
   deleted: '%{name} was successfully deleted.'
 
   are_you_sure: Are you sure?
+
+  action:
+    edit: Edit
+    delete: Delete

@@ -10,13 +10,13 @@
     %button.mdl-button.mdl-js-button.mdl-button--icon
       %i.material-icons delete
 
+-# = add_fixed_button link: new_notebook_section_notice_path
+
 .mdl-grid
   - if @notices.any?
     - @notices.each do |notice|
       = render 'notices/card', notice: notice
   - else
     = box { t('notice.no_notices') }
-
--# = add_fixed_button link: new_notebook_section_notice_path
 
 = render 'child_sections/child_sections', section: current_section

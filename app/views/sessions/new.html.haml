@@ -11,9 +11,9 @@
         = f.password_field :password, class: 'mdl-textfield__input'
         = f.label :password, class: 'mdl-textfield__label'
 
-      %label.remember-me.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect{for: "checkbox-remember-me"}
-        %input#checkbox-remember-me.mdl-checkbox__input{type: "checkbox"}
-        %span.mdl-checkbox__label Remember me
+      %label.remember-me.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect{for: 'checkbox-remember-me'}
+        %input#checkbox-remember-me.mdl-checkbox__input{type: 'checkbox'}
+        %span.mdl-checkbox__label= t('session.remember_me')
 
       = f.submit t('session.log_in'), class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
 

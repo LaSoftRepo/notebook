@@ -23,14 +23,14 @@
       .mdl-layout__drawer
         -# %span.mdl-layout-title Repeek
         %nav.mdl-navigation
-          = link_to 'Home', root_path, class: 'mdl-navigation__link'
+          = link_to t('main_menu.home'), root_path, class: 'mdl-navigation__link'
           - if current_user
-            = link_to 'Notebooks', notebooks_path, class: 'mdl-navigation__link'
-            = link_to 'Profile', '#', class: 'mdl-navigation__link'
-            = link_to 'Log out', log_out_path, class: 'mdl-navigation__link', method: :delete
+            = link_to t('main_menu.notebooks'), notebooks_path, class: 'mdl-navigation__link'
+            = link_to t('main_menu.profile'), '#', class: 'mdl-navigation__link'
+            = link_to t('main_menu.log_out'), log_out_path, class: 'mdl-navigation__link', method: :delete
           - else
-            = link_to 'Sign up', sign_up_path, class: 'mdl-navigation__link'
-            = link_to 'Log in', log_in_path, class: 'mdl-navigation__link'
+            = link_to t('main_menu.sign_up'), sign_up_path, class: 'mdl-navigation__link'
+            = link_to t('main_menu.log_in'), log_in_path, class: 'mdl-navigation__link'
 
       %main.mdl-layout__content
         .page-content

@@ -6,6 +6,6 @@
         %i.material-icons more_vert
       %ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect{for: "menu-button-#{notice.id}"}
         %li.mdl-menu__item
-          = link_to 'Edit', edit_notebook_section_notice_path(id: notice.id)
+          = link_to t('action.edit'), edit_notebook_section_notice_path(id: notice.id)
         %li.mdl-menu__item
-          = link_to 'Delete', notebook_section_notice_path(id: notice.id), method: :delete, data: { confirm: t('are_you_sure') }
+          = link_to t('action.delete'), notebook_section_notice_path(id: notice.id), method: :delete, data: { confirm: t('are_you_sure') }
