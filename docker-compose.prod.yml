@@ -1,0 +1,22 @@
+version: "2.0"
+services:
+  db:
+    image: "mongo:latest"
+    command: "mongod --smallfiles --quiet"
+    ports:
+      - "27018:27017"
+    volumes:
+      - "/docker_volumes/mongo:/data/db"
+
+  web:
+    build:
+      context: "."
+      dockerfile: Dockerfile.prod
+    command: "bin/rails s -p 3000 -b 0.0.0.0  -e production"
+    ports:
+      - "3001:3000"
+    links:
+      - "db"
+    environment:
+      - REPEEK_SECRET_KEY_BASE=83f4e7d7ba776cc37448b132b5a305caff265faf9b895d507e9bac3c50fcc88b2a8cb42b4d08533ba89958bf7d23fd89797a53ab27e534d9a25ce08d8221edb8
+      - REPEEK_SERVE_STATIC_FILES=true
