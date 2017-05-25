@@ -9,7 +9,8 @@ development:
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - localhost:27017
+        - db:27017
+        # - localhost:27017
       options:
         # Change the default write concern. (default = { w: 1 })
         # write:
@@ -145,8 +146,8 @@ test:
 production:
   clients:
     default:
-      # database: repeek_production
-      # hosts:
-      #    - db:27017
+      database: repeek_production
+      hosts:
+         - db:27017
       #    - localhost:27017
-      uri: <%= ENV['MONGODB_URI'] %>
+      # uri: <%= ENV['MONGODB_URI'] %>
