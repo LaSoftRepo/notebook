@@ -51,23 +51,14 @@ RSpec.configure do |config|
   config.extend  ControllerMacros::Klass, type: :controller
   config.include ControllerMacros::Instance, type: :controller
 
-  config.use_transactional_fixtures = false
-
   config.before(:suite) do
-    DatabaseCleaner[:mongoid].clean_with(:truncation)
-    DatabaseCleaner[:mongoid].strategy = :truncation
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:each) do |example|
-    DatabaseCleaner[:mongoid].strategy = :truncation
-    DatabaseCleaner[:mongoid].start
-  end
-
-  config.before(:each, :js => true) do
-    DatabaseCleaner[:mongoid].strategy = :truncation
-  end
-
-  config.after(:each) do
-    DatabaseCleaner[:mongoid].clean
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 end
