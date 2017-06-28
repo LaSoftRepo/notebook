@@ -24,6 +24,13 @@ RSpec.describe PasswordResetsController, type: :controller do
         expect(response).to render_template('password_resets/new')
         expect(response.status).to eq 200
       end
+
+      context 'expired parameter is passed' do
+        it 'assigns error message to @error' do
+          get :new, params: { expired: 'true' }
+          expect(assigns(:error)).to be_present
+        end
+      end
     end
 
     describe 'POST #create' do
@@ -184,14 +191,9 @@ RSpec.describe PasswordResetsController, type: :controller do
             patch :update, params: params
           end
 
-          it 'assigns error message to @error' do
-            patch :update, params: params
-            expect(assigns(:error)).to be_present
-          end
-
           it 'redirects to password resets new action' do
             patch :update, params: params
-            expect(response).to redirect_to new_password_reset_path
+            expect(response).to redirect_to new_password_reset_path(expired: true)
           end
         end
       end
