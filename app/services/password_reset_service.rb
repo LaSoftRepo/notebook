@@ -4,7 +4,7 @@ class PasswordResetService
 
   def send_instructions(email)
     return false unless email.match User::VALID_EMAIL_REGEX
-    user = User.find_by(email: email)
+    user = User.where(email: email).first
     if user
       user.password_reset_token = TokenGenerator.generate
       user.password_reset_sent_at = Time.zone.now
