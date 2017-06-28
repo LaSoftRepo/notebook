@@ -3,6 +3,7 @@ class PasswordResetsController < ApplicationController
   before_action :user_by_token, only: [:edit, :update]
 
   def new
+    @error = t('password_reset.expired') if params[:expired].present?
     render 'password_resets/new'
   end
 
@@ -26,9 +27,7 @@ class PasswordResetsController < ApplicationController
       render 'password_resets/edit', status: 422
     end
   rescue PasswordResetService::PasswordResetExpired
-    # TODO: The error isn't showed cause we do redirect, need to fix it
-    @error = t('password_reset.expired')
-    redirect_to new_password_reset_path
+    redirect_to new_password_reset_path(expired: true)
   end
 
   private
