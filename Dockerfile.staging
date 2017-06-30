@@ -15,4 +15,5 @@ WORKDIR $APP_HOME
 COPY . $APP_HOME
 
 RUN gem update bundler
-RUN bundle install
+RUN bundle install --without development test
+RUN rake assets:precompile RAILS_ENV=staging
