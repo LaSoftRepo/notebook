@@ -143,11 +143,17 @@ test:
           mode: :primary
         max_pool_size: 1
 
+staging:
+  clients:
+    default:
+      database: repeek_staging
+      hosts:
+         - mongodb:27017
+
 production:
   clients:
     default:
       database: repeek_production
       hosts:
-         - db:27017
-      #    - localhost:27017
-      # uri: <%= ENV['MONGODB_URI'] %>
+         - mongodb:27017
+      # uri: <%= ENV['MONGODB_URI'] %> - Heroku
