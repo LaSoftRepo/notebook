@@ -147,12 +147,12 @@ staging:
     default:
       database: repeek_staging
       hosts:
-         - <%= ENV['MONGO_HOST_STAGING'] %>:<%= ENV['MONGO_HOST_STAGING'] %>
+         - "<%= ENV['MONGO_HOST_STAGING'] %>:<%= ENV['MONGO_PORT_STAGING'] %>"
 
 production:
   clients:
     default:
       database: repeek_production
       hosts:
-         - <%= ENV['MONGO_HOST_PRODUCTION'] %>:<%= ENV['MONGO_HOST_PRODUCTION'] %>
+         - "<%= ENV['MONGO_HOST_PRODUCTION'] %>:<%= ENV['MONGO_PORT_PRODUCTION'] %>"
       # uri: <%= ENV['MONGODB_URI'] %> - Heroku
