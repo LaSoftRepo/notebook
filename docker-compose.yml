@@ -5,16 +5,16 @@ services:
     volumes:
     - /docker_volumes/mongo:/data/db
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: role=repeek-staging
+      io.rancher.container.pull_image: always
   web:
     image: vitalikpaprotsky/repeek-staging:latest
     environment:
-      RACK_ENV: staging
-      RAILS_ENV: staging
-      PORT: '3000'
       MONGO_HOST_STAGING: mongo
       MONGO_PORT_STAGING: '27017'
+      PORT: '3000'
+      RACK_ENV: staging
+      RAILS_ENV: staging
       REPEEK_MAILER_PASSWORD: repeek123
     links:
     - mongo:mongo
@@ -23,6 +23,7 @@ services:
     - s
     labels:
       io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: role=repeek-staging
   lb:
     image: rancher/lb-service-haproxy:v0.7.5
     ports:
