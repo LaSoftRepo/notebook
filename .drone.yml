@@ -68,7 +68,7 @@ pipeline:
 
   # When a new tag is created on GitHub
   # Deploy repeek-production image to Rancher with GitHub tag
-  # There's no production host. Rancher isn't configured yet.
+  # There's no production host. Rancher isn't configured yet
   # rancher:
   #   image: peloton/drone-rancher
   #   url:
