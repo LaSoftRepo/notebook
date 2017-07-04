@@ -9,6 +9,8 @@ pipeline:
     environment:
       RACK_ENV: test
       RAILS_ENV: test
+      MONGO_HOST_TEST: mongo
+      MONGO_PORT_TEST: 27017
 
 
   # When master branch is pushed to GitHub or some other branch is merged to it

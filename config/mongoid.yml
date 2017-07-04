@@ -136,7 +136,7 @@ test:
     default:
       database: repeek_test
       hosts:
-        - mongo:27017
+        "<%= ENV['MONGO_HOST_TEST'] || localhost %>:<%= ENV['MONGO_PORT_TEST'] || 27017 %>"
       options:
         read:
           mode: :primary
