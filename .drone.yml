@@ -57,9 +57,9 @@ pipeline:
   # Deploy repeek-staging image to Rancher with GitHub tag
   rancher:
     image: peloton/drone-rancher
-    url: http://172.104.152.205:8080/v2-beta/projects/1a17 # Use env var
-    access_key: 454A252F6A52C59EDEEC                       # Use env var
-    secret_key: Rcdq7cfzH1eKEBsB2YAHheEPYPzeUjkWFRGNTpGZ   # Use env var
+    url: http://172.104.152.205:8080/v1/projects/1a17    # Use env var
+    access_key: 454A252F6A52C59EDEEC                     # Use env var
+    secret_key: Rcdq7cfzH1eKEBsB2YAHheEPYPzeUjkWFRGNTpGZ # Use env var
     service: repeek/web
     docker_image: "vitalikpaprotsky/repeek-staging:${DRONE_TAG}"
     when:
