@@ -17,6 +17,7 @@ pipeline:
   # Push repeek-staging image to DockerHub with latest tag
   docker:
     image: plugins/docker
+    dockerfile: Dockerfile.staging
     email: vetalpaprotsky@gmail.com
     repo: vitalikpaprotsky/repeek-staging
     tags: latest
@@ -30,6 +31,7 @@ pipeline:
   # Push repeek-staging image to DockerHub with GitHub tag
   docker:
     image: plugins/docker
+    dockerfile: Dockerfile.staging
     email: vetalpaprotsky@gmail.com
     repo: vitalikpaprotsky/repeek-staging
     tags: ${DRONE_TAG}
@@ -42,6 +44,7 @@ pipeline:
   # Push repeek-production image to DockerHub with GitHub tag
   docker:
     image: plugins/docker
+    dockerfile: Dockerfile.production
     email: vetalpaprotsky@gmail.com
     repo: vitalikpaprotsky/repeek-production
     tags: ${DRONE_TAG}
