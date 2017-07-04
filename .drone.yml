@@ -1,0 +1,79 @@
+pipeline:
+  build:
+    image: vitalikpaprotsky/repeek-base:latest
+    commands:
+      - gem update bundler
+      - bundle install
+      - rspec spec
+
+    environment:
+      RACK_ENV: test
+      RAILS_ENV: test
+
+
+  # When master branch is pushed to GitHub or some other branch is merged to it
+  # Push repeek-staging image to DockerHub with latest tag
+  docker:
+    image: plugins/docker
+    email: vetalpaprotsky@gmail.com
+    repo: vitalikpaprotsky/repeek-staging
+    tags: latest
+    secrets: [ docker_username, docker_password ]
+    when:
+      branch: master
+      event: push
+
+
+  # When a new tag is created on GitHub
+  # Push repeek-staging image to DockerHub with GitHub tag
+  docker:
+    image: plugins/docker
+    email: vetalpaprotsky@gmail.com
+    repo: vitalikpaprotsky/repeek-staging
+    tags: ${DRONE_TAG}
+    secrets: [ docker_username, docker_password ]
+    when:
+      event: tag
+
+
+  # When a new tag is created on GitHub
+  # Push repeek-production image to DockerHub with GitHub tag
+  docker:
+    image: plugins/docker
+    email: vetalpaprotsky@gmail.com
+    repo: vitalikpaprotsky/repeek-production
+    tags: ${DRONE_TAG}
+    secrets: [ docker_username, docker_password ]
+    when:
+      event: tag
+
+
+  # When a new tag is created on GitHub
+  # Deploy repeek-staging image to Rancher with GitHub tag
+  rancher:
+    image: peloton/drone-rancher
+    url: http://172.104.152.205:8080/v2-beta             # Use env var
+    access_key: 62AF0D8CB739B7F1C4BB                     # Use env var
+    secret_key: BzC9v2uXULcCxzh696bPjphnSgNsTWoL85VrcXML # Use env var
+    service: repeek/web
+    docker_image: "vitalikpaprotsky/repeek-staging:${DRONE_TAG}"
+    when:
+      event: tag
+
+
+  # When a new tag is created on GitHub
+  # Deploy repeek-production image to Rancher with GitHub tag
+  # Rancher isn't configured yet.
+  # rancher:
+  #   image: peloton/drone-rancher
+  #   url:
+  #   access_key:
+  #   secret_key:
+  #   service: repeek/web
+  #   docker_image: "vitalikpaprotsky/repeek-production:${DRONE_TAG}"
+  #   when:
+  #     event: tag
+
+services:
+  mongo:
+    image: mongo:3.4.5
