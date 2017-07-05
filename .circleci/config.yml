@@ -24,13 +24,7 @@ jobs:
         paths:
           - vendor/bundle
 
-      # Run rspec in parallel
+      # Run rspec
       - type: shell
         command: |
-          bundle exec rspec --profile 10 \
-                            --out /tmp/test-results/rspec.xml \
-                            --format documentation
-
-      # Save artifacts
-      - type: store_test_results
-        path: /tmp/test-results
+          bundle exec rspec --format documentation
