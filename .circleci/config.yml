@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repeek
+    docker:
+      - image: vitalikpaprotsky/repeek-base:latest
+        environment:
+          RAILS_ENV: test
+      - image: mongo:3.4.5
+    steps:
+      - checkout
+
+      # Restore bundle cache
+      - type: cache-restore
+        key: rails-demo-{{ checksum "Gemfile.lock" }}
+
+      # Bundle install dependencies
+      - run: gem install bundler
+      - run: bundle install --path vendor/bundle
+
+      # Store bundle cache
+      - type: cache-save
+        key: rails-demo-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      # Run rspec in parallel
+      - type: shell
+        command: |
+          bundle exec rspec --profile 10 \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress
+
+      # Save artifacts
+      - type: store_test_results
+        path: /tmp/test-results
