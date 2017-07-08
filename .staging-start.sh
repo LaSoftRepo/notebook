@@ -1,3 +1,3 @@
 #!/bin/bash
-bin/rake assets:precompile RAILS_ENV=staging
-bin/rails s -e staging
+bundle exec rake assets:precompile RAILS_ENV=staging
+bundle exec rails s -e staging
