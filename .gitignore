@@ -24,3 +24,6 @@
 
 # Ignore bundle folder for gems.
 /vendor/bundle
+
+# Ignore .env.rancher-deploy
+.env.rancher-deploy
