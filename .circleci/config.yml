@@ -31,3 +31,12 @@ jobs:
           bundle exec rspec --profile 10 \
                             --format documentation \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      - setup_remote_docker
+
+      # Build and push Docker image
+      - run: |
+          TAG=1.4.0
+          docker build -t vitalikpaprotsky/repeek-staging:$TAG -f Dockerfile.staging .
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push vitalikpaprotsky/repeek-staging:$TAG
