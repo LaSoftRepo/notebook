@@ -32,20 +32,20 @@ jobs:
                             --format documentation \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-      - setup_remote_docker
-
-      # Install Docker client
-      - run:
-          command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
-
-      # Build and push Docker image
-      - run: |
-          TAG=1.4.0
-          docker build -t vitalikpaprotsky/repeek-staging:$TAG -f Dockerfile.staging .
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push vitalikpaprotsky/repeek-staging:$TAG
+      # - setup_remote_docker
+      #
+      # # Install Docker client
+      # - run:
+      #     command: |
+      #       set -x
+      #       VER="17.03.0-ce"
+      #       curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+      #       tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+      #       mv /tmp/docker/* /usr/bin
+      #
+      # # Build and push Docker image
+      # - run: |
+      #     TAG=1.4.0 # USE GITHUB TAG
+      #     docker build -t vitalikpaprotsky/repeek-staging:$TAG -f Dockerfile.staging .
+      #     docker login -u $DOCKER_USER -p $DOCKER_PASS
+      #     docker push vitalikpaprotsky/repeek-staging:$TAG
