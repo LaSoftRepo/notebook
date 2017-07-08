@@ -12,72 +12,40 @@ pipeline:
       MONGO_HOST_TEST: mongo
       MONGO_PORT_TEST: '27017'
 
-
   # When master branch is pushed to GitHub or some other branch is merged to it
-  # Push repeek-staging image to DockerHub with latest tag
+  # Push repeek image to DockerHub with latest tag
   docker:
     image: plugins/docker
-    dockerfile: Dockerfile.staging
     email: vetalpaprotsky@gmail.com
-    repo: vitalikpaprotsky/repeek-staging
+    repo: vitalikpaprotsky/repeek
     tags: latest
     secrets: [ docker_username, docker_password ]
     when:
       branch: master
       event: push
 
-
   # When a new tag is created on GitHub
-  # Push repeek-staging image to DockerHub with GitHub tag
+  # Push repeek image to DockerHub with GitHub tag
   docker:
     image: plugins/docker
-    dockerfile: Dockerfile.staging
     email: vetalpaprotsky@gmail.com
-    repo: vitalikpaprotsky/repeek-staging
+    repo: vitalikpaprotsky/repeek
     tags: ${DRONE_TAG}
     secrets: [ docker_username, docker_password ]
     when:
       event: tag
 
-
   # When a new tag is created on GitHub
-  # Push repeek-production image to DockerHub with GitHub tag
-  docker:
-    image: plugins/docker
-    dockerfile: Dockerfile.production
-    email: vetalpaprotsky@gmail.com
-    repo: vitalikpaprotsky/repeek-production
-    tags: ${DRONE_TAG}
-    secrets: [ docker_username, docker_password ]
-    when:
-      event: tag
-
-
-  # When a new tag is created on GitHub
-  # Deploy repeek-staging image to Rancher with GitHub tag
+  # Deploy repeek image to Rancher with GitHub tag
   rancher:
     image: peloton/drone-rancher
     url: ${RANCHER_URL}
     access_key: ${RANCHER_ACCESS_KEY}
     secret_key: ${RANCHER_SECRET_KEY}
     service: repeek/web
-    docker_image: "vitalikpaprotsky/repeek-staging:${DRONE_TAG}"
+    docker_image: "vitalikpaprotsky/repeek:${DRONE_TAG}"
     when:
       event: tag
-
-
-  # When a new tag is created on GitHub
-  # Deploy repeek-production image to Rancher with GitHub tag
-  # There's no production host. Rancher isn't configured yet
-  # rancher:
-  #   image: peloton/drone-rancher
-  #   url:
-  #   access_key:
-  #   secret_key:
-  #   service: repeek/web
-  #   docker_image: "vitalikpaprotsky/repeek-production:${DRONE_TAG}"
-  #   when:
-  #     event: tag
 
 services:
   mongo:
