@@ -8,7 +8,7 @@ services:
       io.rancher.scheduler.affinity:host_label: role=repeek-staging
       io.rancher.container.pull_image: always
   web:
-    image: vitalikpaprotsky/repeek-staging:latest
+    image: vitalikpaprotsky/repeek:latest
     environment:
       MONGO_HOST_STAGING: mongo
       MONGO_PORT_STAGING: '27017'
@@ -19,11 +19,13 @@ services:
     links:
     - mongo:mongo
     command:
-    - bin/rails
-    - s
+    - sh
+    - .staging-start.sh
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: role=repeek-staging
+      stack: repeek
+      io.rancher.container.pull_image: always
+      service: web
   lb:
     image: rancher/lb-service-haproxy:v0.7.5
     ports:
