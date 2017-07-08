@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    parallelism: 3
     working_directory: /usr/src/app
     docker:
       - image: vitalikpaprotsky/repeek-base:latest
@@ -12,7 +13,7 @@ jobs:
 
       # Restore bundle cache
       - type: cache-restore
-        key: rails-demo-{{ checksum "Gemfile.lock" }}
+        key: repeek-{{ checksum "Gemfile.lock" }}
 
       # Bundle install dependencies
       - run: gem install bundler
@@ -20,11 +21,18 @@ jobs:
 
       # Store bundle cache
       - type: cache-save
-        key: rails-demo-{{ checksum "Gemfile.lock" }}
+        key: repeek-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
-      # Run rspec
+      # Run rspec in parallel
       - type: shell
         command: |
-          bundle exec rspec --format documentation
+          bundle exec rspec --profile 10 \
+                            --out /tmp/test-results/rspec.xml \
+                            --format documentation \
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      # Save artifacts
+      - type: store_test_results
+        path: /tmp/test-results
