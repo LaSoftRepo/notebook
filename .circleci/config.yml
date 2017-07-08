@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: /usr/src/app
     docker:
       - image: vitalikpaprotsky/repeek-base:latest
         environment:
