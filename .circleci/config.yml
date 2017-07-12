@@ -36,15 +36,17 @@ jobs:
           name: Deploy to staging or production
           command: |
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
-              echo "deploy with latest tag to staging"
+              sh .circleci/install_docker.sh
+              sh .circleci/push_to_dockerhub.sh latest
             else
-              echo "Did not deploy to staging. It is not the master branch."
+              echo "Didn't push to DockerHub and didn't deploy to staging on Rancher. It's not the master branch."
             fi
 
             if [[ "${CIRCLE_TAG}" =~ .+ ]]; then
-              echo "deploy with ${CIRCLE_TAG} tag to production"
+              sh .circleci/install_docker.sh
+              sh .circleci/push_to_dockerhub.sh $CIRCLE_BRANCH
             else
-              echo "Did not deploy to production. The tag was not provided."
+              echo "Didn't push to DockerHub and didn't deploy to production on Rancher. The tag was not provided."
             fi
 
 # https://discuss.circleci.com/t/create-github-release-tag-on-success/11829
