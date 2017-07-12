@@ -3,5 +3,5 @@ FROM vitalikpaprotsky/repeek-base
 COPY . /usr/src/app
 
 RUN gem update bundler
-RUN bundle install --path vendor/bundle  --without development test
+RUN bundle install --path vendor/bundle --without development test
 RUN bundle exec rake assets:precompile RAILS_ENV=production
