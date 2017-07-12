@@ -32,11 +32,11 @@ jobs:
                             --format documentation \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-deployment:
-  release:
-    tag: /release-.*/
-    commands:
-      - echo $(git describe --abbrev=0 --tags)
+  deployment:
+    release:
+      tag: /release-.*/
+      commands:
+        - echo $(git describe --abbrev=0 --tags)
 
       # - setup_remote_docker
       #
