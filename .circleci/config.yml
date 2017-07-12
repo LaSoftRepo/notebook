@@ -33,10 +33,18 @@ jobs:
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       - deploy:
-          name: Deploy To Production
+          name: Deploy to staging or production
           command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+              echo "deploy with latest tag to staging"
+            else
+              echo "Did not deploy to staging. It is not the master branch."
+            fi
+
             if [[ "${CIRCLE_TAG}" =~ .+ ]]; then
-              echo "deploy with ${CIRCLE_TAG} tag"
+              echo "deploy with ${CIRCLE_TAG} tag to production"
+            else
+              echo "Did not deploy to production. The tag was not provided."
             fi
 
 # https://discuss.circleci.com/t/create-github-release-tag-on-success/11829
