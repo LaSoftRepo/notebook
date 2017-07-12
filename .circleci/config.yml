@@ -37,6 +37,15 @@ jobs:
             echo $CIRCLE_BRANCH
             echo $CIRCLE_TAG
 
+
+# https://discuss.circleci.com/t/create-github-release-tag-on-success/11829
+deployment:
+  staging:
+    tag: /.*/
+    commands:
+      - echo $CIRCLE_BRANCH
+      - echo $CIRCLE_TAG
+
       # - setup_remote_docker
       #
       # # Install Docker client
