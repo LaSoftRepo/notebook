@@ -32,19 +32,19 @@ jobs:
                             --format documentation \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-      - run:
+      - deploy:
+          name: Deploy To Production
           command: |
-            echo $CIRCLE_BRANCH
-            echo $CIRCLE_TAG
-
+            if [[ "${CIRCLE_TAG}" =~ .+ ]]; then
+              echo "deploy with ${CIRCLE_TAG} tag"
+            fi
 
 # https://discuss.circleci.com/t/create-github-release-tag-on-success/11829
 deployment:
-  staging:
-    tag: /.*/
+  fake_deploy_for_cci2:
+    tag: /.+/
     commands:
-      - echo $CIRCLE_BRANCH
-      - echo $CIRCLE_TAG
+      - echo "make tags run in 2.0"
 
       # - setup_remote_docker
       #
