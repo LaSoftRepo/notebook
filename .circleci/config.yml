@@ -43,6 +43,7 @@ jobs:
             fi
 
             if [[ "${CIRCLE_TAG}" =~ .+ ]]; then
+              sh .circleci/deploy_to_staging.sh $CIRCLE_TAG
               sh .circleci/deploy_to_production.sh $CIRCLE_TAG
             else
               echo "Didn't deploy to production. The tag was not provided."
