@@ -68,7 +68,7 @@ deployment:
       #
       # # Build and push Docker image
       # - run: |
-      #     TAG=1.4.0 # USE GITHUB TAG
+      #     TAG=latest # USE GITHUB TAG
       #     docker build -t vitalikpaprotsky/repeek-staging:$TAG -f Dockerfile.staging .
       #     docker login -u $DOCKER_USER -p $DOCKER_PASS
       #     docker push vitalikpaprotsky/repeek-staging:$TAG
