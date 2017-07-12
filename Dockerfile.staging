@@ -1,0 +1,7 @@
+FROM vitalikpaprotsky/repeek-base
+
+COPY . /usr/src/app
+
+RUN gem update bundler --without development test
+RUN bundle install --path vendor/bundle
+RUN bundle exec rake assets:precompile RAILS_ENV=staging
