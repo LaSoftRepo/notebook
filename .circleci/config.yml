@@ -45,7 +45,7 @@ jobs:
 
             if [[ "${CIRCLE_TAG}" =~ .+ ]]; then
               sh .circleci/install_docker.sh
-              sh .circleci/push_to_dockerhub.sh $CIRCLE_BRANCH
+              sh .circleci/push_to_dockerhub.sh $CIRCLE_TAG
             else
               echo "Didn't push to DockerHub and didn't deploy to production on Rancher. The tag was not provided."
             fi
