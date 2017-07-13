@@ -5,6 +5,7 @@ sh .circleci/install_docker.sh
 sh .circleci/push_to_dockerhub.sh $TAG staging
 
 echo "Start deploying to staging..."
+echo "Exit code ${$?}"
 docker run \
   -e PLUGIN_URL=$STAGING_RANCHER_URL \
   -e PLUGIN_ACCESS_KEY=$STAGING_RANCHER_ACCESS_KEY \
