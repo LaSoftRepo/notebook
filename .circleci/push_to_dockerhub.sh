@@ -10,7 +10,7 @@ docker login -u $DOCKER_USER -p "${DOCKER_PASS}qqq" &&
 docker push $IMAGE &&
 SUCESS=1
 
-if [ $SUCESS = 1 ]; then
+if [ $SUCESS -eq 1 ]; then
   echo "Pushed ${IMAGE} to Dockerhub"
 else
   echo "There was an error during pushing ${IMAGE} to Dockerhub"

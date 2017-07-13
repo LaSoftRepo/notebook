@@ -38,14 +38,14 @@ jobs:
           name: Deploy to staging or production
           command: |
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
-              sh .circleci/deploy_to_staging.sh latest
+              bash .circleci/deploy_to_staging.sh latest
             else
               echo "Didn't deploy to staging. It's not the master branch."
             fi
 
             if [[ "${CIRCLE_TAG}" =~ .+ ]]; then
-              sh .circleci/deploy_to_staging.sh $CIRCLE_TAG
-              sh .circleci/deploy_to_production.sh $CIRCLE_TAG
+              bash .circleci/deploy_to_staging.sh $CIRCLE_TAG
+              bash .circleci/deploy_to_production.sh $CIRCLE_TAG
             else
               echo "Didn't deploy to production. The tag was not provided."
             fi
