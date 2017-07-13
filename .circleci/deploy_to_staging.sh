@@ -2,9 +2,10 @@
 TAG=$1 # Release tag which is used as docker image tag
 
 bash .circleci/install_docker.sh
-bash .circleci/push_to_dockerhub.sh $TAG staging
+if [ "$?" == 1 ]; then exit 1; fi
 
-echo "Exit code {$?}"
+bash .circleci/push_to_dockerhub.sh $TAG staging
+if [ "$?" == 1 ]; then exit 1; fi
 
 echo "Start deploying to staging..."
 docker run \
