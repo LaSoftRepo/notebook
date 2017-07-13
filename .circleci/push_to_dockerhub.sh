@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 TAG=$1 # Release tag which is used as docker image tag
 ENV=$2 # App environment
 
