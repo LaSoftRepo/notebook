@@ -5,7 +5,6 @@ sh .circleci/install_docker.sh
 sh .circleci/push_to_dockerhub.sh $TAG staging
 
 echo "Start deploying to staging..."
-echo "Exit code ${$?}"
 docker run \
   -e PLUGIN_URL=$STAGING_RANCHER_URL \
   -e PLUGIN_ACCESS_KEY=$STAGING_RANCHER_ACCESS_KEY \
@@ -15,5 +14,4 @@ docker run \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
   peloton/drone-rancher
-echo "Exit code ${$?}"
 echo "Deployed to staging"
