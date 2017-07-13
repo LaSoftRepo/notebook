@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Start installing docker..."
 set -x
 VER="17.03.0-ce"
