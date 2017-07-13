@@ -14,6 +14,5 @@ docker run \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
   peloton/drone-rancher
+echo "Exit code ${$?}"
 echo "Deployed to staging"
-
-exit 1

@@ -6,4 +6,5 @@ echo "Start pushing vitalikpaprotsky/repeek-${ENV}:${TAG} to Dockerhub..."
 docker build -t vitalikpaprotsky/repeek-$ENV:$TAG -f Dockerfile.$ENV .
 docker login -u $DOCKER_USER -p $DOCKER_PASS
 docker push vitalikpaprotsky/repeek-$ENV:$TAG
+echo "Exit code ${$?}"
 echo "Pushed vitalikpaprotsky/repeek-${ENV}:${TAG} to Dockerhub"
