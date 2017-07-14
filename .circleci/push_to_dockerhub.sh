@@ -6,7 +6,7 @@ IMAGE="vitalikpaprotsky/repeek-${ENV}:${TAG}"
 echo "Start pushing ${IMAGE} to Dockerhub..."
 
 docker build -t $IMAGE -f Dockerfile.$ENV . &&
-docker login -u $DOCKER_USER -p "${DOCKER_PASS}qqq" &&
+docker login -u $DOCKER_USER -p "${DOCKER_PASS}" &&
 docker push $IMAGE &&
 SUCESS=1
 

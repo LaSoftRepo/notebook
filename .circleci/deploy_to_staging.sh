@@ -17,4 +17,5 @@ docker run \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
   peloton/drone-rancher
+# TODO: Add SUCCESS check!
 echo "Deployed to staging"
