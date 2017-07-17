@@ -16,6 +16,12 @@ docker run \
   -e PLUGIN_DOCKER_IMAGE=vitalikpaprotsky/repeek-staging:$TAG \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  peloton/drone-rancher
-# TODO: Add SUCCESS check!
-echo "Deployed to staging"
+  peloton/drone-rancher &&
+SUCCESS=1
+
+if [ "$SUCESS" == 1 ]; then
+  echo "Deployed to staging"
+else
+  echo "There was an error during deploying to staging"
+  exit 1
+fi

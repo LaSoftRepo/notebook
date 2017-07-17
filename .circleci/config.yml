@@ -57,6 +57,8 @@ deployment:
     commands:
       - echo "make tags run in 2.0"
 
+      # Example...
+      #
       # - setup_remote_docker
       #
       # # Install Docker client
@@ -74,9 +76,3 @@ deployment:
       #     docker build -t vitalikpaprotsky/repeek-staging:$TAG -f Dockerfile.staging .
       #     docker login -u $DOCKER_USER -p $DOCKER_PASS
       #     docker push vitalikpaprotsky/repeek-staging:$TAG
-
-      # 1. Push the image to DockerHub and deploy it to Rancher Staging with latest tag
-      #    when master branch is pushed or some other branch is merged to it.
-      #
-      # 2. Push the image to DockerHub and deploy it to Rancher Production with a release tag
-      #    when the release tag is created.
