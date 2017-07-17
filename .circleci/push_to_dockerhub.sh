@@ -8,9 +8,9 @@ echo "Start pushing ${IMAGE} to Dockerhub..."
 docker build -t $IMAGE -f Dockerfile.$ENV . &&
 docker login -u $DOCKER_USER -p "${DOCKER_PASS}" &&
 docker push $IMAGE &&
-SUCESS=1
+SUCCESS=1
 
-if [ "$SUCESS" == 1 ]; then
+if [ "$SUCCESS" == 1 ]; then
   echo "Pushed ${IMAGE} to Dockerhub"
 else
   echo "There was an error during pushing ${IMAGE} to Dockerhub"

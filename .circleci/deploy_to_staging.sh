@@ -11,7 +11,7 @@ echo "Start deploying to staging..."
 docker run \
   -e PLUGIN_URL=$STAGING_RANCHER_URL \
   -e PLUGIN_ACCESS_KEY=$STAGING_RANCHER_ACCESS_KEY \
-  -e PLUGIN_SECRET_KEY=$STAGING_RANCHER_SECRET_KEY \
+  -e PLUGIN_SECRET_KEY=$STAGING_RANCHER_SECRET_KEYaaa \
   -e PLUGIN_SERVICE=repeek/web \
   -e PLUGIN_DOCKER_IMAGE=vitalikpaprotsky/repeek-staging:$TAG \
   -v $(pwd):$(pwd) \
@@ -19,7 +19,7 @@ docker run \
   peloton/drone-rancher &&
 SUCCESS=1
 
-if [ "$SUCESS" == 1 ]; then
+if [ "$SUCCESS" == 1 ]; then
   echo "Deployed to staging"
 else
   echo "There was an error during deploying to staging"
