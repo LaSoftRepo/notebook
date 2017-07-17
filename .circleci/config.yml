@@ -57,7 +57,7 @@ deployment:
     commands:
       - echo "make tags run in 2.0"
 
-      # Example...
+      # Example using run...
       #
       # - setup_remote_docker
       #
