@@ -11,7 +11,7 @@ echo "Start deploying to staging..."
 docker run \
   -e PLUGIN_URL=$STAGING_RANCHER_URL \
   -e PLUGIN_ACCESS_KEY=$STAGING_RANCHER_ACCESS_KEY \
-  -e PLUGIN_SECRET_KEY=$STAGING_RANCHER_SECRET_KEYaaa \
+  -e PLUGIN_SECRET_KEY=$STAGING_RANCHER_SECRET_KEY \
   -e PLUGIN_SERVICE=repeek/web \
   -e PLUGIN_DOCKER_IMAGE=vitalikpaprotsky/repeek-staging:$TAG \
   -v $(pwd):$(pwd) \
