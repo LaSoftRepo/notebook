@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   end
   resources :sessions
   resources :password_resets
+
+  # TODO: REMOVE LATER!
+  get 'check_ip' => 'check_ip#index'
+  get 'fun_captcha' => 'fun_captcha#index'
 end
