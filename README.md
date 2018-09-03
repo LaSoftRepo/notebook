@@ -1,10 +1,8 @@
 # README
 
-Docker & Docker Compose - Environment Setup
-
-RSpec - Testing
-
-Rancher & Circle CI - Deployment
+* Docker & Docker Compose - Environment Setup
+* RSpec - Testing
+* Rancher & Circle CI - Deployment
 
 
 Update the service on rancher using plugin drone-rancher:
