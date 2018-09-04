@@ -19,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'rails-html-sanitizer', '> 1.0.3'
 gem 'sprockets', '> 3.7.1'
-
+gem 'ffi', '> 1.9.14'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
